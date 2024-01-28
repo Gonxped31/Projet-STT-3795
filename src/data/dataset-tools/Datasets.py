@@ -3,7 +3,7 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 import random
-
+import os
 
 class Datasets: 
     def __init__(self):
@@ -24,6 +24,7 @@ class Datasets:
     # Returns: 
     #   an array of k images from the CIFAR-10 training dataset 
     def getCifar10Images(self, k): 
+        print("Current Working Directory:", os.getcwd()) 
         dataset = Datasets.loadCifar10Training()  # Load the dataset
         data = dataset['data']
         labels = dataset['labels']
@@ -31,20 +32,21 @@ class Datasets:
         # Select k random indices
         indices = random.sample(range(len(data)), k)
 
-        # Create a figure with subplots
-        #fig, axes = plt.subplots(1, k, figsize=(k * 2, 2))
-
         # Save the image paths 
         imgPaths = []
+
+        save_dir = './src/data/dataset-tools'
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+
         for i, idx in enumerate(indices):
             image = data[idx].numpy()  # Convert tensor to numpy array
             image = np.transpose(image, (1, 2, 0))  # Rearrange color channels
-            #axes[i].imshow(image / 255)  # Normalize and display image
-            #axes[i].set_title(f"Label: {labels[idx].item()}")
-            #axes[i].axis('off')
-            #plt.show()
 
             # Save each image as a JPEG file
-            imgPaths.append(f'image_{idx}.jpg')
-            plt.imsave(f'image_{idx}.jpg', image / 255)
+            img_path = os.path.join(save_dir, f'image_{idx}.jpg')
+
+            # Save each image as a JPEG file
+            imgPaths.append(img_path)
+            plt.imsave(img_path, image / 255)
         return imgPaths
