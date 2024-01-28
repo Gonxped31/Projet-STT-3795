@@ -12,7 +12,7 @@ images = d.getCifar10Images(1)
 
 #GENERATE POINT CLOUD
 # Load the depth image as a grayscale image
-depth_image = cv2.imread('src/data/dataset-tools/image_735.jpg', cv2.IMREAD_GRAYSCALE)
+depth_image = cv2.imread(f'src/data/dataset-tools/{images[0]}', cv2.IMREAD_GRAYSCALE)
 
 # Convert depth to float and scale if necessary
 depth_in_meters = depth_image.astype(np.float32) / 1000.0
