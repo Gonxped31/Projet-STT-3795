@@ -8,7 +8,8 @@ import random
 class Datasets: 
     def __init__(self):
         pass 
-        
+    
+    #Load the CIFAR-10 dataset
     def loadCifar10Training(): 
         with open('./src/data/cifar-10-batches-py/train/data_batch_1', 'rb') as f:
             batch = pickle.load(f, encoding='latin1')
@@ -21,8 +22,8 @@ class Datasets:
     # Params: 
     #   int: k. 
     # Returns: 
-    #   k images from the CIFAR-10 training dataset 
-    def getImages(self, k): 
+    #   an array of k images from the CIFAR-10 training dataset 
+    def getCifar10Images(self, k): 
         dataset = Datasets.loadCifar10Training()  # Load the dataset
         data = dataset['data']
         labels = dataset['labels']
@@ -31,23 +32,19 @@ class Datasets:
         indices = random.sample(range(len(data)), k)
 
         # Create a figure with subplots
-        fig, axes = plt.subplots(1, k, figsize=(k * 2, 2))
+        #fig, axes = plt.subplots(1, k, figsize=(k * 2, 2))
 
         # Save the image paths 
         imgPaths = []
         for i, idx in enumerate(indices):
             image = data[idx].numpy()  # Convert tensor to numpy array
             image = np.transpose(image, (1, 2, 0))  # Rearrange color channels
-            axes[i].imshow(image / 255)  # Normalize and display image
-            axes[i].set_title(f"Label: {labels[idx].item()}")
-            axes[i].axis('off')
-            plt.show()
+            #axes[i].imshow(image / 255)  # Normalize and display image
+            #axes[i].set_title(f"Label: {labels[idx].item()}")
+            #axes[i].axis('off')
+            #plt.show()
 
             # Save each image as a JPEG file
+            imgPaths.append(f'image_{idx}.jpg')
             plt.imsave(f'image_{idx}.jpg', image / 255)
-
-       
-
-# Usage
-datasets = Datasets()
-datasets.getImages(5)  # Display and save 5 random images
+        return imgPaths
