@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{url}
+
+\title{STT3795 - Proposition de projet}
+\author{Kamen Damov, Simon Langlois, Samir Bio Gbian}
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Descriptions et objectifs}
+L'objectif de ce projet est de comparer différentes pipelines d'apprentissage automatique pour classifier des langages, des types de musique, et des chiffres prononcés. Notre projet sera une analyse empirique des différentes architecture de classification. Nous allons en développer trois pipelines qui auront des prétraitement de données différents et classificateurs différents:
+\subsection{}
+La première architecture serait d'utiliser une pipeline de prétraitement de données audios soit avec un Fourier Transform à partir duquel on pourra extraire les domaines fréquentiels, et domaines temporels. Suite à cela, nous appliquerons des modèles de classifications traditionnels tel que le SVM, l'arbre de décision, la forêt d'arbres de décisions, et la Naive de Bayes. Finalement, nous allons évaluer la performance des modèles. 
+\subsection{}
+La deuxième architecture est d'appliquer la même pipeline de prétraitement qu'au point 1.1 mais auquel on ajoutera un algorithme de d'analyse de données topologiques nommées persistent homology qui nous donnera des caractéristiques additonnelles. Nous nous sommes inspiré de ce papier-là qui présente une méthode d'analyse topologique pour but de classification \url{https://arxiv.org/abs/1910.08345}. Suite à ce prétraitement, nous allons utiliser les mêmes classificateurs qu'au point 1.1.
+\subsection{}
+La troisième architecture sera d'appliquer la même pipeline que le point 2.1 mais d'appliquer un modèle d'apprentissage profond soit un réseaux de neurones convolutionnel (CNN).\\\\
+Nous allons utiliser ces trois pipelines sur trois jeux de données audios différents ce qui nous donnera la possibilité de comparer les types d'architectures entre elles, mais aussi de comparer un type d'architecture sur 3 jeux de données différents. 
+\section{Contributions de chaque membre de l'équipe}
+Chaque membre de l'équipe se chargera de faire les trois pipelines (1.1, 1.2, 1.3) pour un jeux de données spécifiques.\\
+\section{Source de données}
+\subsection{}
+Notre premier jeu de données est un ensemble de prononciations des catégories de MNIST. Voici le lien vers les données: \url{https://github.com/Jakobovski/free-spoken-digit-dataset/tree/master}
+\subsection{}
+Notre deuxième jeu de données est un ensemble de languages parlé qui est libelé avec la langue qui est parlé dans l'extrait sonore. Voici le lien vers les données: \url{https://huggingface.co/datasets/common_language}
+\subsection{}
+Notre troisième jeu de données est un ensemble de données musicales qui est libelé avec le genre de musique. Voici le lien vers les données: \url{https://huggingface.co/datasets/marsyas/gtzan}
+\end{document}
