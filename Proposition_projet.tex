@@ -1,26 +1,16 @@
 \documentclass{article}
-\usepackage[french]{babel}
 \usepackage{graphicx} % Required for inserting images
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage{url}
 \usepackage{hyperref}
-\usepackage[affil-it]{authblk}
 
-\renewcommand\Authand{ et }
-\renewcommand\Authands{ et }
-
-\title{STT 3795: Proposition Rapport}
-\author{Bio Samir Gbian: 20250793}
-\author{Kamen Damov: 20102811}
-\author{Simon Langlois: 20247696}
-
-\affil{Département de mathématiques et statistiques}
-\affil{Université de Montréal}
+\title{STT3795 - Proposition de projet}
+\author{Kamen Damov, Simon Langlois, Samir Bio Gbian}
+\date{February 2024}
 
 \begin{document}
 
 \maketitle
+
 \section{Descriptions et objectifs}
 L'objectif de ce projet est de comparer différentes pipelines d'apprentissage automatique pour classifier des langages, des types de musique, et des chiffres prononcés. Notre projet sera une analyse empirique des différentes architecture de classification. Nous allons en développer trois pipelines qui auront des prétraitement de données différents et classificateurs différents:
 \subsection{}
@@ -34,9 +24,17 @@ Nous allons utiliser ces trois pipelines sur trois jeux de données audios diff�
 Chaque membre de l'équipe se chargera de faire les trois pipelines (1.1, 1.2, 1.3) pour un jeux de données spécifiques.\\
 \section{Source de données}
 \subsection{}
-Notre premier jeu de données est un ensemble de prononciations des catégories de MNIST. Voici le lien vers les données: \href{https://github.com/Jakobovski/free-spoken-digit-dataset/tree/master}{Lien}\\
+Notre premier jeu de données est un ensemble de prononciations des catégories de MNIST. Voici le lien vers les données: \href{https://github.com/Jakobovski/free-spoken-digit-dataset/tree/master}{https://github.com/Jakobovski/free-spoken-digit-dataset/tree/master}
 \subsection{}
-Notre deuxième jeu de données est un ensemble de languages parlé qui est libelé avec la langue qui est parlé dans l'extrait sonore. Voici le lien vers les données: \href{https://huggingface.co/datasets/common_language}{Lien}\\
+Notre deuxième jeu de données est un ensemble de languages parlé qui est libelé avec la langue qui est parlé dans l'extrait sonore. Voici le lien vers les données: \href{https://huggingface.co/datasets/common_language}{https://huggingface.co/datasets/common_language}
 \subsection{}
-Notre troisième jeu de données est un ensemble de données musicales qui est libelé avec le genre de musique. Voici le lien vers les données: \href{https://huggingface.co/datasets/marsyas/gtzan}{Lien}\\
+Notre troisième jeu de données est un ensemble de données musicales qui est libelé avec le genre de musique. Voici le lien vers les données: \href{https://huggingface.co/datasets/marsyas/gtzan}{https://huggingface.co/datasets/marsyas/gtzan}
+
+\section*{Descriptions et objectifs - Post-commentaires}
+Notre objectif sera d'explorer et comparer plusieurs méthodes et techniques pour classifier du langage parlé parmi 20 langues. 
+\subsection*{Normlisation et prétraitement}
+Ayant des données audio, nous allons d'abord normaliser les données (borner les spectres entre -1 et 1, réduire le bruit, etc). 
+\subsection*{Extraction de représentation}Ensuite nous allons utiliser utiliser des algorithmes d'extraction de représentation fréquentielles et spectrographiques telle que Fast Fourier Transform et TDA (persistent homology). Ces techniques augmenteront considérablement la dimensionalité de nos données. 
+\subsection*{Réduction de dimensionalité}Après avoir extrait ces représentations, nous allons réduire la dimensionnalité en utilisant l'algorithme de PCA. 
+\subsection*{Modèles}Ensuite nous allons remodeler les données pour les ajuster aux modèles de classification suivants: SVM, Random Forest, et CNN. Basé sur la performance de ces modèles, nous allons restructurer le prétraitement des donneés (soit en retirant ou ajoutant des étapes dans le prétraitement) et recomparer la performance des modèles.
 \end{document}
