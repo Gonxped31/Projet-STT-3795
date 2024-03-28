@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage[french]{babel}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[T1]{fontenc}
@@ -6,6 +6,17 @@
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage[affil-it]{authblk}
+\usepackage{xcolor}
+% Définir la couleur de la table des matières
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=black,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
 
 \renewcommand\Authand{ et }
 \renewcommand\Authands{ et }
@@ -20,6 +31,147 @@
 
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Classification supervisée des languages naturels}
+            
+        \vspace{0.5cm}
+        \LARGE
+        Projet effectué dans le cadre du cours \textit{STT 3795: Fondements théoriques en science des données}
+            
+        \vspace{1.5cm}
+
+        Travail effectué par :\\
+        \textbf{Kamen Damov},
+        \textbf{Bio Samir Gbian},\\
+        \textbf{Simon Langlois}
+            
+        \vfill
+            
+        Travail présenté à:\\
+        \textbf{Stefan Horoi et Guillaume Huguet}
+            
+        \vspace{0.8cm}
+                        
+        \Large
+        \textit{Département de mathématiques et statistiques} \\
+        \textit{Université de montréal} \\
+        28 Avril 2024
+            
+    \end{center}
+\end{titlepage}
+
+% Insérer la table des matières
+\tableofcontents
+
+\newpage
+\section{Introduction}
+La classification des langages est une tâche cruciale dans de nombreux domaines, de la technologie de la langue naturelle à la reconnaissance de la parole en passant par la traduction automatique. L'essor des données massives et la diversité des langues parlées à travers le monde ont amplifié l'importance de disposer de méthodes de classification efficaces pour traiter et analyser ces données de manière significative.
+
+Dans ce contexte, l'évaluation et la comparaison des performances des algorithmes de classification sont essentielles pour identifier les approches les plus adaptées à cette tâche complexe. Ce projet vise à examiner et à comparer la qualité de certains algorithmes de classification les plus couramment utilisés dans la classification des langues. En particulier, nous nous concentrons sur l'évaluation des performances de plusieurs algorithmes, notamment les classificateurs naïfs de Bayes, les machines à vecteurs de support (SVM), les forêts aléatoires et les réseaux de neurones convolutionnels (CNN).
+
+%In language classification tasks based on speech, it is critical to extract a set of acoustic features from audio files that capture the unique characteristics of the spoken language. The following is a compilation of essential attributes for such a purpose.
+
+
+
+\section{Objectifs}
+L'objectif principal de ce projet est d'identifier les forces et les faiblesses de chaque algorithme de classification dans le contexte spécifique de la classification des langues. Pour ce faire, nous utiliserons des jeux de données représentatifs contenant des échantillons de voix de différentes personnes, couvrant une variété de structures et de caractéristiques linguistiques. Nous évaluerons les performances de chaque algorithme \textbf{\underline{en termes de précision, de rappel,}}\\
+\textbf{\underline{de F-mesure et d'autres mesures de qualité de classification.}}
+
+
+\section{Description des données analysées}
+\subsection{Source}
+Les données utilisés dans le projet proviennent du site \textit{Hugging Face}. Il s'agit d'un site internet fiable permettant l'hénergement de jeux de données ainsi que le partage de modèle d'IA déjà entrainé. Cela permet donc d'avoir une référence à laquelle comparer notre model ce qui est une des raisons principale pour laquelle ce jeu de données a été choisi.
+Le jeu de données, nommé \textit{common language}, contient plusieurs fichiers audio en format WAV (plus précisément 34045 fichiers). Ces fichiers sont séparés en trois type : entrainement, test et validation. Chaque audio représente une personne d'un certain sexe (Masculin/Féminin) citant une phrase ou répétant des mots dans une langue. Quarante-cinq langues différentes sont parlé dans ces audios (Voir source en référence pour plus de détail sur toutes les langues parlés).
+
+\subsection{Nettoyage des données}
+Les données brutes initiales ont pour attributs :\\
+\begin{itemize}
+    \item Client id : id du client
+    \item Path : Lien vers le fichier audio
+    \item Sentence : Version écrite de l'audio
+    \item age : Age du locuteur
+    \item gender : Genre du locuteur
+    \item language : Language parlé dans l'audio
+\end{itemize}
+Nous avons retiré la colomne \textit{Client id} puisqu'elle n'était pas pertinente pour le projet.\\
+Ensuite, les fichiers audio ont été tronqué aux extrémités pour retirer les bruits au début et à la fin de l'audio. Pour le faire, il a fallu trouver la forme d'onde de chaque audio en applicant une transformation rapide de Fourier. Par exemple, pour l'audio \textit{common\_voice\_ar\_19061960.wav} dans le jeu de données d'entrainement, nous obtenons la forme suivante :\\
+
+IMAGE\\
+
+En retirant les bruits aux ectrémités, nous abtenons cette nouvelle forme :\\
+
+IMAGE\\
+
+Le nouvelle forme obtenue contient moins de bruits que la première forme. Cela permet d'avoir de nouvelles données plus fiables. Cependant, il existe certaines données dans lesquelles les extrémétités sont significatives mais seront quand même retirés. Donc, de façon global, les données sont plus fiables mais nous perdons de l'information.
+
+\subsection{Statistiques}
+Nous avons regardés trois statistiques sur les données : la longueur totale des audios par language, la longueur moyenne des audios par language ainsi que le nombre de fichiers audio par language.\\
+
+\textbf{1.} Les graphiques ci-bas présentent la longueur totale des audios par language pour les trois jeux de données.\\
+
+FIGURES\\
+
+Nous pouvons remarquer que les données d'entrainement ainsi que les données de test sont uniforme. par contre les données de validation ne le sont pas. Pour remédier à ce problème, il a fallu fusionner les données de test et les données de validation. Voici le nouveau graphique obtenu suite à la fusion de ces deux donneés:\\
+
+GRAPHIQUE\\
+
+Cette fusion (que nous allons considérer comme nouvelles données de test) est beaucoup plus significative que les donneés de validation à elles toutes seule.\\
+Donc, les données sont assez uniformes au niveau de la longueur totale des audios par language.\\
+
+\textbf{2.} Les graphiques ci-dessous présentent la longueur moyenne des audios par language pour les deux jeux de données.\\
+
+FIGURES\\
+
+Il est possible de remarquer à travers les graphique plus haut que les données sont assez uniforme entre elles.
+
+\textbf{3.} Les graphiques ci-dessous présentent le nombre de fichiers audio par language pour les deux jeux de données.\\
+
+FIGURES\\
+
+Il est possible de remarquer à travers les graphique plus haut que les données sont assez uniforme entre elles.
+
+
+\subsection{Prétraitement des données}
+Pour le prétraitement des données audios, nous utilisons différents attributs qui sont présentés ci-bas.
+
+\subsubsection{MFCCs (Mel Frequency Cepstral Coefficients)}
+Cet attribut est critique dans le sens où il permet de capturer les différents apsects qui sont unique à chaque language parlé. Cela permet de différentier beaucoup plus facilement les languages. Pour obtenir les MFCCs, nous avons d'abord trouvé le spectre des puissances en fonction des fréquences de notre fichier audio à partir d'une \hyperref[fft]{transformation rapide de Fourier}(FFT). Ensuite, il fallait trouver les \hyperref[mfb]{banques de filtres de Mel}(MFB) du spectre à partir desquels nous obtenons les \hyperref[freq-energy]{énergies des fréquences} (énergie pondérés) passant par chaque filtre de la banque. À ces énergies sera appliqué la fonction logarithmique \textbf{\large EXPLIQUER POURQUOI}. Enfin, en appliquant une \hyperref[dct]{transformation en cosinus discrète} sur le log-transformé des énergies, nous obtenons les MFCCs.\\
+
+\subsubsection{Centroide spectral}
+Cet attribut est relié à la clartée du song.
+
+\subsubsection{Matrice des attributs}
+
+\section{Méthodologie}
+
+
+\section{Résultats}
+
+
+\section{Conclusion}
+
+
+\section{Références}
+\begin{itemize}
+    \item \href{https://huggingface.co/datasets/common_language}{Source de données}
+    \item \href{https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/tje2.12082#:~:text=All\%20performance\%20metrics\%20gave\%20the,studies\%20use\%20only\%2013\%20MFCCs}{Nombre de MFCCs utilisé dans le code}
+\end{itemize}
+
+
+\section{Annexe}
+\subsection{Définitions}
+\textbf{Transformation rapide de Fourier:}\label{fft}\\
+
+\textbf{Filtre:}\label{filtre}\\
+
+\textbf{Banques de filtres de Mel:}\label{mfb}\\
+
+\textbf{Énergie d'une fréquence:}\label{freq-energy}\\
+
+\textbf{Transformation en consinus discrète:}\label{dct}
 
 \end{document}
