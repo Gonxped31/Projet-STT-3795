@@ -8,3 +8,4 @@ pip install noisereduce
 pip install jupyter
 pip install setuptools
 pip install torch
+pip install xgboost
