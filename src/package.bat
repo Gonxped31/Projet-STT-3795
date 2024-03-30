@@ -11,3 +11,5 @@ pip install torch
 pip install xgboost
 pip install sklearn
 pip install numpy
+pip install pre-commit
+
