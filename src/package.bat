@@ -12,4 +12,5 @@ pip install xgboost
 pip install sklearn
 pip install numpy
 pip install pre-commit
-
+pip install datasets
+pip install seaborn
