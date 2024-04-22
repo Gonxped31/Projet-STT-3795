@@ -1,14 +1,34 @@
 from common_language import _LANGUAGES
+
+# Data analysis and stats imports
 from scipy.fft import fft
+from scipy.stats import expon, reciprocal
+from scipy.spatial.distance import pdist, squareform
 from mutagen.wave import WAVE
 from parselmouth.praat import call
-import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import librosa
 import librosa.display
 import parselmouth
 import noisereduce as nr
+
+# ML imports
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.decomposition import PCA
+from sklearn.manifold import MDS
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neural_network import MLPClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay, f1_score, classification_report
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from xgboost import XGBClassifier
+
+# Data visualization imports
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Source for audio dataset:
 # https://huggingface.co/datasets/common_language
@@ -44,6 +64,19 @@ def get_dataframe(type):
     df = pd.read_csv(get_path(type, f'{type}_data.csv'))
     df['Length'] = df['paths'].apply(lambda x: get_length(get_path(type, x)))
     return df
+
+def get_dataframes():
+    train_df = get_dataframe('train')
+    test_df = get_dataframe('test')
+    validation_df = get_dataframe('validation')
+    full_df = pd.concat([train_df, test_df, validation_df])
+    return full_df, train_df, test_df, validation_df
+
+def get_preprocessed_dataframes():
+    train_df = pd.read_csv('./data/train_preprocessed_data.csv')
+    test_df = pd.read_csv('./data/test_preprocessed_data.csv')
+    validation_df = pd.read_csv('./data/validation_preprocessed_data.csv')
+    return pd.concat([train_df, test_df, validation_df])
 
 def get_data_vector(type, audio):
     path = get_path(type, audio)
@@ -138,3 +171,58 @@ def get_HNR(data):
     #print(hnr)
     hnr_mean = call(hnr, "Get mean", 0, 0)
     return hnr_mean
+
+### Modelling ###
+
+### Principal components
+
+def get_PCs(dataframe, percentage_variance):
+    print()
+    scaler = StandardScaler()
+    scaled_df = scaler.fit_transform(dataframe)
+    print(f'Scaled_df Mean = {np.mean(scaled_df)},\nScaled_df Std = {np.std(scaled_df)}')
+
+
+    pca_T = PCA()
+    pca_T.fit_transform(scaled_df)
+    ev = pca_T.explained_variance_
+    print()
+    print(f'Total variance = {sum(ev)}')
+
+    pca = PCA(percentage_variance/100)
+    principal_components = pca.fit_transform(scaled_df)
+    explained_variance = pca.explained_variance_
+    percentage = sum(pca.explained_variance_ratio_)
+    print(f'Real percentage = {percentage}')
+    print(f'Variance for {round(percentage*100, 2)}% = {sum(explained_variance)}')
+    print(f'Number of PCs for {round(percentage*100, 2)}% = {len(explained_variance)}')
+    print(f'Attribute lost = {len(scaled_df[0]) - len(explained_variance)}')
+    names = pca.get_feature_names_out()
+    return pd.DataFrame(data=principal_components, columns=names)
+
+# MDS classique
+def mds(dataframe, n_components):
+    scaler = StandardScaler()
+    scaled_df = scaler.fit_transform(dataframe)
+    print(f'Scaled_df Mean = {np.mean(scaled_df)},\nScaled_df Std = {np.std(scaled_df)}')
+    mds = MDS(n_components=n_components, random_state=42, dissimilarity='euclidean')
+    mds_transformed = mds.fit_transform(scaled_df)
+    return pd.DataFrame(mds_transformed, columns=[f'Component_{i+1}' for i in range(n_components)])
+
+# Mahalanobis distance matrix set up
+def compute_mahalanobis_distance_matrix(X):
+    # Matrice singuliere a normaliser
+    VI = np.linalg.inv(np.cov(X.T) + np.eye(X.shape[1]) * 1e-4)
+    mahalanobis_dist = pdist(X, metric='mahalanobis', VI=VI)
+    distance_matrix = squareform(mahalanobis_dist)
+    return distance_matrix
+
+# MDS with mahalanobis distance
+def mds_mahalanobis(dataframe, n_components):
+    scaler = StandardScaler()
+    scaled_df = scaler.fit_transform(dataframe)
+    mahalanobis_distance_matrix = compute_mahalanobis_distance_matrix(scaled_df)
+    mds = MDS(n_components=n_components, random_state=42, dissimilarity='precomputed')
+    mds_transformed = mds.fit_transform(mahalanobis_distance_matrix)
+    return pd.DataFrame(mds_transformed, columns=[f'Component_{i+1}' for i in range(n_components)])
+
