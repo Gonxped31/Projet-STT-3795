@@ -41,8 +41,9 @@ channels = 1
 bits_per_sample = 16
 sample_rate = 16000
 
-frame_length = 2048
-hop_length = 512
+# Recommended for speech processing
+# https://pypi.org/project/noisereduce/
+frame_length = 512
 
 def get_path(type, name):
     return f'./data/wav_files/{type}/{name}'
@@ -58,6 +59,7 @@ def get_length(path):
 def get_data(path):
     data, sr = librosa.load(path, sr=None)
     assert(sr == sample_rate)
+    data = nr.reduce_noise(y=data, sr=sample_rate, n_fft=frame_length)
     return data
 
 def get_dataframe(type):
@@ -72,17 +74,44 @@ def get_dataframes():
     full_df = pd.concat([train_df, test_df, validation_df])
     return full_df, train_df, test_df, validation_df
 
-def get_preprocessed_dataframes():
+def get_clean_path(type, name):
+    return f'./data/wav_files_clean/{type}/{name}'
+
+def get_clean_dataframe(type):
+    df = pd.read_csv(get_clean_path(type, f'{type}_data.csv'))
+    #df['Length'] = df['paths'].apply(lambda x: get_length(get_clean_path(type, x)))
+    return df
+
+def get_clean_dataframes():
+    train_df = get_clean_dataframe('train')
+    test_df = get_clean_dataframe('test')
+    validation_df = get_clean_dataframe('validation')
+    full_df = pd.concat([train_df, test_df, validation_df])
+    return full_df, train_df, test_df, validation_df
+
+def get_preprocessed_data():
     train_df = pd.read_csv('./data/train_preprocessed_data.csv')
     test_df = pd.read_csv('./data/test_preprocessed_data.csv')
     validation_df = pd.read_csv('./data/validation_preprocessed_data.csv')
     return pd.concat([train_df, test_df, validation_df])
 
-def get_data_vector(type, audio):
-    path = get_path(type, audio)
+FEATURE_AUDIO = 'Audio'
+FEATURE_MFCCS = 'MFCCs'
+FEATURE_SPEC_CENTROID = 'Spec Centroid'
+FEATURE_SPEC_BANDWIDTH = 'Spec Bandwidth'
+FEATURE_SPEC_CONTRAST = 'Spec Contrast'
+FEATURE_SPEC_ROLLOF = 'Spec Rollof'
+FEATURE_SPEC_FLATNESS = 'Spec Flatness'
+FEATURE_PITCH_TRACK = 'Pitch Track'
+FEATURE_FORMANTS = 'Formants'
+FEATURE_RMS_ENERGY = 'RMS Energy'
+FEATURE_ZCR = 'ZCR'
+FEATURE_HNR_MEAN = 'HNR Mean'
+    
+def get_data_features(path, audio):
     data = get_data(path)
     #clean data: https://pypi.org/project/noisereduce/
-    data = nr.reduce_noise(y=data, sr=sample_rate)
+    data = nr.reduce_noise(y=data, sr=sample_rate, n_fft=frame_length)
 
     #Get the attributes
     mfccs = get_Normalized_Mfccs(data)
@@ -93,18 +122,18 @@ def get_data_vector(type, audio):
     zcr = get_ZCR(data)
     hnr_mean = get_HNR(data)
     
-    row = pd.DataFrame({'Audio': audio ,'MFCCs': [np.array(mfccs)], 
-                                'Spec Centroid': [specs_measurements[0]], 'Spec Rollof': [specs_measurements[1]],
-                                'Spec Bandwidth': [specs_measurements[2]], 'Spec Flatness': [specs_measurements[3]], 
-                                'Spec Contrast': [specs_measurements[4]], 'Pitch Track': [pitch_track],
-                                'Formants': [formants_data], 'RMS Energy': [rms_energy],
-                                'ZCR': [zcr], 'HNR Mean': [hnr_mean]})
+    row = pd.DataFrame({FEATURE_AUDIO: audio ,FEATURE_MFCCS: [np.array(mfccs)], 
+                                FEATURE_SPEC_CENTROID: [specs_measurements[0]], FEATURE_SPEC_ROLLOF: [specs_measurements[1]],
+                                FEATURE_SPEC_BANDWIDTH: [specs_measurements[2]], FEATURE_SPEC_FLATNESS: [specs_measurements[3]], 
+                                FEATURE_SPEC_CONTRAST: [specs_measurements[4]], FEATURE_PITCH_TRACK: [pitch_track],
+                                FEATURE_FORMANTS: [formants_data], FEATURE_RMS_ENERGY: [rms_energy],
+                                FEATURE_ZCR: [zcr], FEATURE_HNR_MEAN: [hnr_mean]})
     return row
 
 # MFCCs
 
 def get_Normalized_Mfccs(data):
-    mfccs = librosa.feature.mfcc(y=data, sr=sample_rate, n_mfcc=25)
+    mfccs = librosa.feature.mfcc(y=data, sr=sample_rate, n_fft=frame_length, n_mfcc=25)
     mfccs_mean = np.mean(mfccs, axis=1)
     mfccs_std = np.std(mfccs, axis=1)
     mfccs_normalized = ((mfccs.T - mfccs_mean).T) / mfccs_std[:, np.newaxis]
@@ -113,17 +142,17 @@ def get_Normalized_Mfccs(data):
 # Spectral measurements
 
 def get_spectral_measurements(data):
-    spectral_centroids = librosa.feature.spectral_centroid(y=data, sr=sample_rate)[0]
-    spectral_rolloff = librosa.feature.spectral_rolloff(y=data, sr=sample_rate)[0]
-    spectral_bandwidth = librosa.feature.spectral_bandwidth(y=data, sr=sample_rate)[0]
-    spectral_flatness = librosa.feature.spectral_flatness(y=data)[0]
-    spectral_contrast = librosa.feature.spectral_contrast(y=data, sr=sample_rate)
+    spectral_centroids = librosa.feature.spectral_centroid(y=data, sr=sample_rate, n_fft=frame_length)[0]
+    spectral_rolloff = librosa.feature.spectral_rolloff(y=data, sr=sample_rate, n_fft=frame_length)[0]
+    spectral_bandwidth = librosa.feature.spectral_bandwidth(y=data, sr=sample_rate, n_fft=frame_length)[0]
+    spectral_flatness = librosa.feature.spectral_flatness(y=data, n_fft=frame_length)[0]
+    spectral_contrast = librosa.feature.spectral_contrast(y=data, sr=sample_rate, n_fft=frame_length)
     return (spectral_centroids, spectral_rolloff, spectral_bandwidth, spectral_flatness, spectral_contrast)
 
 # Extract the pitch sequence
 
 def get_pitch_sequences(data):
-    pitches, magnitudes = librosa.core.piptrack(y=data, sr=sample_rate)
+    pitches, magnitudes = librosa.core.piptrack(y=data, sr=sample_rate, n_fft=frame_length)
     # Select the dominant pitch at each frame
     pitch_track = []
     for t in range(pitches.shape[1]):
@@ -155,12 +184,12 @@ def get_formants(path):
 ### Energy and Amplitude Features ###
 
 def get_rms_energy(data):
-    # Root Mean Square (RMS) Energy - with a frame length of 2048 (default)
-    return librosa.feature.rms(y=data, frame_length=frame_length, hop_length=hop_length)
+    # Root Mean Square (RMS) Energy
+    return librosa.feature.rms(y=data, frame_length=frame_length)
 
 def get_ZCR(data):
-    # Zero-Crossing Rate (ZCR) - with a frame length of 2048 (default)
-    return librosa.feature.zero_crossing_rate(y=data, frame_length=frame_length, hop_length=hop_length)
+    # Zero-Crossing Rate (ZCR)
+    return librosa.feature.zero_crossing_rate(y=data, frame_length=frame_length)
 
 ### Voice Quality Features ###
 def get_HNR(data):
