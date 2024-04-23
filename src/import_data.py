@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import datasets
+import matplotlib.pyplot as plt
 from datasets import load_dataset
 import pickle
 import os
@@ -64,7 +65,6 @@ mapper = {i: languages[i] for i in range(len(languages))}
 for d in ['train', 'test', 'validation']: 
     dataframes[d]['language'] = dataframes[d]['language'].map(mapper)
 
-import matplotlib.pyplot as plt
 split_types = ['train', 'test', 'validation']
 for d in split_types:
     print("Central tendency metrics for " + d)

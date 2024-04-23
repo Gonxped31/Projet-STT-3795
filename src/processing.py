@@ -58,6 +58,7 @@ def get_length(path):
 def get_data(path):
     data, sr = librosa.load(path, sr=None)
     assert(sr == sample_rate)
+    data = nr.reduce_noise(y=data, sr=sample_rate)  
     return data
 
 def get_dataframe(type):
@@ -100,6 +101,13 @@ def get_data_vector(type, audio):
                                 'Formants': [formants_data], 'RMS Energy': [rms_energy],
                                 'ZCR': [zcr], 'HNR Mean': [hnr_mean]})
     return row
+
+def clean_sound(audio): 
+    tresh = 1000
+    first_non_zero_index = np.where(np.abs(audio) > tresh)[0][0]
+    last_non_zero_index = np.where(np.abs(audio[::-1]) > tresh)[0][0]
+    trimmed_audio_data = audio[first_non_zero_index:-last_non_zero_index]
+    return trimmed_audio_data
 
 # MFCCs
 
@@ -225,4 +233,3 @@ def mds_mahalanobis(dataframe, n_components):
     mds = MDS(n_components=n_components, random_state=42, dissimilarity='precomputed')
     mds_transformed = mds.fit_transform(mahalanobis_distance_matrix)
     return pd.DataFrame(mds_transformed, columns=[f'Component_{i+1}' for i in range(n_components)])
-
