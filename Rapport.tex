@@ -12,6 +12,14 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\proofend}{\hfill $\square$}
+\newcommand{\deltach}{\hat{\delta}}
+
 % Define the color of the table of contents
 
 \hypersetup{
@@ -103,6 +111,12 @@ Given that our project was solely focused on the classification of the spoken la
 \begin{algorithmic}[1]
 \State Initialize paths for raw and cleaned audio files
 \State Prepare empty list for errors
+\Function{clean\_sound}{audio}
+    \State Define threshold to identify significant audio (e.g., 1000 units)
+    \State Find the start and end of significant audio using the threshold
+    \State Trim the audio outside the significant range
+    \State \Return the trimmed audio
+\EndFunction
 \For{each audio file in the dataset}
         \State Read the audio file to obtain waveform data
         \State Apply noise reduction to the waveform
@@ -112,32 +126,44 @@ Given that our project was solely focused on the classification of the spoken la
         \Except
             \State Log error with file details
         \EndTry
-    \EndFor
-
-\Function{clean\_sound}{audio}
-    \State Define threshold to identify significant audio (e.g., 1000 units)
-    \State Find the start and end of significant audio using the threshold
-    \State Trim the audio outside the significant range
-    \State \Return the trimmed audio
-\EndFunction
 \end{algorithmic}
 \end{algorithm}
-Next, the audio files were trimmed at the ends to remove noise at the beginning and end of the audio. To do this, it was necessary to find the waveform of each audio by applying a Fast Fourier Transformation. For example, for the audio \textit{common\_voice\_ar\_19061960.wav} in the training dataset, we obtain the following shape:\\
-
-IMAGE\\
-
-By removing the noises at the ends, we obtain this new shape:\\
-
-IMAGE\\
-
-The new shape obtained contains less noise than the first shape. This allows for more reliable data. However, there are some data in which the extremities are significant but will still be removed. Therefore, globally, the data are more reliable but we lose information.
+As we can see in Figure 1 and Figure 2, only relevant data has been kept, as the white noise has been removed. The new shape obtained contains less noise than the first shape. This allows for more reliable data. However, there are some data in which the extremities are significant but will still be removed. Therefore, globally, the data are more reliable but we lose information.\\
+\begin{figure}[!tbp]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{images/pre_cleaning.png}}
+    \caption{Pre cleaning shape}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{images/post_cleaning.png}
+    \caption{Post cleaning shape}
+  \end{minipage}
+\end{figure}
 
 \subsection{Statistics}
-We looked at three statistics on the data: the total length of audios by language, the average length of audios by language, and the number of audio files by language.\\
+Before preprocessing our audio data into features for model training, we need to verify that the data is well-balanced across various attributes, such as label distribution, category balance, and uniformity in audio lengths. We looked at three statistics on the data: the total length of audios by language, the average length of audios by language, and the number of audio files by language.\\
 
-\textbf{1.} The graphs below present the total length of audios by language for the three datasets.\\
+\textbf{1.} The graphs below present the total length of audios by language.\\
 
-FIGURES\\
+\begin{figure}[!tbp]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{images/.png}}
+    \caption{Pre cleaning shape}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{images/post_cleaning.png}
+    \caption{Post cleaning shape}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{images/post_cleaning.png}
+    \caption{Post cleaning shape}
+  \end{minipage}
+\end{figure}
 
 We can notice that the training data as well as the test data are uniform. However, the validation data are not. To remedy this problem, it was necessary to merge the test and validation data. Here is the new graph obtained following the merger of these two data:\\
 
@@ -171,10 +197,41 @@ This attribute is related to the clarity of the sound.
 \subsubsection{Attribute Matrix}
 After extracting raw features from the 
 \section{Methodology}
+\subsection{Why supervised Learning ?}
+
 \subsection{Dimensionality reduction}
 Before applying PCA or MDS, we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study gave us pretty strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory. After applying PCA, with a maintained variance of $99\%$, we have $112$ features from the $151$ intial features. This means that the first $112$ principal components of the covariance matrix $\Sigma \in \mathbb{R}^{151 \times 151}$ , where $\forall i \in 1, \ldots, 151 \quad \forall j \in 1, \ldots, 151 \quad \sigma_{ij} \in \Sigma, \sigma_{ij} = COV(x_i, x_j)$, $99\%$ of the original dataset.
-\subsection{SVM}
 
+\subsection{SVM}
+For this project, we use the library \textit{SVC} from \textit{sklearn}. This library use a non-linear SVM with a soft margin. Non-linear SVM with a soft margin is particularly useful when dealing with data that cannot be linearly separated in the original feature space. The inclusion of slack variables, \(\xi_i\), allows some data points to be on the incorrect side of the margin, providing a balance between the complexity of the model and its error minimization.\\
+
+\noindent
+\textbf{Formulation:}
+
+For a dataset \(X \in \R^{n \times p} \) and a vector $y \in \{-1, 1\}^n$, the objective is to find $w$ such that the values returned by the functions $f(X) = sign(w^T\phi(x) + b)$ are correct for most samples.\\
+SVC resolve the following problem :
+
+\begin{equation}
+\min_{w, b, \boldsymbol{\xi}} \left( \frac{1}{2} w^T w + \beta \sum_{i=1}^{n} \xi_i \right)
+\end{equation}
+
+subject to:
+\[
+y_i (w^T \phi(x_i) + b) \geq 1 - \xi_i
+\]
+\[
+\xi_i \geq 0, \quad \forall i,
+\]
+
+
+\noindent
+\textbf{Kernel Function}\\
+Common choices for the kernel function \(K\) include:
+- Polynomial: \(K(\mathbf{x}_i, \mathbf{x}_j) = (\gamma \mathbf{x}_i^T \mathbf{x}_j + r)^d\),
+- Radial Basis Function (RBF): \(K(\mathbf{x}_i, \mathbf{x}_j) = \exp(-\gamma \|\mathbf{x}_i - \mathbf{x}_j\|^2)\),
+- Sigmoid: \(K(\mathbf{x}_i, \mathbf{x}_j) = \tanh(\gamma \mathbf{x}_i^T \mathbf{x}_j + r)\).
+
+\(\gamma\), \(r\), and \(d\) are parameters that can be tuned according to the specific data and problem requirements.
 
 
 \subsection{Random Forest Classifier}
@@ -186,7 +243,7 @@ Before applying PCA or MDS, we wanted to see the relationship between features i
 
 \section{Conclusion}
 
-
+\newpage
 \section{References}
 \begin{itemize}
     \item \href{https://huggingface.co/datasets/common_language}{Data Source}
