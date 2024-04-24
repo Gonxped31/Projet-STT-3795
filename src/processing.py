@@ -30,6 +30,11 @@ from xgboost import XGBClassifier
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+#from google.colab import drive
+#drive.mount('/content/drive')
+#root = "/content/drive/My Drive/Colab Notebooks/Projet_STT3795/"
+root = "."
+
 # Source for audio dataset:
 # https://huggingface.co/datasets/common_language
 # https://github.com/speechbrain/speechbrain/tree/develop/recipes/CommonLanguage
@@ -46,7 +51,7 @@ sample_rate = 16000
 frame_length = 512
 
 def get_path(type, name):
-    return f'./data/wav_files/{type}/{name}'
+    return f'{root}/data/wav_files/{type}/{name}'
 
 def get_length(path):
     audio = WAVE(path)
@@ -57,6 +62,7 @@ def get_length(path):
     return audio_info.length
 
 def get_data(path):
+    # Counteract this: https://librosa.org/blog/2019/07/17/resample-on-load/
     data, sr = librosa.load(path, sr=None)
     assert(sr == sample_rate)
     if len(data) < frame_length:
@@ -71,7 +77,7 @@ def get_dataframe(type):
     return df
 
 def get_base_dataframe(language, type):
-    path = f'./data/common_voice_kpd/{language}/{type}.csv'
+    path = f'{root}/data/common_voice_kpd/{language}/{type}.csv'
     return pd.read_csv(path)
 
 def get_dataframes():
@@ -82,7 +88,7 @@ def get_dataframes():
     return full_df, train_df, test_df, validation_df
 
 def get_clean_path(type, name):
-    return f'./data/wav_files_clean/{type}/{name}'
+    return f'{root}/data/wav_files_clean/{type}/{name}'
 
 def get_clean_dataframe(type):
     df = pd.read_csv(get_clean_path(type, f'{type}_data.csv'))
@@ -97,9 +103,9 @@ def get_clean_dataframes():
     return full_df, train_df, test_df, validation_df
 
 def get_preprocessed_data():
-    train_df = pd.read_csv('./data/train_preprocessed_data.csv')
-    test_df = pd.read_csv('./data/test_preprocessed_data.csv')
-    validation_df = pd.read_csv('./data/validation_preprocessed_data.csv')
+    train_df = pd.read_csv(f'{root}/data/train_preprocessed_data.csv')
+    test_df = pd.read_csv(f'{root}/data/test_preprocessed_data.csv')
+    validation_df = pd.read_csv(f'{root}/data/validation_preprocessed_data.csv')
     full_df = pd.concat([train_df, test_df, validation_df])
     return full_df, train_df, test_df, validation_df
 
