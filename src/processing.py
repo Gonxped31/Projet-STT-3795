@@ -59,12 +59,15 @@ def get_length(path):
 def get_data(path):
     data, sr = librosa.load(path, sr=None)
     assert(sr == sample_rate)
+    if len(data) < frame_length:
+        raise ValueError('Data is too short', len(data), path)
+    # clean data
     data = nr.reduce_noise(y=data, sr=sample_rate, n_fft=frame_length)
     return data
 
 def get_dataframe(type):
     df = pd.read_csv(get_path(type, f'{type}_data.csv'))
-    df['Length'] = df['paths'].apply(lambda x: get_length(get_path(type, x)))
+    #df['Length'] = df['paths'].apply(lambda x: get_length(get_path(type, x)))
     return df
 
 def get_dataframes():
@@ -110,8 +113,6 @@ FEATURE_HNR_MEAN = 'HNR Mean'
     
 def get_data_features(path, audio):
     data = get_data(path)
-    #clean data: https://pypi.org/project/noisereduce/
-    data = nr.reduce_noise(y=data, sr=sample_rate, n_fft=frame_length)
 
     #Get the attributes
     mfccs = get_Normalized_Mfccs(data)
