@@ -63,7 +63,7 @@ def get_data(path):
         raise ValueError('Data is too short', len(data), path)
     # clean data
     data = nr.reduce_noise(y=data, sr=sample_rate, n_fft=frame_length)
-    return data
+    return np.array(data)
 
 def get_dataframe(type):
     df = pd.read_csv(get_path(type, f'{type}_data.csv'))
