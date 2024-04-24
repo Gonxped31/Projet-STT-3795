@@ -1,4 +1,4 @@
-,sentence,age,gender,language,paths
+Unnamed: 0,sentence,age,gender,language,paths
 0,لا بد أنك تمزح!,twenties,male,Arabic,common_voice_ar_19203953.wav
 1,ماذا هناك في حقيبتك ؟,twenties,male,Arabic,common_voice_ar_21374204.wav
 2,لا أحد يملك القمر.,twenties,male,Arabic,common_voice_ar_21310390.wav
@@ -868,7 +868,6 @@
 866,有時需要用錢,thirties,male,Chinese_Taiwan,common_voice_zh-TW_17528870.wav
 867,看到的麥穗,teens,male,Chinese_Taiwan,common_voice_zh-TW_17403160.wav
 868,爸爸你看,not_defined,not_defined,Chinese_Taiwan,common_voice_zh-TW_18297896.wav
-869,提供舞台給研發團隊展現成果,not_defined,not_defined,Chinese_Taiwan,common_voice_zh-TW_17622900.wav
 870,暑期體驗泣不成聲,not_defined,not_defined,Chinese_Taiwan,common_voice_zh-TW_17417489.wav
 871,趕快拿出來,not_defined,not_defined,Chinese_Taiwan,common_voice_zh-TW_17376931.wav
 872,我這時候才看懂,not_defined,not_defined,Chinese_Taiwan,common_voice_zh-TW_17395641.wav
@@ -1516,7 +1515,6 @@
 1514,De directeur van de basisschool was ziek en werd vervangen door de interim manager.,fourties,male,Dutch,common_voice_nl_20535618.wav
 1515,"He received the following cable from his office, Berlin denies Guernica bombing.",not_defined,not_defined,English,common_voice_en_21375011.wav
 1516,Tack this picture to the wall.,not_defined,not_defined,English,common_voice_en_18322991.wav
-1517,What would you do?,not_defined,not_defined,English,common_voice_en_17271156.wav
 1518,He continued to use the Seneca view camera for all other work.,not_defined,not_defined,English,common_voice_en_19878214.wav
 1519,"From trivial things, great contests often arise.",thirties,male,English,common_voice_en_17249680.wav
 1520,"It's true that everything has its destiny, but one day that destiny will be realized.",not_defined,not_defined,English,common_voice_en_104156.wav
@@ -1581,7 +1579,6 @@
 1579,"Here he made useful contacts, including Bob Hope, Betty Grable and Rita Hayworth.",twenties,male,English,common_voice_en_18860884.wav
 1580,"Well, I can guess how that turned out.",not_defined,not_defined,English,common_voice_en_17276707.wav
 1581,"""Teaching units at this University were originally called """"department"""".""",not_defined,not_defined,English,common_voice_en_19711879.wav
-1582,And so it was.,not_defined,not_defined,English,common_voice_en_497292.wav
 1583,He hasn't had a square meal for years.,not_defined,not_defined,English,common_voice_en_18431580.wav
 1584,The stairs creaked under his weight as he climbed to the darkened upper floor.,fifties,male,English,common_voice_en_17152441.wav
 1585,I'm going to tell your mother on you.,not_defined,not_defined,English,common_voice_en_102654.wav
@@ -2949,7 +2946,6 @@
 2947,La morale del film si basa sul concetto di distruzione mutua assicurata.,teens,male,Italian,common_voice_it_19996039.wav
 2948,"Prende il nome dal fiume San Gabriel, che la percorre da nord-est a sud-ovest.",not_defined,not_defined,Italian,common_voice_it_19989977.wav
 2949,"I palchi, presenti solo nei maschi, spuntano a partire dal secondo anno di vita.",not_defined,not_defined,Italian,common_voice_it_20002317.wav
-2950,Jack Reilly,not_defined,not_defined,Italian,common_voice_it_19970552.wav
 2951,Grazie a quel ruolo è diventata molto celebre.,not_defined,not_defined,Italian,common_voice_it_20071406.wav
 2952,Una fontana pubblica era un luogo importante per la soddisfazione delle esigenze delle famiglie.,not_defined,not_defined,Italian,common_voice_it_20012834.wav
 2953,"""Descrive la """"gravità"""" della vita, pur in un contesto a volte di soap opera.""",not_defined,not_defined,Italian,common_voice_it_20062697.wav
@@ -3995,7 +3991,6 @@
 3993,Би чамд үнэхээр хайр сэтгэлтэй болсноо мэдээгүй явжээ.,not_defined,not_defined,Mongolian,common_voice_mn_18766100.wav
 3994,Доржоо одоо би таныг чи гэж хэлбэл уурлахгүй биз.,not_defined,not_defined,Mongolian,common_voice_mn_18766099.wav
 3995,Дахиад л нэгэн бяцхан хүү томчуудын увайгүй үйлдлийн золиос болон амиа алджээ.,twenties,male,Mongolian,common_voice_mn_20088395.wav
-3996,Ядуу тарчиг байсан үеэс л илүү байх.,twenties,male,Mongolian,common_voice_mn_18580108.wav
 3997,Буддын шашны нэг онцлог тал нь зан үйл нь хурал номтойгоо хамт байдаг юм.,twenties,male,Mongolian,common_voice_mn_18580135.wav
 3998,Учир нь Катриний ээж түүнд жигтэйхэн сайн байсан билээ.,twenties,male,Mongolian,common_voice_mn_18580111.wav
 3999,Миний мэдэх нэг эмэгтэй нас жар хүрсэн ч толиотой сайхан харагддаг байлаа.,not_defined,not_defined,Mongolian,common_voice_mn_18587199.wav
@@ -4062,7 +4057,6 @@
 4060,موج سواری خوشایند است، اینطور نیست؟,thirties,male,Persian,common_voice_fa_19546209.wav
 4061,هفتاد و هفت، هفتاد و هشت، هفتاد و نه.,twenties,male,Persian,common_voice_fa_20833705.wav
 4062,چون هیچ زنی نبود که دستش را بالا ببرد و بگوید,not_defined,not_defined,Persian,common_voice_fa_21795762.wav
-4063,اما سرآخر، وا دادند,fourties,male,Persian,common_voice_fa_18594915.wav
 4064,هستند كسانی كه از نگاهشان كبر و غرور میبارد,not_defined,not_defined,Persian,common_voice_fa_21882855.wav
 4065,تخمک گذاری چیست؟,not_defined,not_defined,Persian,common_voice_fa_21582570.wav
 4066,شورای عالی برنامه ریزی وزارت علوم، تحقیقات و فناوری,not_defined,not_defined,Persian,common_voice_fa_20991987.wav
@@ -4084,7 +4078,6 @@
 4082,غدد لنفاوی من ورم کرده اند.,not_defined,not_defined,Persian,common_voice_fa_19553465.wav
 4083,چطور این کلمه را تلفظ می کنی؟,thirties,male,Persian,common_voice_fa_19538213.wav
 4084,می توانید یک سشوار خوب به من نشان دهید؟,thirties,male,Persian,common_voice_fa_19804792.wav
-4085,آه، نه اصلاُ!,not_defined,not_defined,Persian,common_voice_fa_19446941.wav
 4086,خوب ساعتم تیز و فلزیه,not_defined,not_defined,Persian,common_voice_fa_19222889.wav
 4087,آیا انعام دادن در کشور شما متداول است؟,not_defined,not_defined,Persian,common_voice_fa_19297038.wav
 4088,تاجیکستان دربردارنده بخشهای کهن خجند فرغانه زرافشان و پامیر است,twenties,male,Persian,common_voice_fa_22176424.wav
@@ -4163,7 +4156,6 @@
 4161,"Pewnego razu ojciec zawołał go i powiedział: — Wiesz Emil, będziesz miał brata albo siostrę.",not_defined,not_defined,Polish,common_voice_pl_20634301.wav
 4162,"""""""Radził sobie zuchwale bardzo.""""""",not_defined,not_defined,Polish,common_voice_pl_21445760.wav
 4163,Miała szeroko otwarte oczy.,not_defined,not_defined,Polish,common_voice_pl_20627393.wav
-4164,"W tym celu należy zapewnić szczególną ochronę zarówno dziecku, jak i matce.",not_defined,not_defined,Polish,common_voice_pl_20617775.wav
 4165,"Chodzę koło niego, jak pies dookoła suki.",not_defined,not_defined,Polish,common_voice_pl_20682466.wav
 4166,"Z drugiej strony nie chcę dzisiaj ale widzę, że masz rację.",not_defined,not_defined,Polish,common_voice_pl_20931710.wav
 4167,— Symbole siedmiu planet.,not_defined,not_defined,Polish,common_voice_pl_20617919.wav
@@ -5018,7 +5010,6 @@
 5016,Tras todo este tiempo quedan atrás numerosas actuaciones.,not_defined,not_defined,Spanish,common_voice_es_19601966.wav
 5017,"En la batalla subsiguiente, Rand Int.",not_defined,not_defined,Spanish,common_voice_es_19603941.wav
 5018,Hallazgos arqueológicos sugieren asentamientos humanos anteriores a la dinastía Qin.,not_defined,not_defined,Spanish,common_voice_es_19967934.wav
-5019,"""Diodoro Sículo le da el """"praenomen"""" Manio.""",not_defined,not_defined,Spanish,common_voice_es_19982740.wav
 5020,Se suele elaborar a partir de cortes y molida de bajo costo.,not_defined,not_defined,Spanish,common_voice_es_19630495.wav
 5021,Era raquítico y sordo.,not_defined,not_defined,Spanish,common_voice_es_18398857.wav
 5022,En las tumbas se hallaron además algunas armas y recipientes.,not_defined,not_defined,Spanish,common_voice_es_19724975.wav

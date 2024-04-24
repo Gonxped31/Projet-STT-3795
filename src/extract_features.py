@@ -154,7 +154,7 @@ def mfccs_to_df(mfcc_means,mfcc_stds):
     
     return mfcc_features_df
 
-def extract_feature_row(path, label):
+def extract_feature_row(path, language):
     data = prlib.get_data(path)
 
     #Get the attributes
@@ -174,7 +174,6 @@ def extract_feature_row(path, label):
     spectre_rollof_df = extract_spectre(specs_measurements[1], "rollof")
     spectre_bandwidth_df = extract_spectre(specs_measurements[2], "bandwidth")
     spectre_flatness_df = extract_spectre(specs_measurements[3], "flatness")
-    
 
     # Spectre contrast
     spectre_contrast_df = extract_contrast(specs_measurements[4])
@@ -191,7 +190,10 @@ def extract_feature_row(path, label):
     rms_energy_df = extract_rms_features(rms_energy[0])
 
     #ZCR and HNR mean
-    zcr_hnr = extract_zcr_features(zcr, hnr_mean)
+    zcr_hnr_df = extract_zcr_features(zcr, hnr_mean)
+
+    # Voice language label
+    label_df = pd.DataFrame({ 'label': [language] })
 
     combined_features_row = pd.concat([mfccs, spectre_centroid_df,\
                                     spectre_rollof_df, \
@@ -200,7 +202,7 @@ def extract_feature_row(path, label):
                                                 spectre_contrast_df,\
                                                     pitch_track_df,\
                                                         formants_df, \
-                                                            rms_energy_df, zcr_hnr, label], axis = 1)
+                                                            rms_energy_df, zcr_hnr_df, label_df], axis = 1)
     
     if (combined_features_row.isnull().values.any()):
         raise Exception("NaN values in", combined_features_row)
@@ -216,26 +218,24 @@ def extract_feature_row(path, label):
     return combined_features_row
 
 def extract_features(type, df):
+    languages = df['language'].tolist()
     audios = df['paths'].tolist()
     attributes_df = pd.DataFrame()
     for j in range(len(audios)):
-        print(j, "/", len(audios), ":", audios[j])
         path = prlib.get_clean_path(type, audios[j])
-        print(audios[j] + " " + path)
+        print(j, "/", len(audios), ":", path)
         try:
-            label = pd.DataFrame({ 'label': [df['language'][j]] })
-            combined_features_row = extract_feature_row(path, label)
+            combined_features_row = extract_feature_row(path, languages[j])
             attributes_df = pd.concat([attributes_df, combined_features_row], ignore_index=True)
-            # attributes_df['label'] = df['language'][j]
         except Exception as e:
             print(e)
             df = df.drop(j)
-    return attributes_df
+    return attributes_df, df
 
 if __name__ == '__main__':
     # Extract features from the dataset
-    _, train_df, test_df, validation_df = prlib.get_clean_dataframes()
+    _, train_df, test_df, validation_df = prlib.get_dataframes()
     for (type, df) in [('train', train_df), ('test', test_df), ('validation', validation_df)]:
-        attributes_df = extract_features(type, df)
+        attributes_df, df = extract_features(type, df)
         attributes_df.to_csv(f'./data/{type}_preprocessed_data.csv', index=False) # , sep=',', encoding='utf-8', index=False)
         df.to_csv(f'./data/wav_files_clean/{type}/{type}_data.csv', index=False)

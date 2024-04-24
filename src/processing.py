@@ -100,7 +100,8 @@ def get_preprocessed_data():
     train_df = pd.read_csv('./data/train_preprocessed_data.csv')
     test_df = pd.read_csv('./data/test_preprocessed_data.csv')
     validation_df = pd.read_csv('./data/validation_preprocessed_data.csv')
-    return pd.concat([train_df, test_df, validation_df])
+    full_df = pd.concat([train_df, test_df, validation_df])
+    return full_df, train_df, test_df, validation_df
 
 FEATURE_AUDIO = 'Audio'
 FEATURE_MFCCS = 'MFCCs'
@@ -216,7 +217,6 @@ def get_PCs(dataframe, percentage_variance):
     scaled_df = scaler.fit_transform(dataframe)
     print(f'Scaled_df Mean = {np.mean(scaled_df)},\nScaled_df Std = {np.std(scaled_df)}')
 
-
     pca_T = PCA()
     pca_T.fit_transform(scaled_df)
     ev = pca_T.explained_variance_
@@ -232,7 +232,9 @@ def get_PCs(dataframe, percentage_variance):
     print(f'Number of PCs for {round(percentage*100, 2)}% = {len(explained_variance)}')
     print(f'Attribute lost = {len(scaled_df[0]) - len(explained_variance)}')
     names = pca.get_feature_names_out()
-    return pd.DataFrame(data=principal_components, columns=names)
+
+    embedding = lambda df: pd.DataFrame(pca.transform(scaler.transform(df)), columns=names)
+    return pd.DataFrame(data=principal_components, columns=names), embedding
 
 # MDS classique
 def mds(dataframe, n_components):

@@ -1,4 +1,4 @@
-,sentence,age,gender,language,paths
+Unnamed: 0,sentence,age,gender,language,paths
 0,ألقت الشرطة القبض على المشتبه به امس.,twenties,male,Arabic,common_voice_ar_20939658.wav
 1,! أنت ملاك,not_defined,not_defined,Arabic,common_voice_ar_19493969.wav
 2,.لن يذهب,not_defined,not_defined,Arabic,common_voice_ar_19629527.wav
@@ -448,7 +448,6 @@
 446,Hi ha una antiga lliça ara en desús.,fourties,male,Catalan,common_voice_ca_20222277.wav
 447,"També se li atribueixen altres obres, però totes elles són qüestionables.",not_defined,not_defined,Catalan,common_voice_ca_19520944.wav
 448,Edificis situats a la cantonada entre el carrer Santa Marina i el carrer Sant Francesc.,sixties,male,Catalan,common_voice_ca_20734984.wav
-449,"L'horari de realització de Bous al carrer serà el que es determine, en cada cas, en la resolució d'autorització.",not_defined,not_defined,Catalan,common_voice_ca_17679561.wav
 450,Però també és ben cert que un treball com aquest no té sentit sense un posicionament clar.,not_defined,not_defined,Catalan,common_voice_ca_17378351.wav
 451,La parella fou infeliç i una vegada a l'exili visqueren de forma separada.,not_defined,not_defined,Catalan,common_voice_ca_20347999.wav
 452,"Per definició, cap port pot ser oficialment registrat al rang de ports dinàmics.",not_defined,not_defined,Catalan,common_voice_ca_20324383.wav
@@ -1763,7 +1762,6 @@
 1761,"En général, plus le médicament est efficace, plus la tentation d’en abuser est forte.",not_defined,not_defined,French,common_voice_fr_19627098.wav
 1762,Il devient la même année premier chef à l'opéra de Mannheim.,not_defined,not_defined,French,common_voice_fr_20237127.wav
 1763,"cent cinquante-cinq les Plantées, zéro un, cent vingt Dagneux",not_defined,not_defined,French,common_voice_fr_18381398.wav
-1764,"Marié deux fois, Sunjong n'a pas de descendance.",fifties,male,French,common_voice_fr_19131637.wav
 1765,Il n’oserait pas,not_defined,not_defined,French,common_voice_fr_17327897.wav
 1766,"Les délicieuses pommes de terre à l’huile au cumin, légèrement citronnée",fifties,male,French,common_voice_fr_17326051.wav
 1767,Le boulevard périphérique de Paris a plus tard été construit à cet emplacement.,not_defined,not_defined,French,common_voice_fr_19684586.wav
@@ -3124,7 +3122,6 @@
 3122,"Efk-iyi-d, ad ak-fkeɣ.",not_defined,not_defined,Kabyle,common_voice_kab_20929638.wav
 3123,"Ad neqqim da, ɣef tuga.",not_defined,not_defined,Kabyle,common_voice_kab_21531209.wav
 3124,Teǧǧam-as-d tarda leḥwal.,not_defined,not_defined,Kabyle,common_voice_kab_18822697.wav
-3125,Efk-iyi-tt a baba ad tt-ččeγ!,not_defined,not_defined,Kabyle,common_voice_kab_19340759.wav
 3126,"Yezger Saɛid Usliman ar tala, yufa din tameɛcuqt-is, dɣa tenna-yas: A Saɛid, tesneḍ baba, rzu-d tammedit-a ɣur-s.",not_defined,not_defined,Kabyle,common_voice_kab_17828836.wav
 3127,ttawimt azduz ad tesseftutusemt,not_defined,not_defined,Kabyle,common_voice_kab_17660368.wav
 3128,"Akken nebda asileɣ, iḥbes-as i Yuba uselkim-is, dɣa nessiwel i Takfarinas, amasay n ugezdu n tsenselkimt di Steel.",not_defined,not_defined,Kabyle,common_voice_kab_17845612.wav
@@ -3912,7 +3909,6 @@
 3910,Их ажилч хичээнгүй боловч сэтгүүлчийн авьяасгүй хүнийг авч ажиллуулаад сонины газар ч зүдэрнэ.,fourties,male,Mongolian,common_voice_mn_18578648.wav
 3911,Би өөрийн зовлонт тавилан руугаа явж байна гэдгийг мэдэрсэн.,twenties,male,Mongolian,common_voice_mn_18681279.wav
 3912,Би тэр үес гуравдугаар ангид сурч байсан хийгээд намар нь сургуульдаа очив.,not_defined,not_defined,Mongolian,common_voice_mn_18577372.wav
-3913,Бид одоохон аваад ирье гэж хэлэв.,not_defined,not_defined,Mongolian,common_voice_mn_18825844.wav
 3914,Цэрмааг ирэхэд Гансүх орондоо ороод унтчихсан байжээ.,fourties,male,Mongolian,common_voice_mn_18578650.wav
 3915,Дамаск хотод лалын шашин эрчтэй дэлгэрч байсныг тэр үеийн бунхнууд гэрчилнэ.,twenties,female,Mongolian,common_voice_mn_18577863.wav
 3916,Хорвоо дэлхий үнэхээр сайхан газар байдаг гэж диваажинд байхад хүүхдүүд ярьдаг.,not_defined,not_defined,Mongolian,common_voice_mn_18955293.wav
@@ -4016,7 +4012,6 @@
 4014,من جدی هستم.,not_defined,not_defined,Persian,common_voice_fa_20713479.wav
 4015,.به خصوص با طراحان هست,not_defined,not_defined,Persian,common_voice_fa_19216406.wav
 4016,اساس و پایه علمی واضحی برای اختربینی وجود ندارد,fourties,male,Persian,common_voice_fa_21624141.wav
-4017,كسانی كه دندانهای خود را تيز میكنند تا به جان مردم فقير بيفتند,not_defined,not_defined,Persian,common_voice_fa_21837397.wav
 4018,و بسیاری از موضوعات مشکل ساز دیگر را,not_defined,not_defined,Persian,common_voice_fa_18555280.wav
 4019,در محل کار هستم.,not_defined,not_defined,Persian,common_voice_fa_19281670.wav
 4020,چند تا کیف دارید؟,not_defined,not_defined,Persian,common_voice_fa_20717259.wav
@@ -4554,7 +4549,6 @@
 4552,"Активизируются попытки подорвать конституционный порядок, установленный в результате свободного волеизъявления кубинского народа.",twenties,male,Russian,common_voice_ru_19287943.wav
 4553,"Настоятельно необходимо, чтобы Израиль придерживался рамок для ведения переговоров на основе норм международного права.",thirties,female,Russian,common_voice_ru_19484261.wav
 4554,"Кроме того, у Японии есть система противоракетной обороны.",twenties,male,Russian,common_voice_ru_20294968.wav
-4555,Мы не намерены заменять Конференцию по разоружению другим органом.,teens,male,Russian,common_voice_ru_20497577.wav
 4556,"Мы намерены участвовать в работе этого Совета, проявляя решимость и целеустремленность.",twenties,male,Russian,common_voice_ru_19288399.wav
 4557,Наша проблема вызвана агрессивной политикой нынешнего израильского правительства.,twenties,other,Russian,common_voice_ru_21784139.wav
 4558,"В-четвертых, вызревание нового миропорядка сопровождается ростом конфликтности.",teens,male,Russian,common_voice_ru_20117595.wav
@@ -4988,7 +4982,6 @@
 4986,"Biblioteca Colombina de la Catedral de Sevilla, España.",not_defined,not_defined,Spanish,common_voice_es_19125374.wav
 4987,"""En """"The Cleveland-Loretta Quagmire"""" se acuesta con Loretta, la mujer de Cleveland.""",not_defined,not_defined,Spanish,common_voice_es_19994804.wav
 4988,El resultado buscado era hacer la fachada norte del edificio el aspecto ms importante.,not_defined,not_defined,Spanish,common_voice_es_19735072.wav
-4989,El gobernador de Misiones nunca llegó a asentarse en esta localidad.,not_defined,not_defined,Spanish,common_voice_es_19121972.wav
 4990,Se graduó como ingeniero agrónomo en la Universidad de la República.,twenties,female,Spanish,common_voice_es_19976694.wav
 4991,"Durante su juventud se unió a las capuchinas, perteneciente a la Orden Franciscana.",teens,female,Spanish,common_voice_es_20301655.wav
 4992,Esto es vital para mejorar la capacidad de la estación.,not_defined,not_defined,Spanish,common_voice_es_19697350.wav
@@ -4999,7 +4992,6 @@
 4997,Es ingerida con el pasto por los rumiantes.,not_defined,not_defined,Spanish,common_voice_es_19633911.wav
 4998,La organización aboga por temas que afectan e impactan a la comunidad judía estadounidense.,not_defined,not_defined,Spanish,common_voice_es_19656786.wav
 4999,Actualmente trabaja en su nuevo disco.,not_defined,not_defined,Spanish,common_voice_es_19636511.wav
-5000,"La creación de la banda se atribuye al Sr. Tulio Freire, integrante del gobierno.",thirties,female,Spanish,common_voice_es_19964816.wav
 5001,La historia del Restaurante está íntimamente unida a la familia Arzak.,not_defined,not_defined,Spanish,common_voice_es_19654813.wav
 5002,Escribió varios trabajos sobre temática militar.,not_defined,not_defined,Spanish,common_voice_es_19715866.wav
 5003,Despachaba rival tras rival en los primeros asaltos con poderosos golpes.,not_defined,not_defined,Spanish,common_voice_es_20223871.wav
@@ -5124,7 +5116,6 @@
 5122,Innan var hon läkare på en kasern.,twenties,male,Swedish,common_voice_sv-SE_19101551.wav
 5123,Lämna ett meddelande eller skicka ett sms som en normal människa.,teens,male,Swedish,common_voice_sv-SE_18761720.wav
 5124,Vi tar ett glas efteråt.,teens,male,Swedish,common_voice_sv-SE_18831485.wav
-5125,Du får manövrera den här jätteroboten.,teens,male,Swedish,common_voice_sv-SE_18743590.wav
 5126,Det är bra.,twenties,male,Swedish,common_voice_sv-SE_19102146.wav
 5127,Det var ingen fest!,twenties,male,Swedish,common_voice_sv-SE_19101581.wav
 5128,Det är kanske därför hon inte är med mig nu.,twenties,male,Swedish,common_voice_sv-SE_19102125.wav
@@ -5194,7 +5185,6 @@
 5192,Här är mitt kort.,twenties,male,Swedish,common_voice_sv-SE_19101817.wav
 5193,Jag blir bara trött.,twenties,male,Swedish,common_voice_sv-SE_19101991.wav
 5194,"Förlåt, jag hör dig inte.",teens,male,Swedish,common_voice_sv-SE_18831484.wav
-5195,Han är inte i skick ännu.,teens,male,Swedish,common_voice_sv-SE_18831467.wav
 5196,Jag vill också att han stannar.,teens,male,Swedish,common_voice_sv-SE_18743607.wav
 5197,Ditt sista vad?,twenties,male,Swedish,common_voice_sv-SE_19101707.wav
 5198,Jag har ont i halsen.,teens,male,Swedish,common_voice_sv-SE_18831539.wav

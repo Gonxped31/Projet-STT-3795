@@ -1,4 +1,4 @@
-,sentence,age,gender,language,paths
+Unnamed: 0,sentence,age,gender,language,paths
 0,عليك أن تفي بوعدك.,twenties,male,Arabic,common_voice_ar_20401372.wav
 1,يشبه أباه.,twenties,female,Arabic,common_voice_ar_19216539.wav
 2,لن يُغَيِّرَ ذلك شيئًا.,fourties,male,Arabic,common_voice_ar_19375914.wav
@@ -314,7 +314,6 @@
 312,ما رأيها في ما توصل إليه المؤتمر من نتائج ؟,twenties,male,Arabic,common_voice_ar_20732070.wav
 313,كل جهد يستحق المكافأة.,twenties,male,Arabic,common_voice_ar_21204173.wav
 314,الإنسان بالتفكير والله بالتدبير,twenties,male,Arabic,common_voice_ar_19963353.wav
-315,أهلاً ، هل تعمل هنا ؟,not_defined,not_defined,Arabic,common_voice_ar_19222349.wav
 316,لا تقلق!,thirties,male,Arabic,common_voice_ar_19285860.wav
 317,أعندك أي شيء تريد قوله بخصوص هذا الموضوع ؟,not_defined,not_defined,Arabic,common_voice_ar_19962449.wav
 318,إنه رسّام مشهور.,not_defined,not_defined,Arabic,common_voice_ar_19398412.wav
@@ -656,7 +655,6 @@
 654,Batzorde honen hautaketa bost urtean behin egiten du Aita Santuak.,not_defined,not_defined,Basque,common_voice_eu_21642477.wav
 655,Argitaratzeraino eraman dituzue idazlan batzuk.,twenties,female,Basque,common_voice_eu_19517862.wav
 656,Letaginak ukitu dituen itsuak ezpata direla pentsatu du.,not_defined,not_defined,Basque,common_voice_eu_18566208.wav
-657,Madrilera jo eta elizetan kantatuz hala-hola atera zuen bizitza.,fourties,female,Basque,common_voice_eu_21685386.wav
 658,"Asko-asko ikasi dut, nire buruaz batez ere.",not_defined,not_defined,Basque,common_voice_eu_18600987.wav
 659,Konparatuko dugu gure hizkuntza Islandiako hizkuntzarekin?,not_defined,not_defined,Basque,common_voice_eu_18939940.wav
 660,Hona hemen elkarte bakoitzak erabilitako traineruaren egileak.,not_defined,not_defined,Basque,common_voice_eu_21585899.wav
@@ -1037,7 +1035,6 @@
 1035,bloavezh mat.,not_defined,not_defined,Breton,common_voice_br_19454301.wav
 1036,Daoust hag-eñ e teuio ?,thirties,male,Breton,common_voice_br_17848296.wav
 1037,Tu bennak e tle bezañ.,not_defined,not_defined,Breton,common_voice_br_18015161.wav
-1038,Bemdez e prenan ar gazetenn er stal.,not_defined,not_defined,Breton,common_voice_br_17805544.wav
 1039,Gellout a ran komz get an Itron Vaerez ?,thirties,male,Breton,common_voice_br_17966483.wav
 1040,eñ a lenne.,twenties,male,Breton,common_voice_br_17351008.wav
 1041,div ha tregont.,not_defined,not_defined,Breton,common_voice_br_17980468.wav
@@ -1480,7 +1477,6 @@
 1478,lenn a reont-int.,not_defined,not_defined,Breton,common_voice_br_17976649.wav
 1479,Pehini zo gwell ?,twenties,male,Breton,common_voice_br_18015323.wav
 1480,Petra zo ?,not_defined,not_defined,Breton,common_voice_br_17967984.wav
-1481,Na rit ket an dra-se !,not_defined,not_defined,Breton,common_voice_br_17805582.wav
 1482,pevar ha daou-ugent.,twenties,male,Breton,common_voice_br_18030353.wav
 1483,bep mintin ez ae d'ar skol abred.,fifties,male,Breton,common_voice_br_17747279.wav
 1484,Ret eo degas cheñchamant.,not_defined,not_defined,Breton,common_voice_br_17981165.wav
@@ -1518,7 +1514,6 @@
 1516,Klevet 'rit ?,twenties,male,Breton,common_voice_br_17974244.wav
 1517,"Evit kompren o mont en-dro, kit da-heul red an dour !",not_defined,not_defined,Breton,common_voice_br_17350516.wav
 1518,Un dasenn zo gant ma c'hoar.,fourties,male,Breton,common_voice_br_17965554.wav
-1519,Seder eo hemañ hag ankeniet eo egile,not_defined,not_defined,Breton,common_voice_br_17970190.wav
 1520,Hizivaat ar stil da ziskouez ar cʼhemmoù nevez a-walcʼh ?,not_defined,not_defined,Breton,common_voice_br_18142668.wav
 1521,ganto e c'hoarie.,not_defined,not_defined,Breton,common_voice_br_17967073.wav
 1522,un dra gaer ha tregont.,not_defined,not_defined,Breton,common_voice_br_17964986.wav
@@ -1581,7 +1576,6 @@
 1579,n'ouzon netra ebet.,not_defined,not_defined,Breton,common_voice_br_17981069.wav
 1580,hon tad.,twenties,male,Breton,common_voice_br_17331789.wav
 1581,Divinour ?,not_defined,not_defined,Breton,common_voice_br_17965992.wav
-1582,Eus Chicago on.,not_defined,not_defined,Breton,common_voice_br_17805559.wav
 1583,pevar c'hoari dedennus.,not_defined,not_defined,Breton,common_voice_br_17962458.wav
 1584,Trugarez evit pep tra.,not_defined,not_defined,Breton,common_voice_br_18158983.wav
 1585,sec'hed o deus.,fourties,male,Breton,common_voice_br_18141723.wav
@@ -1705,7 +1699,6 @@
 1703,ra vo meulet.,not_defined,not_defined,Breton,common_voice_br_17967999.wav
 1704,"Ma zad, ma mamm, ma zad-kozh, ma mamm-gozh, ma c'hoar ha me.",not_defined,not_defined,Breton,common_voice_br_17976703.wav
 1705,N'eus ket bara war an daol.,twenties,male,Breton,common_voice_br_17351002.wav
-1706,Mignonez vihan John eo Amy.,twenties,male,Breton,common_voice_br_18015337.wav
 1707,Lez da garr amañ gant na vo ket war hent.,twenties,male,Breton,common_voice_br_18029886.wav
 1708,war yaouankaat ez a.,twenties,male,Breton,common_voice_br_17862532.wav
 1709,bemdez e c'hoariez.,not_defined,not_defined,Breton,common_voice_br_17332434.wav
@@ -2354,7 +2347,6 @@
 2352,沙峡谷是位于美国加利福尼亚州洛杉矶县的一个非建制地区。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_22187716.wav
 2353,他也提出了适者生存的生物理论。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_22158879.wav
 2354,现任中共天津市委专职副书记。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_22059132.wav
-2355,曲阜师范大学是山东省以师范教育为主的省属重点大学。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_22073656.wav
 2356,公园大道站是加拿大魁北克省蒙特利尔的一个历史性铁路车站建筑。,thirties,male,Chinese_China,common_voice_zh-CN_22108297.wav
 2357,朱军的妻子谭梅是一个舞蹈演员。,thirties,male,Chinese_China,common_voice_zh-CN_21788434.wav
 2358,库里马塔是巴西皮奥伊州的一个市镇。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_22184596.wav
@@ -2597,7 +2589,6 @@
 2595,节目于逢星期六晚上七时半播映。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_21945068.wav
 2596,好孩子请不要模仿,thirties,male,Chinese_China,common_voice_zh-CN_22077848.wav
 2597,有论者批评词中出现现代通俗口语「劲歌」，与整首歌的古典风格格格不入。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_18817154.wav
-2598,她是托勒密十二世唯一确认的妻子。,teens,female,Chinese_China,common_voice_zh-CN_22145120.wav
 2599,葛莱美奖最佳另类音乐专辑是葛莱美奖颁予杰出另类摇滚类型音乐专辑的歌手的奖项。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_22103964.wav
 2600,虽然这很难,not_defined,not_defined,Chinese_China,common_voice_zh-CN_22069952.wav
 2601,不裂果香草为报春花科珍珠菜属的植物。,not_defined,not_defined,Chinese_China,common_voice_zh-CN_22186096.wav
@@ -2627,7 +2618,6 @@
 2625,返學等放學放學飲可樂,twenties,male,Chinese_Hongkong,common_voice_zh-HK_22224915.wav
 2626,嗰次喺淺水灣南灣坊見到有雞蛋仔格仔餅賣,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22222452.wav
 2627,都可以儲積分賺里數,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22314501.wav
-2628,上星期去咗香港島嘅赤柱正灘泳灘游水。,thirties,female,Chinese_Hongkong,common_voice_zh-HK_22391611.wav
 2629,光棍佬教仔便宜莫貪,twenties,male,Chinese_Hongkong,common_voice_zh-HK_22261194.wav
 2630,西班牙汁豬扒腸仔飯,twenties,male,Chinese_Hongkong,common_voice_zh-HK_22222241.wav
 2631,你哋快啲啦!大舅父佢哋而家喺調景嶺站等緊你哋,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22263604.wav
@@ -2646,7 +2636,6 @@
 2644,當係耳邊風，講極都唔聽。,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22250145.wav
 2645,咁好啦都係嘅,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22393660.wav
 2646,麵房街,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22316932.wav
-2647,唔想一除鞋就臭暈身邊嘅人,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22273498.wav
 2648,太子百匯軒附近有無體育館？,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22396023.wav
 2649,有個亞伯喺大圍積富街唔見左個銀包,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22289786.wav
 2650,一言既出四馬難追,not_defined,not_defined,Chinese_Hongkong,common_voice_zh-HK_22344701.wav
@@ -3823,7 +3812,6 @@
 3821,Унӑн ӗҫ вӑхӑчӗ хальхи созыври хулари Депутатсен пухӑвӗн вӑхӑчӗ тухиччен пырӗ.,not_defined,not_defined,Chuvash,common_voice_cv_17341394.wav
 3822,Ҫапла вӑл майӗпен пейзаж ҫине куҫнӑ.,not_defined,not_defined,Chuvash,common_voice_cv_20788246.wav
 3823,Унта депутатсем яланхиллех чылай ыйту пӑхса тухрӗҫ.,not_defined,not_defined,Chuvash,common_voice_cv_17431749.wav
-3824,Сӑлтавӗ — ҫамрӑксен театрӗн ҫуртӗнчи Пысӑк зал юсавра пулнинче.,not_defined,not_defined,Chuvash,common_voice_cv_17342083.wav
 3825,"Пилеш, хурӑн, ҫӗмӗрт, ҫӑка йывӑҫҫисем аван чӗрӗлчӗҫ.",not_defined,not_defined,Chuvash,common_voice_cv_20789023.wav
 3826,Ӑна Улатӑр юханшывӗн сылтӑм ҫыран хӗррипе тӑвӗҫ.,not_defined,not_defined,Chuvash,common_voice_cv_17432017.wav
 3827,Вӑл тусӗсемпе ҫыхӑнать те пулӑшмалли май шыраса тупатех.,not_defined,not_defined,Chuvash,common_voice_cv_20788407.wav
@@ -3855,7 +3843,6 @@
 3853,Техникӑна вара трасса ҫинче туптаҫҫӗ.,not_defined,not_defined,Chuvash,common_voice_cv_20790025.wav
 3854,"Мана курсанах хирӗҫ чупать, ыталать.",not_defined,not_defined,Chuvash,common_voice_cv_20789022.wav
 3855,Арҫын ҫӑлра тӑнсӑр выртнӑ.,not_defined,not_defined,Chuvash,common_voice_cv_17341650.wav
-3856,Судпа медицина экспертизи вӑл преступлени вӑхӑтӗнче мӗн тунине ӑнланнине ҫирӗплетнӗ.,not_defined,not_defined,Chuvash,common_voice_cv_17342095.wav
 3857,Ҫакна полицейскисем уҫӑмлатӗҫ.,fourties,male,Chuvash,common_voice_cv_17431554.wav
 3858,Ырӑ кун пултӑр!,twenties,male,Chuvash,common_voice_cv_17431690.wav
 3859,Халӑх фрончӗн хастарӗсене ҫул проекчӗ уйрӑмах тӗлӗнтернӗ.,not_defined,not_defined,Chuvash,common_voice_cv_17878112.wav
@@ -3975,8 +3962,6 @@
 3973,Шупашкар чиновникӗсем ӑна хула валли туянасшӑн.,twenties,male,Chuvash,common_voice_cv_17333693.wav
 3974,Шухӑш пӗр кунра ҫуралман,not_defined,not_defined,Chuvash,common_voice_cv_20788514.wav
 3975,Ӑна ҫитес ҫул хута яма тытӑнӗҫ.,fourties,male,Chuvash,common_voice_cv_17431744.wav
-3976,"Вӑл паттӑрсене йӗркене пӑхӑнма, пӗр-пӗрне пулӑшма суннӑ.",not_defined,not_defined,Chuvash,common_voice_cv_17341603.wav
-3977,Район ҫыннисемшӗн тата ҫак ҫулпа ҫӳрекенсемшӗн ку пысӑк савӑнӑҫ пулнӑ.,not_defined,not_defined,Chuvash,common_voice_cv_17341645.wav
 3978,"Ӗҫӗ нумай: техника тӗлӗшӗнчен тӗрӗслемелле, лицензи илмелле, ытти вак-тӗвеке пурнӑҫламалла.",thirties,male,Chuvash,common_voice_cv_17436936.wav
 3979,Нумаях пулмасть Шупашкарта хӗрарӑм килте ача ҫуратни пирки пӗлтернӗччӗ.,not_defined,not_defined,Chuvash,common_voice_cv_17431515.wav
 3980,Ку палла тӑвасси пирки калаҫнӑ ӗнтӗ.,teens,male,Chuvash,common_voice_cv_17649389.wav
@@ -4062,7 +4047,6 @@
 4060,Эпир унӑн халалне ялан асра тытатпӑр.,twenties,male,Chuvash,common_voice_cv_20975332.wav
 4061,Ҫапла хамӑртан тӗртсе тӑшман тӑвасшӑн тапаҫланнине сивлетӗп эпӗ.,not_defined,not_defined,Chuvash,common_voice_cv_17432047.wav
 4062,Пур пӗр вӑя пухаттӑм та ура ҫине тӑраттӑм.,twenties,male,Chuvash,common_voice_cv_20798521.wav
-4063,"Хушӑран юр ҫуса хура ҫӗре шуратать, анчах вӑл кӑштахран ирӗлет.",not_defined,not_defined,Chuvash,common_voice_cv_17341778.wav
 4064,Ку хыпар — суя.,not_defined,not_defined,Chuvash,common_voice_cv_17432005.wav
 4065,Ҫитес ытлари кун миҫе волонтер пуласса пӗлме ҫук.,not_defined,not_defined,Chuvash,common_voice_cv_20788234.wav
 4066,Унта вӑл Раҫҫейӗн допингла хирӗҫ агентствин пресс-служби пӗлтернине асӑннӑ.,not_defined,not_defined,Chuvash,common_voice_cv_17431649.wav
@@ -4119,10 +4103,7 @@
 4117,Красноармейски районӗнчи ушкӑн карвинг енӗпе иккӗмӗш пулнӑ.,thirties,male,Chuvash,common_voice_cv_18231048.wav
 4118,Анчах ӑна тӳрех пурнӑҫлама май килмерӗ.,twenties,male,Chuvash,common_voice_cv_20893013.wav
 4119,Документа шӑпах паян алӑ пусса ҫирӗплетнӗ.,not_defined,not_defined,Chuvash,common_voice_cv_17432056.wav
-4120,Юнашар класра физика учителӗ икӗ ачапа пӗрле кино кӑтартма хатӗрленнӗ.,fourties,male,Chuvash,common_voice_cv_17343937.wav
-4121,"Ӑна вӑрманҫӑсем те тасатмаҫҫӗ, ахаль ҫынсене те ирӗк илмесӗр пуҫтарма памаҫҫӗ.",not_defined,not_defined,Chuvash,common_voice_cv_17341567.wav
 4122,Халӗ вӑрмансенче хӑрӑк-харӑк туллиех пулни никамшӑн та вӑрттӑнлӑх мар.,teens,male,Chuvash,common_voice_cv_17649372.wav
-4123,Хула депутачӗсен ячӗпе нумаях пулмасть ҫыру килнӗ.,not_defined,not_defined,Chuvash,common_voice_cv_17339538.wav
 4124,Анчах тӑтӑш пирӗн пата килекенпе калаҫу пуҫаратӑп.,not_defined,not_defined,Chuvash,common_voice_cv_20788245.wav
 4125,Кӗрхи ҫӗртме сухине тӑвассипе те республикӑри тепӗр хуҫалӑхсем малалла ӗҫлени паллӑ.,not_defined,not_defined,Chuvash,common_voice_cv_17342012.wav
 4126,Вӑл вара спортра усӑ курма юраман эмелсен йышне кӗрет.,not_defined,not_defined,Chuvash,common_voice_cv_17432013.wav
@@ -4155,7 +4136,6 @@
 4153,Йывӑр суранланнӑскере туртса кӑлартӑм.,not_defined,not_defined,Chuvash,common_voice_cv_20788232.wav
 4154,Кун пирки концернӑн пресс-служби ҫак йӗркесен авторне паян хыпарланӑ.,not_defined,not_defined,Chuvash,common_voice_cv_17431930.wav
 4155,"Вӑхӑт нумаях та иртмерӗ, ҫӗршыв шайӗнчи ертӳҫӗсем урӑхларах калаҫни палӑрчӗ.",not_defined,not_defined,Chuvash,common_voice_cv_17431962.wav
-4156,Анчах палӑртнӑ вӑхӑт тӗлне ҫулӑн пӗр пайне ҫеҫ асфальт сарнӑ.,not_defined,not_defined,Chuvash,common_voice_cv_17341382.wav
 4157,Шупашкарта Китайри Аньцин хулинчи делегаци пулнӑ.,not_defined,not_defined,Chuvash,common_voice_cv_17431721.wav
 4158,"Тӗрӗпе йӑлари япаласене, йӑла-йӗрке хатӗрӗсене, тумтире капӑрлатнӑ.",twenties,male,Chuvash,common_voice_cv_17393525.wav
 4159,"Кунта пире националист, тӑшман, сӑрӑ кашкӑр, ухмах тата ытти ярлӑксемпе илемлетнӗ.",not_defined,not_defined,Chuvash,common_voice_cv_17431639.wav
@@ -4276,7 +4256,6 @@
 4274,Tak to nemá cenu.,twenties,male,Czech,common_voice_cs_20485473.wav
 4275,"Kocour sedí přede dveřmi, zdá se, že spí.",teens,male,Czech,common_voice_cs_20523997.wav
 4276,Ve středu ráno proběhne rozprava s Radou a Komisí.,not_defined,not_defined,Czech,common_voice_cs_22465846.wav
-4277,"Jestli máte nějaké dotazy, napište mi.",not_defined,not_defined,Czech,common_voice_cs_20490654.wav
 4278,Nějaké jídlo?,not_defined,not_defined,Czech,common_voice_cs_20535961.wav
 4279,"Před čtyřmi lety jsem psal, proč nejdu do politiky.",fourties,male,Czech,common_voice_cs_20555077.wav
 4280,Nemám nejmenší tušení.,thirties,male,Czech,common_voice_cs_20901879.wav
@@ -4386,7 +4365,6 @@
 4384,Pouze část z toho je pravda.,not_defined,not_defined,Czech,common_voice_cs_20455977.wav
 4385,Jsou tam nějaká připravená data a ty slíbené prográmky.,twenties,male,Czech,common_voice_cs_20480541.wav
 4386,Základem bylo Zákupské panství.,not_defined,not_defined,Czech,common_voice_cs_22465825.wav
-4387,Ve vzduchu se vznášel oblak zvířeného prachu.,not_defined,not_defined,Czech,common_voice_cs_20490672.wav
 4388,Momentálně pracuje ve své vlastní truhlářské firmě.,fifties,male,Czech,common_voice_cs_22386200.wav
 4389,"Panečku, já poznal hezký kousek světa.",not_defined,not_defined,Czech,common_voice_cs_20472969.wav
 4390,Jak se rozdělují dlouhé metody?,twenties,male,Czech,common_voice_cs_20632411.wav
@@ -4449,7 +4427,6 @@
 4447,Alternativně by byla použitelná i obálková metoda.,not_defined,not_defined,Czech,common_voice_cs_20455926.wav
 4448,"Bože, byls to ty, že jo?",not_defined,not_defined,Czech,common_voice_cs_20459905.wav
 4449,Všichni z cesty!,not_defined,not_defined,Czech,common_voice_cs_20504141.wav
-4450,Jižní Korea má podobné klima jako Česká republika.,not_defined,not_defined,Czech,common_voice_cs_20457821.wav
 4451,I výpočetní kapacitu.,twenties,male,Czech,common_voice_cs_21092933.wav
 4452,Kolik to stojí korun.,thirties,male,Czech,common_voice_cs_20483729.wav
 4453,Heleně je robotů líto.,thirties,male,Czech,common_voice_cs_20495808.wav
@@ -5835,7 +5812,6 @@
 5833,"Although everything should be under the state's control, there is a lot of violence in prisons.",not_defined,not_defined,English,common_voice_en_17384575.wav
 5834,These extra cards were inserted randomly into packs.,not_defined,not_defined,English,common_voice_en_18778827.wav
 5835,"Sorry, the test period expired.",not_defined,not_defined,English,common_voice_en_17256107.wav
-5836,"The couple have two children, a daughter Sophia Rosalinda and a son, Mateo Bravery.",not_defined,not_defined,English,common_voice_en_20298788.wav
 5837,Nothing lost for lack of asking,not_defined,not_defined,English,common_voice_en_4495636.wav
 5838,"""You might hear """"font families"""" more than """"typefaces"""", even though they could mean the same thing.""",not_defined,not_defined,English,common_voice_en_17915682.wav
 5839,"In times of despair, look out for the helpers and you will find hope.",twenties,male,English,common_voice_en_18607767.wav
@@ -5893,7 +5869,6 @@
 5891,The Teesta River is one of the rivers that has changed over the years.,not_defined,not_defined,English,common_voice_en_20780858.wav
 5892,"The sea has lived on in this shell, because that's its destiny.",not_defined,not_defined,English,common_voice_en_673134.wav
 5893,Most of his subjects were found in Devon and Cornwall.,thirties,male,English,common_voice_en_21099981.wav
-5894,Make hay while the sun shines.,not_defined,not_defined,English,common_voice_en_8957952.wav
 5895,The thought was so dreadful to him that he forgot about the heat and went forward.,not_defined,not_defined,English,common_voice_en_96065.wav
 5896,"In origin, heroin was supposed to be the “non-addictive morphine substitute.”",twenties,male,English,common_voice_en_18125371.wav
 5897,What was he like?,not_defined,not_defined,English,common_voice_en_587953.wav
@@ -6111,7 +6086,6 @@
 6109,"Marc, would you please give me the fly swatter?",not_defined,not_defined,English,common_voice_en_17742845.wav
 6110,"""The acronym stands for """"very, very important persons"""".""",twenties,male,English,common_voice_en_22301025.wav
 6111,It seemed so safe and tranquil.,not_defined,not_defined,English,common_voice_en_625749.wav
-6112,A little token of appreciation.,not_defined,not_defined,English,common_voice_en_651126.wav
 6113,"""Philip then tells his parents that he was suspended for """"singing"""" the National Anthem.""",thirties,female,English,common_voice_en_19610056.wav
 6114,"Finally, the Beatles began playing at the Jac on occasions.",not_defined,not_defined,English,common_voice_en_19518910.wav
 6115,Doing a handstand needs a lot of practice to learn.,not_defined,not_defined,English,common_voice_en_15735183.wav
@@ -6353,7 +6327,6 @@
 6351,Ridas blindulo pri lamulo.,not_defined,not_defined,Esperanto,common_voice_eo_17911829.wav
 6352,Ĉu estas kredeble?,fifties,female,Esperanto,common_voice_eo_18392409.wav
 6353,Vi estas tro juna.,thirties,other,Esperanto,common_voice_eo_20462354.wav
-6354,Estu ĉapo laŭ la kapo.,not_defined,not_defined,Esperanto,common_voice_eo_18626567.wav
 6355,Mi ne diskutas.,thirties,male,Esperanto,common_voice_eo_20956992.wav
 6356,Supraj partoj estas nigrecaj.,teens,male,Esperanto,common_voice_eo_22188515.wav
 6357,La reproduktaj monatoj dependas de la altitudo.,teens,female,Esperanto,common_voice_eo_21702662.wav
@@ -6483,7 +6456,6 @@
 6481,"Ili faris la agon, ili ﬁnﬁne faris la agon!",not_defined,not_defined,Esperanto,common_voice_eo_20496685.wav
 6482,"Li ne parolas holande, nek laŭ nia dialekto.",thirties,male,Esperanto,common_voice_eo_20504714.wav
 6483,Ni ne parolu pri tio.,not_defined,not_defined,Esperanto,common_voice_eo_17910748.wav
-6484,Li ne havas partian politikan agadon.,not_defined,not_defined,Esperanto,common_voice_eo_20772038.wav
 6485,"Li revenis al sia naskiĝurbo, kiu jam estis apartenaĵo de Ĉeĥoslovakio.",fifties,male,Esperanto,common_voice_eo_21937058.wav
 6486,Certe mi estas kuraĝa.,thirties,female,Esperanto,common_voice_eo_19387931.wav
 6487,Tiufoje la junulo komprenis kaj eliris.,twenties,male,Esperanto,common_voice_eo_19062213.wav
@@ -7024,7 +6996,6 @@
 7022,Des physiciens ont alors cherché à étendre ce groupe.,not_defined,not_defined,French,common_voice_fr_19750117.wav
 7023,Mais je citerai un seul exemple.,not_defined,not_defined,French,common_voice_fr_17302591.wav
 7024,Au contraire,not_defined,not_defined,French,common_voice_fr_17312881.wav
-7025,Il est également plutôt bien accueilli par la presse spécialisée.,fourties,male,French,common_voice_fr_20543726.wav
 7026,"Les productions céréalières et oléicoles sont confortées, tandis qu'apparaît l'élevage équin.",not_defined,not_defined,French,common_voice_fr_19621096.wav
 7027,"Originaire d'une famille modeste de Libreville, il part faire ses études supérieures en France.",not_defined,not_defined,French,common_voice_fr_19681783.wav
 7028,Oiwa se donna la mort par accident avant même d’être exécutée.,not_defined,not_defined,French,common_voice_fr_19339697.wav
@@ -7033,7 +7004,6 @@
 7031,"On va dans le mur, c’est une évidence.",not_defined,not_defined,French,common_voice_fr_19674900.wav
 7032,"Le zayse est classé parmi les langues couchitiques occidentales, un sous-groupe aussi appelé omotique.",twenties,male,French,common_voice_fr_22429529.wav
 7033,"Dans ses moments de loisirs, il sculptait sur bois.",not_defined,not_defined,French,common_voice_fr_19904782.wav
-7034,C'est également un nom de famille.,not_defined,not_defined,French,common_voice_fr_19607611.wav
 7035,Il est possible que la lignée royale mercienne trouve ses origines parmi ce peuple.,not_defined,not_defined,French,common_voice_fr_20853458.wav
 7036,"Pasteur en Angleterre, puis à Amsterdam, il est ensuite professeur de théologie à Lausanne.",not_defined,not_defined,French,common_voice_fr_19601876.wav
 7037,Les parlementaires du Front de gauche ne vous comprennent pas.,fourties,male,French,common_voice_fr_17423913.wav
@@ -7134,7 +7104,6 @@
 7132,La qualité technique des haras marocains est désormais proche de celle des haras européens.,not_defined,not_defined,French,common_voice_fr_21241339.wav
 7133,"Cette école, selon Charles de la Roncière avait une grande renommée.",not_defined,not_defined,French,common_voice_fr_19947427.wav
 7134,Il grandit dans des conditions modestes dans le quartier viennois de Leopoldstadt.,not_defined,not_defined,French,common_voice_fr_19952615.wav
-7135,"Sa Majesté présidait très-souvent le conseil-d'état, dont les travaux étaient toujours très-actifs.",not_defined,not_defined,French,common_voice_fr_17686844.wav
 7136,Il évolue au poste d'attaquant au Clermont Foot.,not_defined,not_defined,French,common_voice_fr_19691097.wav
 7137,On doit cette appellation à l'oiseau représenté sur certaines de ses peintures.,not_defined,not_defined,French,common_voice_fr_19601279.wav
 7138,La station est également disponible sur Internet.,not_defined,not_defined,French,common_voice_fr_19602037.wav
@@ -7169,7 +7138,6 @@
 7167,Ce type de cohabitation était fréquent dans certaines régions autrefois.,not_defined,not_defined,French,common_voice_fr_19649035.wav
 7168,"On s’engueulait, une fois encore, et j’ai pas réalisé.",fourties,male,French,common_voice_fr_21535250.wav
 7169,Il monte aussi sur quatre autres podiums cette année-là.,not_defined,not_defined,French,common_voice_fr_19011632.wav
-7170,"Sprigliano, Randacoli, Bosco Catalano, Canne, Cutunizza, Ferraro, Mancino, Spanò.",not_defined,not_defined,French,common_voice_fr_19713429.wav
 7171,La production monétaire de cet atelier monétaire fut peu abondante.,twenties,male,French,common_voice_fr_19941594.wav
 7172,Jean-Marie Guyau constate l'amoralité qui règne dans la nature.,not_defined,not_defined,French,common_voice_fr_20061482.wav
 7173,Ce laboratoire est aujourd'hui à l'avant-garde de l'imagerie cérébrale fonctionnelle.,not_defined,not_defined,French,common_voice_fr_19611746.wav
@@ -7254,7 +7222,6 @@
 7252,Elle prend la forme d'un buste monumental et tronqué.,not_defined,not_defined,French,common_voice_fr_19617765.wav
 7253,Il a été parlé dans le royaume de Mercie.,not_defined,not_defined,French,common_voice_fr_19779138.wav
 7254,Cette proposition me paraissait intéressante.,not_defined,not_defined,French,common_voice_fr_17985475.wav
-7255,Il participa cependant à un entrainement opérationnel du au au large de Corfou.,twenties,female,French,common_voice_fr_19998169.wav
 7256,Les plus violents peuvent changer le cours de l'histoire.,thirties,male,French,common_voice_fr_20344723.wav
 7257,Il fut nommé en hommage à l'astronome italien Giovanni Schiaparelli.,not_defined,not_defined,French,common_voice_fr_19649212.wav
 7258,Ca va mieux ! merci…,not_defined,not_defined,French,common_voice_fr_18018235.wav
@@ -7268,7 +7235,6 @@
 7266,Elle est reconnue par le Comité olympique international.,not_defined,not_defined,French,common_voice_fr_20440052.wav
 7267,Qui t’accompagne ?,teens,male,French,common_voice_fr_17882591.wav
 7268,"Route d'Aupillac, Labruguière",not_defined,not_defined,French,common_voice_fr_18343828.wav
-7269,Une statue à son effigie est placée dans le Sénat byzantin.,not_defined,not_defined,French,common_voice_fr_20221458.wav
 7270,Quels métiers font vos parents ?,not_defined,not_defined,French,common_voice_fr_17353522.wav
 7271,"Les indications sont les refroidissements, les inflammations de la gorge et le ballonnement abdominal.",not_defined,not_defined,French,common_voice_fr_19636011.wav
 7272,voici les explications,thirties,male,French,common_voice_fr_17326172.wav
@@ -7357,7 +7323,6 @@
 7355,Guon minsken tinke gewoan ik moat hjirwei.,sixties,female,Frisian,common_voice_fy-NL_21427966.wav
 7356,Ik bin Ytsje de Boer.,not_defined,not_defined,Frisian,common_voice_fy-NL_20864041.wav
 7357,Masterwurken út lettere iuwen siere it renovearre museum.,twenties,female,Frisian,common_voice_fy-NL_21406412.wav
-7358,It die bliken dat der gjin skealike stoffen yn de lucht sieten.,twenties,male,Frisian,common_voice_fy-NL_20788285.wav
 7359,Ferljochting op giel.,not_defined,not_defined,Frisian,common_voice_fy-NL_20895230.wav
 7360,Elkenien seach as in hús tsjin de bestjoersgearkomsten oan.,not_defined,not_defined,Frisian,common_voice_fy-NL_21414120.wav
 7361,Klanten kinne allinne âldjiersdei noch feroarje fan soarchfersekerder.,not_defined,not_defined,Frisian,common_voice_fy-NL_21413180.wav
@@ -8191,7 +8156,6 @@
 8189,Hiervon am bekanntesten sind die expressiven „Lieder um den Tod“ op.,not_defined,not_defined,German,common_voice_de_19556060.wav
 8190,Die Kommission misst ihr große Bedeutung bei.,not_defined,not_defined,German,common_voice_de_21863360.wav
 8191,Der Schaden am Stoff kann zügig repariert werden.,not_defined,not_defined,German,common_voice_de_18376746.wav
-8192,Im Austausch soll er einen frühen Prototyp der Fender Telecaster zur Ansicht erhalten haben.,not_defined,not_defined,German,common_voice_de_20034224.wav
 8193,Der Friedhof um die Kirche ist einer der ältesten im deutschen Kulturraum.,thirties,male,German,common_voice_de_20136659.wav
 8194,"""Das Gasthaus """"Zum Engel"""" gilt als einer der schönsten Renaissancebauten im Südwesten Deutschlands.""",not_defined,not_defined,German,common_voice_de_19965781.wav
 8195,In einer Pressekonferenz teilte sein Manager der Öffentlichkeit die bittere Nachricht mit.,not_defined,not_defined,German,common_voice_de_17306734.wav
@@ -8419,7 +8383,6 @@
 8417,Aus dieser Ehe stammt die Schauspielerin und Sängerin Laura Schneiderhan.,not_defined,not_defined,German,common_voice_de_19121902.wav
 8418,Als Sühne versucht er seine Neigung mit finanziellen Wohltaten zu kompensieren.,not_defined,not_defined,German,common_voice_de_19600894.wav
 8419,"Die junge Polizistin machte den Eindruck, als müsste sie sich vor ihren älteren Kollegen erst noch beweisen.",not_defined,not_defined,German,common_voice_de_17929222.wav
-8420,Durch böse Geister hervorgerufene Krankheiten können mit dieser Zeremonie entkräftet werden.,not_defined,not_defined,German,common_voice_de_19582919.wav
 8421,Messe in der Kapelle an allen Festtagen gestattet.,not_defined,not_defined,German,common_voice_de_19505421.wav
 8422,In Burlesque.,fifties,male,German,common_voice_de_20279647.wav
 8423,Er entthronte seinen Halbbruder und setzte ihn gefangen; anschließend ermordete er Peter eigenhändig.,not_defined,not_defined,German,common_voice_de_20178444.wav
@@ -9128,7 +9091,6 @@
 9126,Τι θέλετε;,not_defined,not_defined,Greek,common_voice_el_20526810.wav
 9127,στέναξε ο Κακομοιρίδης.,fifties,male,Greek,common_voice_el_20620508.wav
 9128,"Παρών, είπε πάλι ο κουλός.",not_defined,male,Greek,common_voice_el_20585183.wav
-9129,Και πού μπορώ να τον βρω;,not_defined,not_defined,Greek,common_voice_el_20740959.wav
 9130,Μα πότε νοιάστηκε τίποτα;,not_defined,not_defined,Greek,common_voice_el_20569056.wav
 9131,εγώ να του δώσω δουλειά.,not_defined,not_defined,Greek,common_voice_el_20576994.wav
 9132,και του έφερε η κόρη ένα σιδερένιο πιάτο.,not_defined,not_defined,Greek,common_voice_el_20568916.wav
@@ -9200,9 +9162,7 @@
 9198,Fa a cawm mi va cu va chai hlah.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17909314.wav
 9199,Ngakchia nih innkhan ah bawlung a chiah.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17902068.wav
 9200,A ha a kuat hnu cun rawl ei aa harh ngai.,twenties,male,Hakha_Chin,common_voice_cnh_17931739.wav
-9201,Innka na ong kho maw?,thirties,male,Hakha_Chin,common_voice_cnh_17925637.wav
 9202,Ar a si maw?,twenties,female,Hakha_Chin,common_voice_cnh_17895173.wav
-9203,Ka hawipa sinin cakuat ka hmuh.,thirties,male,Hakha_Chin,common_voice_cnh_17931435.wav
 9204,Ek-ek khawh lo in na um maw?,twenties,female,Hakha_Chin,common_voice_cnh_17932825.wav
 9205,Na fa a huaitam ngai.,twenties,male,Hakha_Chin,common_voice_cnh_17923217.wav
 9206,Saveh te a peh ka hmuh.,thirties,male,Hakha_Chin,common_voice_cnh_17925020.wav
@@ -9221,8 +9181,6 @@
 9219,Mi docawi aa theih tuk i leiba a liam cawk lo.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17927935.wav
 9220,Mah khi cauk khi ka duh.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17938577.wav
 9221,Ka thil ka ciah hna.,twenties,female,Hakha_Chin,common_voice_cnh_17925828.wav
-9222,Mah hi cauk hna hi ka duhmi an si.,thirties,male,Hakha_Chin,common_voice_cnh_17925635.wav
-9223,Uico a ra hih.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17924824.wav
 9224,Sakhithat hi ṭih a nung ngai.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17924732.wav
 9225,Muthla a ṭih mi cu mi ralchia an si.,twenties,male,Hakha_Chin,common_voice_cnh_17923219.wav
 9226,A nauum ah kutdonghrolh aa khih.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17923816.wav
@@ -9314,7 +9272,6 @@
 9312,Na ngandamnak kong silo le harsatnak na tuarnak kong chimh na kan duh mi ttial.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17915057.wav
 9313,An fimnak kha an kawmh i ṭhatnak an chuahpi.,twenties,female,Hakha_Chin,common_voice_cnh_17896980.wav
 9314,Ka ba tuk i kaa chok kho sasai lo.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17923340.wav
-9315,A zurit a fim dih khan a ṭin.,thirties,male,Hakha_Chin,common_voice_cnh_17925643.wav
 9316,Hmun rawn ah a dir.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17925981.wav
 9317,A lung aa hnem.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17925771.wav
 9318,Lai tlangval cheukhat cu an ṭang ah hmul an ngei.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17903217.wav
@@ -9393,7 +9350,6 @@
 9391,Ṭhudan na hmu kho maw?,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17925280.wav
 9392,Hau na peh khawh ahcun na luat kho lai.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17908951.wav
 9393,An in tuk.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17925270.wav
-9394,A holh a hah caah lungsau tein ngeih piak a hau.,thirties,male,Hakha_Chin,common_voice_cnh_17925640.wav
 9395,Zudin hi pakpalawng a si.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17923481.wav
 9396,Khuaiseng cu va rap caah a ṭha.,twenties,male,Hakha_Chin,common_voice_cnh_17925163.wav
 9397,Na angki zawng cu a dum nawnte a si i aa dawh ngai.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17895164.wav
@@ -9405,7 +9361,6 @@
 9403,Zei khua dah na si?,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17908905.wav
 9404,"Laimi phungthluk ah saduhthah al lo, ti a si.",not_defined,not_defined,Hakha_Chin,common_voice_cnh_17902910.wav
 9405,Na lucung le na ketang.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17915047.wav
-9406,Na hreitlung hlan ka duh.,thirties,male,Hakha_Chin,common_voice_cnh_17925650.wav
 9407,Lam cu cho ah a kal.,twenties,female,Hakha_Chin,common_voice_cnh_17926418.wav
 9408,Ngakchia cu a nu a lo.,twenties,male,Hakha_Chin,common_voice_cnh_17926920.wav
 9409,Tlang sir in khual ka tlawng.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17900123.wav
@@ -9555,7 +9510,6 @@
 9553,Cu ngaknu cu a paw a pan caah a pumrua aa dawh.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17899612.wav
 9554,Mi lolak pa a si.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17908999.wav
 9555,Bawngbi kaa hruk lai.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17925455.wav
-9556,Ti kaa liau lioah rul ka hmuh.,thirties,male,Hakha_Chin,common_voice_cnh_17931460.wav
 9557,Nitlang ah ka pi nih la a car.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17902911.wav
 9558,Man a manh duh lo caah an buai ngai.,twenties,female,Hakha_Chin,common_voice_cnh_17896981.wav
 9559,Na kal lai ah ra te.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17925452.wav
@@ -9621,7 +9575,6 @@
 9619,Na ka hngah khawh ahcun kaa lawm ko hnga.,twenties,female,Hakha_Chin,common_voice_cnh_17903462.wav
 9620,Na thluak a chia tuk.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17925883.wav
 9621,Falam ah zaan khat na riah ahcun kan i hmu kho lai.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17897014.wav
-9622,Na si lo ning in i khiam ter hlah.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17916964.wav
 9623,Ka pu zaan ah a hnaar .,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17923323.wav
 9624,Nangmah nih chizawh na dawi.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17923246.wav
 9625,Hriamhma a pu.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17925661.wav
@@ -9715,7 +9668,6 @@
 9713,Hi hi ka cauk a si.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17923231.wav
 9714,Zu kawng ah rap kan tunh.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17893077.wav
 9715,Vanlawng hi hriamnam ṭha bik a si.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17903504.wav
-9716,Hna ka hnawh hlah.,thirties,male,Hakha_Chin,common_voice_cnh_17925653.wav
 9717,Hauruang caah mitsurruang kan hman.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17927112.wav
 9718,A ruak cu an inn ah an suang lo.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17923192.wav
 9719,Sobul cawk ka duh.,not_defined,not_defined,Hakha_Chin,common_voice_cnh_17908953.wav
@@ -10197,7 +10149,6 @@
 10195,Bagaimana cinta dapat mencintai cinta?,thirties,male,Indonesian,common_voice_id_19704866.wav
 10196,Maria adalah kutu buku.,twenties,male,Indonesian,common_voice_id_19362890.wav
 10197,Bukankah Tom sungguh menyukai berenang?,twenties,male,Indonesian,common_voice_id_19197568.wav
-10198,Benarkah? Mengapa?,twenties,male,Indonesian,common_voice_id_19783757.wav
 10199,Inilah dunia kecil.,not_defined,not_defined,Indonesian,common_voice_id_20425643.wav
 10200,Hari ini saya banyak berjalan kaki.,twenties,male,Indonesian,common_voice_id_19197528.wav
 10201,Aku tidak mampu menahannya lebih lama lagi.,twenties,male,Indonesian,common_voice_id_19487567.wav
@@ -10227,7 +10178,6 @@
 10225,"Minggu depan saat saya pergi ke situ, saya akan membeli dan membawa minuman.",not_defined,not_defined,Indonesian,common_voice_id_19376538.wav
 10226,Anda bilang anda lapar.,twenties,male,Indonesian,common_voice_id_20540354.wav
 10227,Tom bertanya padaku dimanakah aku mendapatkan ini.,not_defined,not_defined,Indonesian,common_voice_id_19059651.wav
-10228,Jangan merokok di ruangan ini.,twenties,male,Indonesian,common_voice_id_19783765.wav
 10229,Yang coklat punya saya juga.,twenties,male,Indonesian,common_voice_id_19678946.wav
 10230,Bahasa Serbia adalah bahasa yang indah.,teens,female,Indonesian,common_voice_id_20953205.wav
 10231,Tas ini sebelah luarnya ada sakunya.,thirties,male,Indonesian,common_voice_id_19882862.wav
@@ -10275,7 +10225,6 @@
 10273,Saya tidak ingin memakai jas karena panas saat musim panas.,teens,female,Indonesian,common_voice_id_20952939.wav
 10274,Saya menghadiri pesta hanya untuk bersosialisasi,twenties,male,Indonesian,common_voice_id_19487435.wav
 10275,Saya sedang mencari dompet hitam seperti ini.,twenties,female,Indonesian,common_voice_id_20483313.wav
-10276,Tidakkah kamu menyesal membuat tato itu?,twenties,male,Indonesian,common_voice_id_19783762.wav
 10277,Gunung berapi itu telah meletus dua kali tahun ini.,not_defined,not_defined,Indonesian,common_voice_id_19059442.wav
 10278,"Besok Pak Kobayashi ada pekerjaan, jadi tidak bisa datang.",twenties,male,Indonesian,common_voice_id_20120741.wav
 10279,Bahasa Cina saya kurang bagus.,thirties,male,Indonesian,common_voice_id_19800500.wav
@@ -10849,8 +10798,6 @@
 10847,Si ricordano in particolare le prediche sulla patria e sulla benedizione.,not_defined,not_defined,Italian,common_voice_it_19975142.wav
 10848,Le perdite furono pesanti per entrambi i contendenti.,not_defined,not_defined,Italian,common_voice_it_19974874.wav
 10849,Vengono utilizzati per transazioni manuali e potrebbero essere rifiutati da alcuni sistemi.,not_defined,not_defined,Italian,common_voice_it_19984734.wav
-10850,È rimasto vittima di un incidente?,not_defined,not_defined,Italian,common_voice_it_20236340.wav
-10851,Nel suo contenuto costitutivo,not_defined,not_defined,Italian,common_voice_it_17943844.wav
 10852,Nello svolgersi di tale compito l'operazione viene annullata perché scoppia un colpo di Stato.,not_defined,not_defined,Italian,common_voice_it_20004178.wav
 10853,Ma la morte non lo colse impreparato.,not_defined,not_defined,Italian,common_voice_it_20228412.wav
 10854,"L'opistosoma delle femmine è più lungo che largo, con ben evidenti le filiere.",thirties,female,Italian,common_voice_it_20012016.wav
@@ -11076,7 +11023,6 @@
 11074,Tua madre è giù che ti aspetta.,not_defined,not_defined,Italian,common_voice_it_18945124.wav
 11075,La carica è ora coperta da Sergio Marchionne.,teens,female,Italian,common_voice_it_20002508.wav
 11076,Ancora giovane si sistemò a Montmartre e vi trascorse tutta la vita.,sixties,male,Italian,common_voice_it_20039459.wav
-11077,Il suo è un contributo essenziale alla storia della pittura americana del dopoguerra.,not_defined,not_defined,Italian,common_voice_it_20060392.wav
 11078,"I mammiferi terrestri sono quelli tipici dell'ambiente mediterraneo, come il riccio e la martora.",not_defined,not_defined,Italian,common_voice_it_20269878.wav
 11079,Gli asteroidi che assorbono la radiazione solare possono essere osservati attraverso la banda infrarossa.,not_defined,not_defined,Italian,common_voice_it_20299166.wav
 11080,La produzione è particolarmente riuscita nei suoni di chitarra.,not_defined,not_defined,Italian,common_voice_it_20060930.wav
@@ -11397,7 +11343,6 @@
 11395,仏教の原理に従って行動するのは難しいですか。,not_defined,not_defined,Japanese,common_voice_ja_20461208.wav
 11396,父のは新しい車です。,twenties,male,Japanese,common_voice_ja_22240604.wav
 11397,物価が上がった。,not_defined,not_defined,Japanese,common_voice_ja_19537424.wav
-11398,冬が長くて辛ければ、それだけ、歓びも大きいのだ。,not_defined,not_defined,Japanese,common_voice_ja_21333673.wav
 11399,父は、アメリカへ行ってしまった。,teens,female,Japanese,common_voice_ja_19799302.wav
 11400,幼児は、しばしば、フィクションと現実とを、混同する。,teens,male,Japanese,common_voice_ja_19534089.wav
 11401,彼女は旅行から帰った。,teens,male,Japanese,common_voice_ja_22067457.wav
@@ -11439,7 +11384,6 @@
 11437,不注意な運転は事故の原因となる。,not_defined,not_defined,Japanese,common_voice_ja_22116826.wav
 11438,父は木村先生のと同じ車に乗っています。,teens,male,Japanese,common_voice_ja_21573729.wav
 11439,あの方が言われる事を、何でもしてあげて下さい。,not_defined,not_defined,Japanese,common_voice_ja_20289916.wav
-11440,部屋代はとても高い。,twenties,male,Japanese,common_voice_ja_20958616.wav
 11441,彼女は母親が許してくれる事を願った。,twenties,male,Japanese,common_voice_ja_21059277.wav
 11442,部屋の掃除が終わりました。,not_defined,not_defined,Japanese,common_voice_ja_20289937.wav
 11443,彼女は部屋を掃除するたびに何かを壊す。,not_defined,not_defined,Japanese,common_voice_ja_20934739.wav
@@ -11650,7 +11594,6 @@
 11648,貧乏だからといって他人を軽蔑するな。,not_defined,not_defined,Japanese,common_voice_ja_20661952.wav
 11649,毎月海外の友達に手紙を書きます。,teens,male,Japanese,common_voice_ja_22067456.wav
 11650,はい、いいですよ。,twenties,male,Japanese,common_voice_ja_22285961.wav
-11651,彼女は余命いくばくもない。,not_defined,not_defined,Japanese,common_voice_ja_20474436.wav
 11652,相手チームもスマートだし、何よりも、球場の雰囲気が抜群である。,twenties,male,Japanese,common_voice_ja_22240550.wav
 11653,父は、日曜日はたいてい家にいます。,not_defined,not_defined,Japanese,common_voice_ja_21705309.wav
 11654,父はニューヨークへ旅行することになっています。,not_defined,not_defined,Japanese,common_voice_ja_19537422.wav
@@ -11690,7 +11633,6 @@
 11688,Bɣan ad nadin ula d nutni,thirties,male,Kabyle,common_voice_kab_17579490.wav
 11689,Ḥemmleɣ-k am jjenjaṛ i tiṭ.,not_defined,not_defined,Kabyle,common_voice_kab_19112666.wav
 11690,nennuda lexyal-im fell-am nerḥa,not_defined,not_defined,Kabyle,common_voice_kab_17677155.wav
-11691,Ittwalxez am ubexsis n ṛṛḍuba.,eighties,female,Kabyle,common_voice_kab_19100535.wav
 11692,ur yettili d abḍan n lmal,not_defined,not_defined,Kabyle,common_voice_kab_17628344.wav
 11693,Glan yes-wen.,not_defined,not_defined,Kabyle,common_voice_kab_20150153.wav
 11694,Yexsef.,not_defined,not_defined,Kabyle,common_voice_kab_19794635.wav
@@ -11788,7 +11730,6 @@
 11786,Ṭṭfeɣ tilifun deg ufus-iw,not_defined,not_defined,Kabyle,common_voice_kab_17647097.wav
 11787,Anda-t ɛemmi-m?,thirties,male,Kabyle,common_voice_kab_20496143.wav
 11788,Win ara yebnun ulac.,not_defined,not_defined,Kabyle,common_voice_kab_18190541.wav
-11789,Ur tesɛiḍ d acu ara d-nini ɣef tid yeṭṭef uxxam.,not_defined,not_defined,Kabyle,common_voice_kab_18004887.wav
 11790,Lliɣ ukiɣ.,not_defined,not_defined,Kabyle,common_voice_kab_22386673.wav
 11791,tiɣriw ar ccenwa d uheggeṛ,not_defined,not_defined,Kabyle,common_voice_kab_17560438.wav
 11792,Gren-d fell-am lbaṭel.,thirties,male,Kabyle,common_voice_kab_21557139.wav
@@ -12075,7 +12016,6 @@
 12073,Afet-d Tom.,fifties,male,Kabyle,common_voice_kab_17785215.wav
 12074,Iwint yid-sent ayen akk ara iḥwiǧent.,not_defined,not_defined,Kabyle,common_voice_kab_17981680.wav
 12075,Amcic yegguni aɣerda.,not_defined,not_defined,Kabyle,common_voice_kab_22339107.wav
-12076,Ad yezzenz axxam-is.,not_defined,not_defined,Kabyle,common_voice_kab_17801235.wav
 12077,Muḥend yekka di Ǧeḥḥa!,not_defined,not_defined,Kabyle,common_voice_kab_18089438.wav
 12078,Ur zmireɣ ad k-ẓreɣ.,twenties,male,Kabyle,common_voice_kab_22335169.wav
 12079,Ad farsen tiḥdayin.,not_defined,not_defined,Kabyle,common_voice_kab_18093761.wav
@@ -12171,7 +12111,6 @@
 12169,Ad neffeɣ ad nḥewweṣ.,not_defined,not_defined,Kabyle,common_voice_kab_17823881.wav
 12170,Aṛubu-nni yessexlaε seg akken yettbin-d s tidet d amuddir.,not_defined,not_defined,Kabyle,common_voice_kab_17987313.wav
 12171,Taxxamt mačči yesεa-tt.,not_defined,not_defined,Kabyle,common_voice_kab_18893428.wav
-12172,Infel-d wasif.,twenties,not_defined,Kabyle,common_voice_kab_18347890.wav
 12173,"Axxam d axxam-ik, maca ur tettu ara d inebgi i telliḍ.",not_defined,not_defined,Kabyle,common_voice_kab_18052310.wav
 12174,"Ad teqqim deg uxxam-nsen, ad tečč seg yedrimen n tejmaɛt arma tezweǧ.",not_defined,not_defined,Kabyle,common_voice_kab_20326487.wav
 12175,yewwi-d ifki s ɛecṛa n yidinaṛen,thirties,male,Kabyle,common_voice_kab_17508596.wav
@@ -12184,7 +12123,6 @@
 12182,Ur ttruḥun ara?,not_defined,not_defined,Kabyle,common_voice_kab_17939100.wav
 12183,Ččar-it-id.,not_defined,not_defined,Kabyle,common_voice_kab_18089500.wav
 12184,Zemreɣ ad ak-slemdeɣ amek ara tnehṛeḍ.,not_defined,not_defined,Kabyle,common_voice_kab_17833218.wav
-12185,Teẓẓa yiwen n wahil.,teens,male,Kabyle,common_voice_kab_20821165.wav
 12186,Muḥend U Saɛid,not_defined,not_defined,Kabyle,common_voice_kab_17538592.wav
 12187,Ur am-tt-id-ǧǧant ara.,not_defined,not_defined,Kabyle,common_voice_kab_21514494.wav
 12188,Twalam tura!,not_defined,not_defined,Kabyle,common_voice_kab_18313082.wav
@@ -12306,7 +12244,6 @@
 12304,Sinzi n’aho ariya manota yavuye niba abantu baratoraga bikanga.,not_defined,not_defined,Kinyarwanda,common_voice_rw_20950251.wav
 12305,ryagiraga riti “Uburenganzira ku gukora amahuriro mu ituze ni ingenzi muri demukarasi,twenties,male,Kinyarwanda,common_voice_rw_22470494.wav
 12306,Nishimiye uburyo ubuyobozi bwiza butuzanira abaterankunga bakaza kudufasha mu bibazo nk’ibi”.,not_defined,not_defined,Kinyarwanda,common_voice_rw_20913655.wav
-12307,bahiye ubwo inzu bararagamo yafatwaga n’umuriro ku isaha ya saa cyenda z’ijoro,not_defined,not_defined,Kinyarwanda,common_voice_rw_22453416.wav
 12308,Kandi barasobanutse! Inkoko Ni yo ngoma!.,thirties,male,Kinyarwanda,common_voice_rw_19986455.wav
 12309,Ibibangamira umuziki wanjye kuwukorera hanze y’u Rwanda ni byinshi cyane.,twenties,male,Kinyarwanda,common_voice_rw_21045596.wav
 12310,iyo bamaze gukora bahita bajyana amafaranga kuri banki mu rwego rwo kuyarindira umutekano,not_defined,not_defined,Kinyarwanda,common_voice_rw_22459625.wav
@@ -12555,7 +12492,6 @@
 12553,Nifuza kuzajya muri politiki,not_defined,not_defined,Kinyarwanda,common_voice_rw_19833030.wav
 12554,gufasha urubyiruko,twenties,female,Kinyarwanda,common_voice_rw_22467768.wav
 12555,footballrwanda,twenties,male,Kinyarwanda,common_voice_rw_22460833.wav
-12556,Inzira nshya igiye kujya ikoreshwa n’abanyamaguru ndetse n’ibinyabiziga.,twenties,male,Kinyarwanda,common_voice_rw_21600004.wav
 12557,Kuva mu mwaka ushize ntarongera kujya ku kazi,not_defined,not_defined,Kinyarwanda,common_voice_rw_19541689.wav
 12558,ubwenge budasanzwe,twenties,female,Kinyarwanda,common_voice_rw_22483076.wav
 12559,Ikipe y’u Rwanda nimara gukina na Kenya izaruhuka kuri uyu wa gatanu,twenties,female,Kinyarwanda,common_voice_rw_22477786.wav
@@ -13121,7 +13057,6 @@
 13119,"Тургунбаев аны кестирип, жаптырып салды.",twenties,male,Kyrgyz,common_voice_ky_17450078.wav
 13120,Жума намаздарында ал мечитке беш миңге чейин адам чогулат.,not_defined,not_defined,Kyrgyz,common_voice_ky_17411508.wav
 13121,Ал эми алдыдагы ондукка Франциянын курамасы илинген.,not_defined,not_defined,Kyrgyz,common_voice_ky_17891015.wav
-13122,Алар эки кишиге аккредитация беришти.,twenties,male,Kyrgyz,common_voice_ky_18435447.wav
 13123,Ал видео белгисиз адамдын кыргыз тилиндеги кайрылуусунан турган.,thirties,male,Kyrgyz,common_voice_ky_17383240.wav
 13124,Ош базардагы жашоо уланууда.,thirties,male,Kyrgyz,common_voice_ky_17830141.wav
 13125,Аларды түрмөгө отургузуу керек.,twenties,female,Kyrgyz,common_voice_ky_18433732.wav
@@ -13839,7 +13774,6 @@
 13837,Dwar dan ittieħdet azzjoni?,not_defined,not_defined,Maltese,common_voice_mt_21190955.wav
 13838,Jirriżulta li dan il-post għadu kif ġie rrestawrat.,not_defined,not_defined,Maltese,common_voice_mt_21368838.wav
 13839,Hawnhekk ukoll wieħed irid jara l-interpretazzjoni tal-liġi.,thirties,male,Maltese,common_voice_mt_21274915.wav
-13840,"Lukaku se jilgħab wara t-tliet attakanti Hazard, Mertens u De Bruyne.",sixties,female,Maltese,common_voice_mt_21405273.wav
 13841,Talab lil dawk li jemmnu biex jibqgħu jitolbu għall-ġid tal-Knisja.,fourties,female,Maltese,common_voice_mt_21335116.wav
 13842,"F'Londra, bħalissa qed jitlaqqa' summit ta' kumpaniji fil-qasam tat-teknoloġija.",twenties,male,Maltese,common_voice_mt_21330671.wav
 13843,Permezz ta' dan il-vjaġġ erġajt sibt lili nnifsi.,fourties,female,Maltese,common_voice_mt_21182163.wav
@@ -14969,7 +14903,6 @@
 14967,یا میتواند میان فرزندانتان باشد، پس فرزندانتان با فرصتهای برابر رشد میکنند,thirties,male,Persian,common_voice_fa_18618399.wav
 14968,همه از غذا خوششون اومد,thirties,male,Persian,common_voice_fa_18612843.wav
 14969,چیزی که فکر می کنید وقتی پیر شدید میشید,not_defined,not_defined,Persian,common_voice_fa_19227539.wav
-14970,اینجا، این رو نگاه کن,twenties,male,Persian,common_voice_fa_18758686.wav
 14971,به دکتر وینر زنگ میزنم,twenties,male,Persian,common_voice_fa_18561420.wav
 14972,سعید داره چیکار می کنه؟,not_defined,not_defined,Persian,common_voice_fa_18546870.wav
 14973,رژ لب قرمز میزنم،ولی هنوز ناپخته ام,not_defined,not_defined,Persian,common_voice_fa_21269287.wav
@@ -14984,7 +14917,6 @@
 14982,کی میاد از خاطره رفتنش به پارک شهر حرف بزنه ؟,not_defined,not_defined,Persian,common_voice_fa_18613872.wav
 14983,وسیله نجات غریق,not_defined,not_defined,Persian,common_voice_fa_20083205.wav
 14984,با فریاد من چیکار کردم؟ چرا دور برداشتی؟,not_defined,not_defined,Persian,common_voice_fa_19207117.wav
-14985,دنبال پرنده ی من که نیستی؟,twenties,male,Persian,common_voice_fa_19216076.wav
 14986,حوزههای محیط زیستی، اجتماعی و حکومتی,not_defined,not_defined,Persian,common_voice_fa_18555901.wav
 14987,نه عزیزم بشینین الان خودم همه چیزو اماده می کنم کمک خواستم صداتون می کنم.,not_defined,not_defined,Persian,common_voice_fa_18750959.wav
 14988,چقدر جواب دادن به كتاباى مقطع دبستان ساده شده,twenties,male,Persian,common_voice_fa_18561252.wav
@@ -15158,7 +15090,6 @@
 15156,کلکسیون متنوع از مردان خوشپوش و خوش چهره,twenties,male,Persian,common_voice_fa_18620414.wav
 15157,ندای زمان ما,thirties,male,Persian,common_voice_fa_19221990.wav
 15158,!کاری که کردی ، فکر کن,twenties,male,Persian,common_voice_fa_18613145.wav
-15159,اگه پرنده ی من الان اینجا بود,not_defined,not_defined,Persian,common_voice_fa_18527421.wav
 15160,من ام گفتم. کو گوش شنوا! زهرا خانوم رو که می شناسی!,not_defined,not_defined,Persian,common_voice_fa_19235671.wav
 15161,هی ، ببین ، گوش کن,not_defined,not_defined,Persian,common_voice_fa_18626011.wav
 15162,امروز به زور می تونی یه توهین تو کامنتاش، تو هر پیجی پیدا کنی,not_defined,not_defined,Persian,common_voice_fa_19212858.wav
@@ -15458,7 +15389,6 @@
 15456,"Jano krzyknął: — Marysiu! Otwarła oczy, zanurzone w śnie.",not_defined,not_defined,Polish,common_voice_pl_20625548.wav
 15457,— Dokąd idziesz? — zapytała go szwagierka.,twenties,male,Polish,common_voice_pl_21170686.wav
 15458,— Ojciec nic o tym nie wie jeszcze.,not_defined,not_defined,Polish,common_voice_pl_20603638.wav
-15459,Pogadamy z nią na osobności — rzekł kulawiec.,not_defined,not_defined,Polish,common_voice_pl_20635313.wav
 15460,"— Jeżeli będę mógł, to ja się też będę starał.",not_defined,not_defined,Polish,common_voice_pl_20608333.wav
 15461,Potem zaczęła je bić po tyłku i biła je długo.,not_defined,not_defined,Polish,common_voice_pl_20606926.wav
 15462,I to jest to wspaniałe dzieło o którym mówiłaś?,not_defined,not_defined,Polish,common_voice_pl_20605724.wav
@@ -15527,7 +15457,6 @@
 15525,Potem obróciłam się do ściany i chciałam spać.,not_defined,not_defined,Polish,common_voice_pl_20608811.wav
 15526,Jakże się wtedy Sebastian pienił ze złości!,not_defined,not_defined,Polish,common_voice_pl_20605480.wav
 15527,I oto jak się te nieprzytomne marzenia ziściły w nieprzytomnym losie.,not_defined,not_defined,Polish,common_voice_pl_20607075.wav
-15528,"Zresztą gdzież są ludzie, którzy mają spalić jej ciało?",not_defined,not_defined,Polish,common_voice_pl_20848947.wav
 15529,"""""""Zbiegłem na dół.""""""",thirties,male,Polish,common_voice_pl_20968670.wav
 15530,— A dlaczego się wykręcałaś od tego? — Nie wiem sama.,not_defined,not_defined,Polish,common_voice_pl_20603965.wav
 15531,— Nie lubię przesądnych mężczyzn.,not_defined,not_defined,Polish,common_voice_pl_20613647.wav
@@ -15831,7 +15760,6 @@
 15829,Ou amor próprio,not_defined,not_defined,Portuguese,common_voice_pt_20689739.wav
 15830,E a areia e o cascalho tinham sido lançados violentamente em todas as direções.,not_defined,not_defined,Portuguese,common_voice_pt_20462312.wav
 15831,O que vais fazer comigo?,twenties,male,Portuguese,common_voice_pt_19851685.wav
-15832,Nosso relacionamento é respeitar nossas diferenças e manter cada um em seu campo.,seventies,male,Portuguese,common_voice_pt_19916286.wav
 15833,Um homem com óculos olha para sua câmera.,twenties,male,Portuguese,common_voice_pt_20162561.wav
 15834,Nós tivemos muitos furacões este ano.,not_defined,not_defined,Portuguese,common_voice_pt_20636167.wav
 15835,O que você tem medo de Melissa?,thirties,other,Portuguese,common_voice_pt_20681197.wav
@@ -17672,7 +17600,6 @@
 17670,Хайаан да санаабын толорон суруйууһукпун ээ,not_defined,not_defined,Sakha,common_voice_sah_18871908.wav
 17671,"Үһүс кууруска Оксаналыын холбоспуттара, уопсай дьиэҕэ туспа хос биэрбиттэрэ, кыыс оҕоломмуттара",not_defined,not_defined,Sakha,common_voice_sah_18872508.wav
 17672,Ол күнтэн ыла бэйэ-бэйэлэрин кыыл курдук көрсөр буолан барбыттар,not_defined,not_defined,Sakha,common_voice_sah_18871601.wav
-17673,"Итинник санаатахпына олох көрсүөхпүн баҕарбаппын, ол эрээри өйбүн сүрэҕим истибэт",not_defined,not_defined,Sakha,common_voice_sah_18880506.wav
 17674,Баар суох көмүскэтэр күүстээх аҕатын санаан: «Аҕаа,not_defined,not_defined,Sakha,common_voice_sah_18872085.wav
 17675,"Оһох кэннинэн, хаҥас диэкинэн «абааһыны көрдөөн» тилийэ сүүрбүттэр",not_defined,not_defined,Sakha,common_voice_sah_18577427.wav
 17676,Сугуннуурун быыһыгар үрэххэ киирэн дулҕа быыһыгар кутуйахтыыра,teens,female,Sakha,common_voice_sah_18597918.wav
@@ -18055,7 +17982,6 @@
 18053,Resnica bije kot zvon.,twenties,male,Slovenian,common_voice_sl_18016508.wav
 18054,Ne sme govoriti z ženskami.,twenties,male,Slovenian,common_voice_sl_19445450.wav
 18055,Samo pomislite na to!,twenties,male,Slovenian,common_voice_sl_17668097.wav
-18056,Ali ni tako?,not_defined,not_defined,Slovenian,common_voice_sl_17794339.wav
 18057,"Veš, kaj mislim.",twenties,male,Slovenian,common_voice_sl_18013030.wav
 18058,Gram sreče je boljši kot tona modrosti.,twenties,male,Slovenian,common_voice_sl_17793784.wav
 18059,Bila je dobra partija.,twenties,male,Slovenian,common_voice_sl_18139609.wav
@@ -18293,7 +18219,6 @@
 18291,Stare vrane ne pobirajo črvov blizu brane.,twenties,male,Slovenian,common_voice_sl_17991601.wav
 18292,Berači ne morejo biti izbirčni.,twenties,male,Slovenian,common_voice_sl_18009806.wav
 18293,"Ljubezen je kot bolezen, ki je nočemo zdraviti.",twenties,male,Slovenian,common_voice_sl_18139588.wav
-18294,"Ja, tako sem tudi razmišljal.",not_defined,not_defined,Slovenian,common_voice_sl_17633347.wav
 18295,"Moški razmišljajo, načrtujejo in včasih delajo.",twenties,male,Slovenian,common_voice_sl_18009847.wav
 18296,Kdo bi lahko bil?,twenties,male,Slovenian,common_voice_sl_18011026.wav
 18297,"Ojoj, nisem hotel, da bi se zaljubila vate!",fifties,male,Slovenian,common_voice_sl_18168098.wav
@@ -18597,7 +18522,6 @@
 18595,Dicha zona constituye el lindero este del Municipio.,not_defined,not_defined,Spanish,common_voice_es_20042851.wav
 18596,Su labor le hizo ser merecedor de diversos premios.,not_defined,not_defined,Spanish,common_voice_es_19719410.wav
 18597,"me muero por una ducha. yo he terminado, puedes pasar .",not_defined,not_defined,Spanish,common_voice_es_18467414.wav
-18598,"Baile que en burla empieza, acaba en boda.",not_defined,not_defined,Spanish,common_voice_es_18372561.wav
 18599,Su madre era una judía polaca.,not_defined,not_defined,Spanish,common_voice_es_19747107.wav
 18600,Ingresó como actor en la Cía.,not_defined,not_defined,Spanish,common_voice_es_19711533.wav
 18601,"ella sola, lenta , muy lentamente",twenties,male,Spanish,common_voice_es_18706204.wav
@@ -18645,8 +18569,6 @@
 18643,Es la primera grabación de la banda.,not_defined,not_defined,Spanish,common_voice_es_20789960.wav
 18644,De la construcción original quedan las naves central y laterales.,twenties,male,Spanish,common_voice_es_19638207.wav
 18645,Todo parte de la observación.,twenties,male,Spanish,common_voice_es_20232317.wav
-18646,Se formó en arte musical bajo la dirección del maestro Duarte Lobo.,not_defined,not_defined,Spanish,common_voice_es_19728792.wav
-18647,Dichos caciques obligaron la retirada del líder conquistador español Gonzalo de Ocampo hacia Cumaná.,not_defined,not_defined,Spanish,common_voice_es_19618541.wav
 18648,Otros inversionistas se fueron sumando conforme transcurría la producción.,not_defined,not_defined,Spanish,common_voice_es_19637768.wav
 18649,Su dominio se extendía a la protección de las hembras-madres de los animales.,not_defined,not_defined,Spanish,common_voice_es_20240583.wav
 18650,El interior se decoró inicialmente al más puro estilo rococó.,not_defined,not_defined,Spanish,common_voice_es_20257545.wav
@@ -18799,7 +18721,6 @@
 18797,"Robert Burnham, Jr.",not_defined,not_defined,Spanish,common_voice_es_19621217.wav
 18798,"""El rotor principal del """"Cheyenne"""" tenía cuatro palas.""",not_defined,not_defined,Spanish,common_voice_es_19963092.wav
 18799,"""Y, en cuanto a la colección """"Teatre"""", recoge nuestros autores más notorios en catalán.""",not_defined,not_defined,Spanish,common_voice_es_20263107.wav
-18800,Ian es conocido por sus apariciones inesperadas en los conciertos de bandas amigas.,not_defined,not_defined,Spanish,common_voice_es_20012069.wav
 18801,"Tras esto, no ha vuelto a competir en el automovilismo.",not_defined,not_defined,Spanish,common_voice_es_19720438.wav
 18802,Come larvas de insectos y crustáceos.,not_defined,not_defined,Spanish,common_voice_es_20063526.wav
 18803,Luego fue transformado en una villa fortificada.,twenties,male,Spanish,common_voice_es_20255242.wav
@@ -19426,7 +19347,6 @@
 19424,"Nej, vi vill bara att du ska ge cykeln till honom.",not_defined,not_defined,Swedish,common_voice_sv-SE_20506478.wav
 19425,"Jag åker härifrån, som du bad mig att göra.",not_defined,not_defined,Swedish,common_voice_sv-SE_18713027.wav
 19426,Det är väl vad avslappnad sanning innebär?,twenties,male,Swedish,common_voice_sv-SE_21107655.wav
-19427,"Jag leker en lek, vi vill inte bli störda.",not_defined,not_defined,Swedish,common_voice_sv-SE_20519170.wav
 19428,Vilka fler skriver på?,twenties,male,Swedish,common_voice_sv-SE_20737286.wav
 19429,"Kom igen, kom igen.",not_defined,not_defined,Swedish,common_voice_sv-SE_19732920.wav
 19430,"Ledsen, jag vill att du går.",twenties,male,Swedish,common_voice_sv-SE_18762828.wav
@@ -20069,7 +19989,6 @@
 20067,சொல்லி உனக்கவன்தான் - மிக்க,thirties,male,Tamil,common_voice_ta_21277350.wav
 20068,தாய்மொழிக்குப் பழிவந்தால் சகிப்ப துண்டோ?,thirties,male,Tamil,common_voice_ta_21277403.wav
 20069,"""""""வீழ்வது நாமாக இருப்பினும்""",not_defined,not_defined,Tamil,common_voice_ta_19671045.wav
-20070,நான் சரியாக பேசிக்கொண்டிருக்கிறேனா?,not_defined,not_defined,Tamil,common_voice_ta_19143703.wav
 20071,மூலத்தை உண்ர்வெங்கள் மொழிஉண்டு பண்ணும்.,twenties,male,Tamil,common_voice_ta_20056604.wav
 20072,குலுங்க நகைத் தேயுரைத்தேன் அவனிடத்தில்:,twenties,female,Tamil,common_voice_ta_19538464.wav
 20073,"""""""காதலனைக் கொலைக்களத்துக் கனுப்பக் கண்டுங்""",twenties,female,Tamil,common_voice_ta_21300818.wav
@@ -20326,7 +20245,6 @@
 20324,Акбүз ат килеп җитәр.,teens,male,Tatar,common_voice_tt_17886267.wav
 20325,"Йөз бүре күргән, яхшылап караса, эт икән.",not_defined,not_defined,Tatar,common_voice_tt_18163759.wav
 20326,Шул ук вакытта ул ротадан аерылып калырга һич ярамаганлыгын да уйлап алды.,not_defined,not_defined,Tatar,common_voice_tt_17350570.wav
-20327,"Алар тырыш, сабыр холыклы, күңелләре саф.",thirties,female,Tatar,common_voice_tt_17780632.wav
 20328,Хәзер булышам.,not_defined,not_defined,Tatar,common_voice_tt_17745110.wav
 20329,Мине бу җирдән чыгаруыгызны үтенәм мин.,fifties,female,Tatar,common_voice_tt_17658121.wav
 20330,"Ялганчының йорты янган, берәү дә ышанмаган.",twenties,male,Tatar,common_voice_tt_17812494.wav
@@ -20791,7 +20709,6 @@
 20789,Ordu bin dokuz yüz altmıştan bu yana dört hükümet devirdi.,twenties,male,Turkish,common_voice_tr_19104261.wav
 20790,Türkiye firmayı yedinci girişiminde satabildi.,not_defined,not_defined,Turkish,common_voice_tr_19965970.wav
 20791,Onlar için yaptıklarınızdan memnun musunuz?,not_defined,not_defined,Turkish,common_voice_tr_18338846.wav
-20792,Tüm partiler erken seçim yapılmasını istiyor.,twenties,male,Turkish,common_voice_tr_19956860.wav
 20793,Sergi Ocak ayı sonuna kadar açık kalacak.,not_defined,not_defined,Turkish,common_voice_tr_18372529.wav
 20794,Masalardan birinde dört kadın lafa girdi.,not_defined,not_defined,Turkish,common_voice_tr_18686812.wav
 20795,Bakarciev daha sonra olaydaki rolünü itiraf etti.,twenties,male,Turkish,common_voice_tr_18967999.wav
@@ -21195,7 +21112,6 @@
 21193,Tirlea iki bin üç yüz yirmi dörtlük bir derece yaptı.,not_defined,not_defined,Turkish,common_voice_tr_21784747.wav
 21194,Gazprom da bu projeye dahil mi?,teens,male,Turkish,common_voice_tr_21828820.wav
 21195,Bazılar iyi bir neden için koştular.,not_defined,not_defined,Turkish,common_voice_tr_20388823.wav
-21196,Balkanlar yaşanan bu felakete anında yanıt verdi.,not_defined,not_defined,Turkish,common_voice_tr_21319993.wav
 21197,Kasedin etkisi büyük oldu.,not_defined,not_defined,Turkish,common_voice_tr_18275502.wav
 21198,Yeni yasa uyarınca bunlar da kaldırıldı.,twenties,male,Turkish,common_voice_tr_18373923.wav
 21199,Karışımı sertleşene kadar yoğurun.,not_defined,not_defined,Turkish,common_voice_tr_18687904.wav
@@ -22139,7 +22055,6 @@
 22137,Beth ydy dy enw di?,not_defined,not_defined,Welsh,common_voice_cy_17773965.wav
 22138,Roedd tonnau mawr yn torri ar y traeth.,not_defined,not_defined,Welsh,common_voice_cy_22287434.wav
 22139,"Byddech chi'n gorchymyn i'r gweision wneud pethau, nid gofyn iddyn nhw.",fifties,male,Welsh,common_voice_cy_21702451.wav
-22140,Dylai'r dyfarnwr gael sbectol newydd!,not_defined,not_defined,Welsh,common_voice_cy_17992209.wav
 22141,Byddai angen mynd lawr i'r siop ar y bws i gyrraedd mewn pryd.,not_defined,not_defined,Welsh,common_voice_cy_18373874.wav
 22142,Ond roedd ei broffwydoliaeth ar y trywydd iawn.,teens,female,Welsh,common_voice_cy_19036342.wav
 22143,Beth sydd yn dangos i ni fod y blodyn yn rhywbeth byw?,not_defined,not_defined,Welsh,common_voice_cy_17680764.wav
