@@ -131,6 +131,13 @@ def get_data_features(path, audio):
                                 FEATURE_ZCR: [zcr], FEATURE_HNR_MEAN: [hnr_mean]})
     return row
 
+def clean_sound(audio): 
+    tresh = 1000
+    first_non_zero_index = np.where(np.abs(audio) > tresh)[0][0]
+    last_non_zero_index = np.where(np.abs(audio[::-1]) > tresh)[0][0]
+    trimmed_audio_data = audio[first_non_zero_index:-last_non_zero_index]
+    return trimmed_audio_data
+
 # MFCCs
 
 def get_Normalized_Mfccs(data):
@@ -255,4 +262,3 @@ def mds_mahalanobis(dataframe, n_components):
     mds = MDS(n_components=n_components, random_state=42, dissimilarity='precomputed')
     mds_transformed = mds.fit_transform(mahalanobis_distance_matrix)
     return pd.DataFrame(mds_transformed, columns=[f'Component_{i+1}' for i in range(n_components)])
-
