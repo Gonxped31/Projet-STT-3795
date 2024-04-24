@@ -70,6 +70,10 @@ def get_dataframe(type):
     #df['Length'] = df['paths'].apply(lambda x: get_length(get_path(type, x)))
     return df
 
+def get_base_dataframe(language, type):
+    path = f'./data/common_voice_kpd/{language}/{type}.csv'
+    return pd.read_csv(path)
+
 def get_dataframes():
     train_df = get_dataframe('train')
     test_df = get_dataframe('test')
@@ -130,13 +134,6 @@ def get_data_features(path, audio):
                                 FEATURE_FORMANTS: [formants_data], FEATURE_RMS_ENERGY: [rms_energy],
                                 FEATURE_ZCR: [zcr], FEATURE_HNR_MEAN: [hnr_mean]})
     return row
-
-def clean_sound(audio): 
-    tresh = 1000
-    first_non_zero_index = np.where(np.abs(audio) > tresh)[0][0]
-    last_non_zero_index = np.where(np.abs(audio[::-1]) > tresh)[0][0]
-    trimmed_audio_data = audio[first_non_zero_index:-last_non_zero_index]
-    return trimmed_audio_data
 
 # MFCCs
 
