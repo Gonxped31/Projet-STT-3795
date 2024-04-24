@@ -201,7 +201,10 @@ def extract_feature_row(path, label):
                                                     pitch_track_df,\
                                                         formants_df, \
                                                             rms_energy_df, zcr_hnr, label], axis = 1)
-
+    
+    if (combined_features_row.isnull().values.any()):
+        raise Exception("NaN values in", combined_features_row)
+    
     """
     row = pd.DataFrame({'Audio': audio ,'MFCCs': [np.array(mfccs)],
                                 'Spec Centroid': [specs_measurements[0]], 'Spec Rollof': [specs_measurements[1]],
@@ -226,6 +229,7 @@ def extract_features(type, df):
             # attributes_df['label'] = df['language'][j]
         except Exception as e:
             print(e)
+            df = df.drop(j)
     return attributes_df
 
 if __name__ == '__main__':
@@ -234,3 +238,4 @@ if __name__ == '__main__':
     for (type, df) in [('train', train_df), ('test', test_df), ('validation', validation_df)]:
         attributes_df = extract_features(type, df)
         attributes_df.to_csv(f'./data/{type}_preprocessed_data.csv', index=False) # , sep=',', encoding='utf-8', index=False)
+        df.to_csv(f'./data/wav_files_clean/{type}/{type}_data.csv', index=False)
