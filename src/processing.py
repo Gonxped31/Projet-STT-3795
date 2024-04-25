@@ -30,6 +30,11 @@ from xgboost import XGBClassifier
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+#from google.colab import drive
+#drive.mount('/content/drive')
+#root = "/content/drive/My Drive/Colab Notebooks/Projet_STT3795/"
+root = "."
+
 # Source for audio dataset:
 # https://huggingface.co/datasets/common_language
 # https://github.com/speechbrain/speechbrain/tree/develop/recipes/CommonLanguage
@@ -46,7 +51,7 @@ sample_rate = 16000
 frame_length = 512
 
 def get_path(type, name):
-    return f'./data/wav_files/{type}/{name}'
+    return f'{root}/data/wav_files/{type}/{name}'
 
 def get_length(path):
     audio = WAVE(path)
@@ -57,15 +62,23 @@ def get_length(path):
     return audio_info.length
 
 def get_data(path):
+    # Counteract this: https://librosa.org/blog/2019/07/17/resample-on-load/
     data, sr = librosa.load(path, sr=None)
     assert(sr == sample_rate)
-    data = nr.reduce_noise(y=data, sr=sample_rate)  
-    return data
+    if len(data) < frame_length:
+        raise ValueError('Data is too short', len(data), path)
+    # clean data
+    data = nr.reduce_noise(y=data, sr=sample_rate, n_fft=frame_length)
+    return np.array(data)
 
 def get_dataframe(type):
     df = pd.read_csv(get_path(type, f'{type}_data.csv'))
-    df['Length'] = df['paths'].apply(lambda x: get_length(get_path(type, x)))
+    #df['Length'] = df['paths'].apply(lambda x: get_length(get_path(type, x)))
     return df
+
+def get_base_dataframe(language, type):
+    path = f'{root}/data/common_voice_kpd/{language}/{type}.csv'
+    return pd.read_csv(path)
 
 def get_dataframes():
     train_df = get_dataframe('train')
@@ -75,7 +88,7 @@ def get_dataframes():
     return full_df, train_df, test_df, validation_df
 
 def get_clean_path(type, name):
-    return f'./data/wav_files_clean/{type}/{name}'
+    return f'{root}/data/wav_files_clean/{type}/{name}'
 
 def get_clean_dataframe(type):
     df = pd.read_csv(get_clean_path(type, f'{type}_data.csv'))
@@ -90,10 +103,11 @@ def get_clean_dataframes():
     return full_df, train_df, test_df, validation_df
 
 def get_preprocessed_data():
-    train_df = pd.read_csv('./data/train_preprocessed_data.csv')
-    test_df = pd.read_csv('./data/test_preprocessed_data.csv')
-    validation_df = pd.read_csv('./data/validation_preprocessed_data.csv')
-    return pd.concat([train_df, test_df, validation_df])
+    train_df = pd.read_csv(f'{root}/data/train_preprocessed_data.csv')
+    test_df = pd.read_csv(f'{root}/data/test_preprocessed_data.csv')
+    validation_df = pd.read_csv(f'{root}/data/validation_preprocessed_data.csv')
+    full_df = pd.concat([train_df, test_df, validation_df])
+    return full_df, train_df, test_df, validation_df
 
 FEATURE_AUDIO = 'Audio'
 FEATURE_MFCCS = 'MFCCs'
@@ -110,8 +124,6 @@ FEATURE_HNR_MEAN = 'HNR Mean'
     
 def get_data_features(path, audio):
     data = get_data(path)
-    #clean data: https://pypi.org/project/noisereduce/
-    data = nr.reduce_noise(y=data, sr=sample_rate, n_fft=frame_length)
 
     #Get the attributes
     mfccs = get_Normalized_Mfccs(data)
@@ -129,13 +141,6 @@ def get_data_features(path, audio):
                                 FEATURE_FORMANTS: [formants_data], FEATURE_RMS_ENERGY: [rms_energy],
                                 FEATURE_ZCR: [zcr], FEATURE_HNR_MEAN: [hnr_mean]})
     return row
-
-def clean_sound(audio): 
-    tresh = 1000
-    first_non_zero_index = np.where(np.abs(audio) > tresh)[0][0]
-    last_non_zero_index = np.where(np.abs(audio[::-1]) > tresh)[0][0]
-    trimmed_audio_data = audio[first_non_zero_index:-last_non_zero_index]
-    return trimmed_audio_data
 
 # MFCCs
 
@@ -207,57 +212,3 @@ def get_HNR(data):
     #print(hnr)
     hnr_mean = call(hnr, "Get mean", 0, 0)
     return hnr_mean
-
-### Modelling ###
-
-### Principal components
-
-def get_PCs(dataframe, percentage_variance):
-    print()
-    scaler = StandardScaler()
-    scaled_df = scaler.fit_transform(dataframe)
-    print(f'Scaled_df Mean = {np.mean(scaled_df)},\nScaled_df Std = {np.std(scaled_df)}')
-
-
-    pca_T = PCA()
-    pca_T.fit_transform(scaled_df)
-    ev = pca_T.explained_variance_
-    print()
-    print(f'Total variance = {sum(ev)}')
-
-    pca = PCA(percentage_variance/100)
-    principal_components = pca.fit_transform(scaled_df)
-    explained_variance = pca.explained_variance_
-    percentage = sum(pca.explained_variance_ratio_)
-    print(f'Real percentage = {percentage}')
-    print(f'Variance for {round(percentage*100, 2)}% = {sum(explained_variance)}')
-    print(f'Number of PCs for {round(percentage*100, 2)}% = {len(explained_variance)}')
-    print(f'Attribute lost = {len(scaled_df[0]) - len(explained_variance)}')
-    names = pca.get_feature_names_out()
-    return pd.DataFrame(data=principal_components, columns=names)
-
-# MDS classique
-def mds(dataframe, n_components):
-    scaler = StandardScaler()
-    scaled_df = scaler.fit_transform(dataframe)
-    print(f'Scaled_df Mean = {np.mean(scaled_df)},\nScaled_df Std = {np.std(scaled_df)}')
-    mds = MDS(n_components=n_components, random_state=42, dissimilarity='euclidean')
-    mds_transformed = mds.fit_transform(scaled_df)
-    return pd.DataFrame(mds_transformed, columns=[f'Component_{i+1}' for i in range(n_components)])
-
-# Mahalanobis distance matrix set up
-def compute_mahalanobis_distance_matrix(X):
-    # Matrice singuliere a normaliser
-    VI = np.linalg.inv(np.cov(X.T) + np.eye(X.shape[1]) * 1e-4)
-    mahalanobis_dist = pdist(X, metric='mahalanobis', VI=VI)
-    distance_matrix = squareform(mahalanobis_dist)
-    return distance_matrix
-
-# MDS with mahalanobis distance
-def mds_mahalanobis(dataframe, n_components):
-    scaler = StandardScaler()
-    scaled_df = scaler.fit_transform(dataframe)
-    mahalanobis_distance_matrix = compute_mahalanobis_distance_matrix(scaled_df)
-    mds = MDS(n_components=n_components, random_state=42, dissimilarity='precomputed')
-    mds_transformed = mds.fit_transform(mahalanobis_distance_matrix)
-    return pd.DataFrame(mds_transformed, columns=[f'Component_{i+1}' for i in range(n_components)])

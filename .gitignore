@@ -1,9 +1,10 @@
 *.wav
+*.orig
+*.pyc
 
 #Ignore thumbnails created by Windows
 Thumbs.db
 #Ignore files built by Visual Studio
-*.pyc
 *.obj
 *.exe
 *.pdb
