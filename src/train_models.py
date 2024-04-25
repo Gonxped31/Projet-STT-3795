@@ -4,12 +4,8 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import MDS
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neural_network import MLPClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay, f1_score, classification_report
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, confusion_matrix
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from xgboost import XGBClassifier
 
 # Data analysis and stats imports
 import numpy as np
@@ -148,6 +144,18 @@ def train_rfc(X_train, Y_train, n_iter):
     print("Best parameters:", random_search_rf.best_params_)
     print("Best score:", random_search_rf.best_score_)
     return random_search_rf
+
+def get_metrics(Y_test, predictions):
+    accuracy = accuracy_score(Y_test, predictions)
+    f1 = f1_score(Y_test, predictions, average='macro')
+    precision = precision_score(Y_test, predictions, average='macro')
+    recall = recall_score(Y_test, predictions, average='macro')
+    return ({
+        'accuracy_score': accuracy,
+        'f1_score': f1,
+        'precision_score': precision,
+        'recall_score': recall
+    })
 
 if __name__ == '__main__':
     X_train, Y_train, X_test, Y_test = embedded_data()
