@@ -42,7 +42,7 @@ X_test = embedding(X_test)
 
 def train_simple():
     # Model initialization
-    svm = SVC(verbose=3)
+    svm = SVC(verbose=3, random_state=42)
     random_forest = RandomForestClassifier(verbose=3, random_state=42)
     #nn = MLPClassifier(verbose=3)
 
@@ -56,8 +56,8 @@ def train_simple():
     svm_predictions = svm.predict(X_test)
     random_forest_predictions = random_forest.predict(X_test)
 
-    svm_accuracy = accuracy_score(Y_test, svm_predictions)
-    random_forest_accuracy = accuracy_score(Y_test, random_forest_predictions)
+    svm_accuracy = f1_score(Y_test, svm_predictions, average='macro')
+    random_forest_accuracy = f1_score(Y_test, random_forest_predictions, average='macro')
 
     print(f'SVM accuracy: {svm_accuracy}')
     print(f'RDF accuracy: {random_forest_accuracy}')
@@ -85,7 +85,7 @@ param_grid_rf = {
 }
 
 def train_rfc(n_iter):
-    rfc = RandomForestClassifier(verbose=1, random_state=42, n_jobs=-1)
+    rfc = RandomForestClassifier(random_state=42, n_jobs=-1)
     random_search_rf = RandomizedSearchCV(rfc, param_distributions=param_grid_rf, n_iter=n_iter, cv=5, verbose=3, random_state=42, n_jobs=-1, scoring = 'f1_macro')
     random_search_rf.fit(X_train, Y_train)
     print("Best parameters:", random_search_rf.best_params_)
