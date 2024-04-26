@@ -87,12 +87,12 @@ As we can see in Figure 1 and Figure 2, only relevant data has been kept, as the
 \begin{figure}[!tbp]
   \centering
   \begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{images/pre_cleaning.png}
+    \includesvg[width=1\textwidth]{images/pre_cleaning.svg}
     \caption{Pre cleaning shape}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{images/post_cleaning.png}
+    \includesvg[width=1\textwidth]{images/post_cleaning.svg}
     \caption{Post cleaning shape}
   \end{minipage}
 \end{figure}
@@ -103,21 +103,21 @@ Before preprocessing our audio data into features for model training, we need to
     \centering
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{images/pre_cleaning.png}
+        \includesvg[width=1 \textwidth]{images/mean_audio_file.svg}
         \caption{Figure 1}
         \label{fig:image1}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{images/pre_cleaning.png}
+        \includesvg[width=1\linewidth]{images/pre_cleaning.png}
         \caption{Figure 2}
         \label{fig:image2}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{images/pre_cleaning.png}
+        \includesvg[width=1\linewidth]{images/pre_cleaning.png}
         \caption{Figure 3}
         \label{fig:image3}
     \end{subfigure}
@@ -164,7 +164,16 @@ In other hands, random forest is based on a set of decision trees which are robu
 \subsection{Dimensionality reduction}
 Before applying PCA (Principal Component Analysis) or MDS (Multi-Dimensional Scaling), we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our data. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study (see the correlation matrix in the result section) gave us pretty strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory.
 
-The PCA method searches for an orthogonal projection of the original data, minimizing the mean squared error over the dataset. 
+The PCA method searches for an orthogonal projection of the original data from a space of dimension D into a subspace of lower dimension $k < D$, that could stand as an approximation of the original dataset. We consider the optimal condition for the projection to minimize the mean squared error over the data.
+\begin{align*}
+\arg &\min \limits_{P : \mathbb{R}^{d \times d}} \left\{ \mathbb{E}_x \left[ ||\Vec{x}_i - P\Vec{x}_i||^2 \right] \right\} \\
+&t.q. \  P = P^2 = P^T; rank(P) = k
+\end{align*}
+This projection matrix can be defined from an orthonormal basis, as $P = UU^T$, whose components maximise scaling by the covariance matrix of our training set.
+\begin{align*}
+ \arg \max \limits_{U : \mathbb{R}^{k \times d}} &\left\{ \sum^k_{j=1}  \Vec{u}^T_j \mathbb{C}ov_x({\Vec{x_i}}) \Vec{u}_j \right\} t.q. U^TU = I
+\end{align*}
+We found during class that this basis is made up of eigenvectors of the covariance matrix, $\Sigma\Vec{u}_j = \lambda_j \cdot \Vec{u}_j$. The k-dimensional projection is made from the k eigenvectors with largest eigenvalues, normalized.
 
 After applying PCA, with a maintained variance of $95\%$, we have $90$ features from the $161$ initial features. This means that the first $90$ principal components of the covariance matrix $\Sigma \in \mathbb{R}^{151 \times 151}$ , capture $95\%$ of the variance in the original training set.
 
@@ -422,7 +431,7 @@ As an exploratory first step, we fitted our data to an Random Forest Classifier,
 
 We applied a Random Search algorithm (Algorithm 2) to find the best hyperparamters in a given hyperparameter space. The output of this search gave us this set of hyperparameters \texttt{n\_estimators = 200, min\_samples\_split = 5, min\_samples\_leaf = 4, max\_features = sqrt, max\_depth = None, criterion = gini} which yield the best . Results obtained after running the Random Search : 
 
-\begin{table}[h]
+\begin{table}[!h]
     \centering
     \begin{tabular}{|c|c|c|c|}
         \hline

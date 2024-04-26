@@ -7,17 +7,14 @@
 }
 
 \begin{document}
+\setcounter{page}{10}
 \section*{Appendix}
 Here is the correlation matrix for the data:\\
-\begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-        \centering
-        \includesvg[width=1 \textwidth]{images/correlation_matrix.svg}
-        \caption{Figure 1}
-        \label{fig:image1}
-    \end{subfigure}
-\end{figure}\\
+\begin{center}
+    \includesvg[width=1 \textwidth]{images/correlation_matrix.svg}
+\end{center}
+
+
 
 \newpage
 \section*{References}
@@ -31,6 +28,7 @@ Here is the correlation matrix for the data:\\
     \item \href{https://scikit-learn.org/stable/modules/svm.html#svm-kernels}{Non linear SVM with soft margin}
     
     \item \href{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html}{Random Forest Classifier}
+    
     \item \href{}{Formants}
 \end{itemize}
 \end{document}
