@@ -140,9 +140,10 @@ def get_metrics(Y_test, predictions):
     })
 
 if __name__ == '__main__':
-    X_train, Y_train, X_test, Y_test = embedded_data()
     n_iter = int(sys.argv[1])
     type = sys.argv[2]
+    
+    X_train, Y_train, X_test, Y_test = embedded_data()
 
     # Model initialization
     if n_iter == 0 and type == "svc":
