@@ -65,7 +65,7 @@ Given that our project was solely focused on the classification of the spoken la
 \State Initialize paths for raw and cleaned audio files
 \State Prepare empty list for errors
 \Function{clean\_sound}{audio}
-    \State Define threshold to identify significant audio (e.g., 1000 units)
+    \State Define threshold to identify significant audio (e.g., 1\%)
     \State Find the start and end of significant audio using the threshold
     \State Trim the audio outside the significant range
     \State \Return the trimmed audio
@@ -129,24 +129,27 @@ By looking at the count, some languages are overrepresented in our data, which i
 For the preprocessing of audio data, we use different features which are presented below.
 
 \textbf{MFCCs}:
-The Mel Frequency Cepstral Coefficients are criticals in the sense that it allows capturing the different aspects that are unique to each spoken language. It is much easier to differentiate languages by using MFCCs. 
+The Mel Frequency Cepstral Coefficients (MFCCs) are criticals in the sense that it allows capturing the different aspects that are unique to each spoken language. It is much easier to differentiate languages by using MFCCs. In our case, we decomposed our audio data using $512$ samples from each audio file. With a sample rate of $16000$ we get windows of length $0.032$ milliseconds. Furthermore, we set the number of MFCCs to be $25$, as recommended for spoken language. We yield, for each data point, a matrix $M \in \R^{25 \times n}$, where $n$ is the number of windows. We then compute a vector $V \in \R^{25}$ from $M$, where each element is this mean of an MFCC. These $25$ features are added to the final attribute matrix. 
 %To obtain the MFCCs, we first found the spectrum of power as a function of our audio file's frequencies from a Fast Fourier Transformation (FFT). Then, it was necessary to find the Mel Filter Banks (MFB) of the spectrum from which we obtain the frequency energies (weighted energy) passing through each filter of the bank. A logarithmic function will be applied to these energies. Finally, by applying a Discrete Cosine Transformation on the log-transformed energies, we obtain the MFCCs.\\
 
-\textbf{Spectral Centroid}: The spectral centroid indicates the center of mass of the sound's spectrum, providing a way to characterize the brightness of a sound. It is calculated as the weighted mean of the frequencies present in the signal, with their magnitudes as the weights.
+\textbf{Spectral Centroid}: The spectral centroid indicates the center of mass of the sound's spectrum, providing a way to characterize the brightness of a sound. It is calculated as the weighted mean of the frequencies present in the signal, with their magnitudes as the weights. We yield a vector $V \in \R^{n}$ where $n$ is the number of windows. To have a standardized format to add in our attribute matrix, we compute mean, median, standard deviation, $25th$ percentile, $75th$ percentile, maximum value, and minimum value, from $V$ for each data point. This transformation is applied to all the spectral features (spectral rolloff and spectral bandwidth). 
 
 \textbf{Spectral Rolloff}: The spectral rolloff point indicates the frequency below which a specified percentage of the total energy of the spectrum is located, typically used to distinguish between harmonic (tonal) and noisy sounds. It serves as a way to capture the shape of the sound's spectrum, particularly its high-frequency content.
 
 \textbf{Spectral Bandwidth}: Spectral bandwidth quantifies the width of the frequency band where most of the sound's energy is concentrated, reflecting the sound's perceived texture. It measures the spread of the spectrum around the spectral centroid, indicating the range of significant frequencies that contribute to the sound.
 
-\textbf{Pitch and Intonation Patterns}: Pitch refers to the perceived frequency of a sound, determining the musical note or tone that it corresponds to. Intonation pattern describes the variation of pitch over time within spoken language, contributing to the expression of emotions, questioning, or emphasis in speech.
+\textbf{Pitch and Intonation Patterns}: Pitch refers to the perceived frequency of a sound, determining the musical note or tone that it corresponds to. Intonation pattern describes the variation of pitch over time within spoken language, contributing to the expression of emotions, questioning, or emphasis in speech. Each data point produces a matrix $P \in \R^{n \times m}$ of pitch tracks and a matrix $M \in \R^{n \times m}$ of magnitude windows, where each line represents a the pitch track or magnitude of a given window. From these matrices, we produce a vector of size $V \in \R^{n}$ where each element is the pitch with the most magnitude for each window (windows that only have null pitches are dropped). From $V$ we compute, the mean, median, standard deviation, $25th$ percentile, $75th$ percentile, maximum value, and minimum value, from $V$ which is then added to our attribute matrix. 
 
 \textbf{Formant Frequencies}: 
 %In audio processing, a formant is a concentration of acoustic energy around a particular frequency in the voice spectrum, associated with the resonant frequencies of the vocal tract. 
-Formants play a crucial role in characterizing vowels and certain consonants, greatly influencing speech recognition and synthesis.
+A formant is a characteristic component of the quality of a speech sound, particularly a vowel. When we speak, our vocal tract acts as a resonator, emphasizing specific frequencies and shaping the sounds we produce. Formants play a crucial role in characterizing vowels and certain consonants, greatly influencing speech recognition and synthesis. We will focus on three types of formants, which will be extracted using the \textit{parselmouth} library. \textit{F1} which is determined primarily by the height of the tongue body, \textit{F2} influenced by the frontness or backness of the tongue body,  \textit{F3} which is associated with lip rounding. For each data point, we extract \textit{F1}, \textit{F2}, \textit{F3} values for a set time point. Given that the lengths of our data points aren't the same, we compute the habitual mean, median, standard deviation, $25th$ percentile, $75th$ percentile, maximum value, and minimum value, for each type of formant. We also extract the difference between the means of \textit{F1}, \textit{F2}, \textit{F3}, yielding two additional features. These values are then added to the attributes matrix. 
 
-\textbf{RMS}: Root Mean Square (RMS) represents the square root of the average power of a signal, providing a measure of its amplitude. It's commonly used to quantify the volume level or energy of an audio signal over time.
+\textbf{Root Mean Square (RMS)}: Root Mean Square (RMS) represents the square root of the average power of a signal, providing a measure of its amplitude. It's commonly used to quantify the volume level or energy of an audio signal over time. We compute the RMS energy for each frame, yielding a vector $v \in \R^{n}$, where $n$ is the number of windows. From $v$, we compute the habitual central tendency metrics (as cited above), interquartile range, the energy variability (sum of absolute differences), and low-energy frame rate ()
 
-\textbf{ZCR}: Zero crossing rate (ZCR) is the rate at which an audio signal changes from positive to negative or back, effectively measuring the number of times the amplitude crosses the zero point. This feature is useful for analyzing the noisiness of a signal and distinguishing between voiced and unvoiced speech.
+\textbf{Zero Crossing Rate (ZCR)}: Zero crossing rate (ZCR) is the rate at which an audio signal changes from positive to negative or back, effectively measuring the number of times the amplitude crosses the zero point. This feature is useful for analyzing the noisiness of a signal and distinguishing between voiced and unvoiced speech. We retrieve a vector $v \in \R^{n}$ where $n$ is the number of windows, and where each element is the fraction of zero crossings in a given window.
+
+\textbf{Harmonics to Noise Ratio (HNR)}:
+Harmonics to noise quantifies the amount of harmonic sound (periodic vibrations) relative to the amount of noise (non-periodic components) in a voice signal. A higher HNR generally indicates a clearer and more harmonic sound, which is often associated with a healthier and more typical voice production. 
 
 \section{Methodology}
 \subsection{Why supervised Learning ?}
@@ -158,12 +161,14 @@ In other hands, random forest is based on a set of decision trees which are robu
 
 
 \subsection{Dimensionality reduction}
-Before applying PCA or MDS, we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our data. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study (see the correlation matrix in the result section) gave us pretty strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory. In fact, MDS is more computationally demanding that PCA because it involves computing the distances between all pairs of points in the dataset and then optimizing the configuration of points in the new space to reflect these distances as closely as possible. 
+Before applying PCA or MDS, we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our data. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study (see the correlation matrix in the result section) gave us pretty strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory.
 
-After applying PCA, with a maintained variance of $99\%$, we have $112$ features from the $151$ intial features. This means that the first $112$ principal components of the covariance matrix $\Sigma \in \mathbb{R}^{151 \times 151}$ , where $\forall i \in 1, \ldots, 151 \quad \forall j \in 1, \ldots, 151 \quad \sigma_{ij} \in \Sigma, \sigma_{ij} = COV(x_i, x_j)$, capture $99\%$ of the original dataset.
+After applying PCA, with a maintained variance of $95\%$, we have $90$ features from the $161$ initial features. This means that the first $112$ principal components of the covariance matrix $\Sigma \in \mathbb{R}^{151 \times 151}$ , where $\forall i \in 1, \ldots, 151 \quad \forall j \in 1, \ldots, 151 \quad \sigma_{ij} \in \Sigma, \sigma_{ij} = COV(x_i, x_j)$, capture $99\%$ of the original dataset.
 
 \subsection{Support Vector Machine}
-For this project, we use the library \textit{SVC} from \textit{sklearn}. This library use a non-linear SVM with a soft margin. Non-linear SVM with a soft margin is particularly useful when dealing with data that cannot be linearly separated in the original feature space (which is the case in our situation). The inclusion of slack variables, \(\xi_i\), allows some data points to be on the incorrect side of the margin, providing a balance between the complexity of the model and its error minimization.\\
+For this project, we use the library \textit{SVC} from \textit{sklearn} for multi-class classification. It trains an SVM one-vs-one classifier for each pair of classes, and then builds from them a one-vs-rest classifier for each class. The single class prediction is obtained from the most confident prediction of the one-vs-rest classifiers. 
+
+This library use a non-linear SVM with a soft margin. Non-linear SVM with a soft margin is particularly useful when dealing with data that cannot be linearly separated in the original feature space (which is the case in our situation). The inclusion of slack variables, \(\xi_i\), allows some data points to be on the incorrect side of the margin, providing a balance between the complexity of the model and its error minimization.\\
 
 \textbf{Mathematical formulation}
 
@@ -199,7 +204,7 @@ Common choices for the kernel function \(K\) include:
 
 
 \subsection{Random Forest}
-For this project, we use the library \textit{RandomForestClissifier} from \textit{sklearn}.
+For this project, we use the library \textit{RandomForestClassifier} from \textit{sklearn}.
 Random Forest is an ensemble learning technique that builds multiple decision trees and merges them together to get a more accurate and stable prediction. The algorithm combines the output of multiple (often hundreds) randomly created decision trees, a method known as \textit{bootstrap aggregating}, or \textit{bagging}. Each tree in the forest is built from a sample drawn with replacement (i.e., a bootstrap sample) from the training set.
 
 \textbf{\large Mathematical Description}
@@ -227,6 +232,11 @@ The performance of a Random Forest model is highly dependent on the settings of 
 \begin{itemize}
     \item \texttt{n\_estimators}: It specifies the number of trees in the forest. More trees increase the model's accuracy and stability by reducing the variance in predictions, but they also increase computational demands. Generally, there are diminishing returns in performance improvement beyond a certain number of trees.
 
+    \item \texttt{criterion}: The impurity measure used when splitting tree nodes. Each decision split chooses the predicate condition that minimises the expectation of this measure on the sub-populations divided among sub-trees. \\
+    First, the Gini score \( \displaystyle G(p_1 \dots p_k) = 1 - \mathbb{E}_k[p_k]\). In words, that is the average probability of not finding each class. \\
+    Second, the entropy \(\displaystyle H(p_1 \dots p_k) = \mathbb{E}_k[-\log_2 (p_k)]\) measures the uncertainty in bits 
+    These impurity measures are minimised when there is only one class found in a sub-tree's population. They are maximised when all classes are found in equal amounts.
+
     \item \texttt{max\_depth}: The maximum depth allowed for each tree. A deeper tree can model more complex relationships by creating more specific rules. However, it also makes the model more likely to overfit to the noise in the training data.
 
     \item \texttt{min\_samples\_split}: The minimum number of samples required to split an internal node. Higher values prevent the model from learning overly specific patterns, thus lowering the risk of overfitting. Smaller values allow the trees to make more complex decisions, increasing the risk of overfitting.
@@ -241,8 +251,32 @@ The performance of a Random Forest model is highly dependent on the settings of 
 
 
 \section{Results}
+\subsection{Rejected methods}
+Based on the correlation matrix, we can see that our data are not well correlated. So, it is more relevant to use MDS instead of PCA but MDS demand more computational resources. We tried to reduce the dimensionality with MDS with mhalanobis distance in python but the kernel crashed do to the insufficient memory. In fact, MDS involves computing the distances between all pairs of points in the dataset and then optimizing the configuration of points in the new space to reflect these distances as closely as possible.
+
+In the initial datasets, we have 45 labels. Some languages in the labels are very similar so we reduced the number of labels by 
+
+
 \subsection{Metrics}
-In order to compare, and determine the best model, we need to set metrics which will guide us to our decision. We will use four metrics, accuracy, precision, recall, and F1 scores. 
+In order to compare, and determine the best model, we need to set metrics which will guide us to our decision. We will use four metrics, accuracy, F1 scores, precision and recall. These metrics are defined in terms of hte number of sample and the four categories. True/False means that the classifier is right or wrong and Positive/Negative means that the classifier predicts that the sample is in the class +/- resp. So a \textit{True Positive} represent the fact that the classifier predicts that a sample is in the + class and he is right. A \textit{False Positive} represent the fact that the classifier predicts that a sample is in the + class but he is wrong. And the same logic goes for \textit{True Negative}  and \textit{False Negative}.
+
+\textbf{Accuracy:} The accuracy of a classifier is the ratio between the number of True positives and the total number of predictions ($P(Class == Prediction)$): 
+
+\(\displaystyle \text{Accuracy} = \frac{\text{True Positive + True Negative}}{\text{Total number of predictions}} \)
+
+\textbf{Precision score:} The precision of a classifier represent the probability that the sample is really in the class + knowing that the classifier prediction is + ($P(Class=+ | Prediction = +)$). The is the probability that the prediction of the classifier is right:
+
+\(\displaystyle \text{Precision} = \frac{\text{True Positive}}{\text{True Positive + False Positive}}\)
+
+\textbf{Recall score:} The recall is the probablity that the prediction of the classifier is + knowing that the sample is really in the class + ($P(Prediction=+ | Class = +)$):
+
+\(\displaystyle \text{Recall} = \frac{\text{True Positive}}{\text{True Positive + False Negative}}\)
+
+
+\textbf{F1 Score:} This metric is (almost) the Jaccard similarity between the sets of positive classification and positive prediction. That would be the ratio of their intersection over their union  ($P(Prediction=+ \land Class = +)/P(Prediction=+ \lor Class = +)$). But instead, F1 score is twice the intersection, divided by the union plus the intersection ($2 \times P(Prediction=+ \land Class = +)/(P(Prediction=+ \lor Class = +) +  P(Prediction=+ \land Class = +)$). It can be calculated as the harmonic mean of Precision and Recall:
+
+\(\displaystyle \text{F1} = \frac{2}{\frac{1}{\text{Precision}} + \frac{1}{\text{Recall}}} \displaystyle = 2 \times \frac{\text{Precision}\times\text{Recall}}{\text{Precision + Recall}} \). 
+
 \subsection{SVM}
 After cleaning our data and training the models with no hyperparameters tuning, we get those results:
 
@@ -276,23 +310,34 @@ After cleaning our data and training the models with no hyperparameters tuning, 
 
 \end{table}
 
-Then, after applying grid search to find the best hyperparameters, with get:
+Then, applying random search gives us those parameters : \texttt{C=10, gamma=auto, kernel=rbf} and we get these results after training a SVM with those hyperparameters:
+
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \begin{tabular}{|c|c|c|}
     \hline
-       Accuracy  & f1-score & Precision score & Recall score\\
-       \hline
-         &  &  &  \\
+      Kernel & Accuracy & f1-score\\
+      \hline
+      RBF & 24.596\% & 23.345\%\\
     \hline
     \end{tabular}
-    \caption{Results with best parameters}
+    
+    \begin{tabular}{|c|c|c|}
+    \hline
+    Kernel & Precision score & Recall score\\
+    \hline
+    RBF & 24.078\% & 23.612\% \\
+    \hline
+    \end{tabular}
+
     \label{tab:my_label}
+    \caption{Results before grid search}
 \end{table}
 
-
 \subsection{Random Forest}
+Results obtained before finding the best parameters with random search :
+
 
 \section{Conclusion}
 
