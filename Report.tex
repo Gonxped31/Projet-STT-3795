@@ -175,7 +175,9 @@ This projection matrix can be defined from an orthonormal basis, as $P = UU^T$, 
 \end{align*}
 We found during class that this basis is made up of eigenvectors of the covariance matrix, $\Sigma\Vec{u}_j = \lambda_j \cdot \Vec{u}_j$. The k-dimensional projection is made from the k eigenvectors with largest eigenvalues, normalized.
 
-After applying PCA, with a maintained variance of $95\%$, we have $90$ features from the $161$ initial features. This means that the first $90$ principal components of the covariance matrix $\Sigma \in \mathbb{R}^{151 \times 151}$ , capture $95\%$ of the variance in the original training set.
+For the purpose of dimensionality reduction, we won't perform an orthogonal projection with this basis found by PCA. Instead, we will transform the coordinate basis of our data from our chosen feature space into the eigenspace of $\Sigma$, via $\Vec{y} = U^T\Vec{x}$. Once in that basis, we can keep the k dimensions identified above, cutting off the dimensions responsible for the least variance. 
+
+After applying PCA, with a maintained variance of $95\%$, we keep $90$ features from the $161$ initial features. This means that the first $90$ principal components of the covariance matrix $\Sigma \in \mathbb{R}^{151 \times 151}$ , capture $95\%$ of the variance in the training set.
 
 \subsection{Support Vector Classifier}
 For this project, we use the library \textit{SVC} from \textit{sklearn} for multi-class classification. It trains an SVM one-vs-one classifier for each pair of classes, and then builds from them a one-vs-rest classifier for each class. The single class prediction is obtained from the most confident prediction of the one-vs-rest classifiers. 
