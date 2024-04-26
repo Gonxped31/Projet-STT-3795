@@ -122,6 +122,7 @@ param_grid_svm = {
 }
 
 def train_svm(X_train, Y_train, n_iter):
+    print('Training SVM')
     svm_clf = SVC()
     random_search_svm = RandomizedSearchCV(svm_clf, param_distributions=param_grid_svm, n_iter=n_iter, verbose=3, cv=5, random_state=42, n_jobs=-1, scoring = 'f1_macro')
     random_search_svm.fit(X_train, Y_train)
@@ -134,12 +135,16 @@ param_grid_rf = {
     'max_depth': [3, 4, 5, None],
     'min_samples_split': [2, 5, 10],
     'min_samples_leaf': [1, 2, 4],
-    'max_features': ['sqrt', 'log2', None]
+    'max_features': ['sqrt', 'log2', None],
+    'criterion': ['gini', 'entropy']
 }
 
 def train_rfc(X_train, Y_train, n_iter):
+    print('Training RDF')
     rfc = RandomForestClassifier(random_state=42, n_jobs=-1)
-    random_search_rf = RandomizedSearchCV(rfc, param_distributions=param_grid_rf, n_iter=n_iter, cv=5, verbose=3, random_state=42, n_jobs=-1, scoring = 'f1_macro')
+    random_search_rf = RandomizedSearchCV(rfc, param_distributions=param_grid_rf, n_iter=n_iter, 
+                                          cv=5, verbose=3, random_state=42, n_jobs=-1, 
+                                          scoring = 'f1_macro')
     random_search_rf.fit(X_train, Y_train)
     print("Best parameters:", random_search_rf.best_params_)
     print("Best score:", random_search_rf.best_score_)
@@ -163,5 +168,5 @@ if __name__ == '__main__':
     if n_iter == 0:
         train_simple(X_train, Y_train, X_test, Y_test)
     else:
-        train_svm(X_train, Y_train, n_iter)
-        #train_rfc(X_train, Y_train, n_iter)
+        #train_svm(X_train, Y_train, n_iter)
+        train_rfc(X_train, Y_train, n_iter)
