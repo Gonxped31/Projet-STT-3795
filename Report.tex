@@ -422,11 +422,6 @@ As an exploratory first step, we fitted our data to an Random Forest Classifier,
 
 We applied a Random Search algorithm (Algorithm 2) to find the best hyperparamters in a given hyperparameter space. The output of this search gave us this set of hyperparameters \texttt{n\_estimators = 200, min\_samples\_split = 5, min\_samples\_leaf = 4, max\_features = sqrt, max\_depth = None, criterion = gini} which yield the best . Results obtained after running the Random Search : 
 
-
-
-
-In both SVC and RFC, we see an improvement in all of our metrics after running the Random Search. This suggests that by exhaustively exploring the hyperparamter space, we could potentially find an even better model (even though the performance gain is marginal).  
-
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|c|}
@@ -440,6 +435,8 @@ In both SVC and RFC, we see an improvement in all of our metrics after running t
     \label{tab:my_label}
     \caption{Results after grid search}
 \end{table}
+
+In both SVC and RFC, we see an improvement in all of our metrics after running the Random Search. This suggests that by exhaustively exploring the hyperparamter space, we could potentially find an even better model (even though the performance gain is marginal).  
 
 \section{Conclusion}
 This project embarked on the challenge of comparing the efficacy of two widely used machine learning algorithms, Support Vector Machines (SVC) and Random Forests (RFC), in the domain of language classification based on speech. Through extensive data preprocessing, model training, and hyperparameter optimization, several key insights were unearthed.
