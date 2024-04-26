@@ -212,3 +212,28 @@ def get_HNR(data):
     #print(hnr)
     hnr_mean = call(hnr, "Get mean", 0, 0)
     return hnr_mean
+
+language_cluster_labels = {
+    'Arabic': 'Languages of the Caucasus and Middle East', 'Basque': 'Other European Languages',
+    'Breton': 'Constructed and Isolate Languages', 'Catalan': 'Other European Languages',
+    'Chinese_China': 'East Asian Languages', 'Chinese_Hongkong': 'East Asian Languages',
+    'Chinese_Taiwan': 'East Asian Languages', 'Chuvash': 'Turkic Languages',
+    'Czech': 'Slavic Languages', 'Dhivehi': 'Diverse Asian and Pacific Languages',
+    'Dutch': 'Germanic Languages', 'English': 'Germanic Languages',
+    'Esperanto': 'Constructed and Isolate Languages', 'Estonian': 'Other European Languages',
+    'French': 'Romance European Languages', 'Frisian': 'African and Other Languages',
+    'Georgian': 'Languages of the Caucasus and Middle East', 'German': 'Germanic Languages',
+    'Greek': 'Romance European Languages', 'Hakha_Chin': 'Diverse Asian and Pacific Languages',
+    'Indonesian': 'Diverse Asian and Pacific Languages', 'Interlingua': 'Constructed and Isolate Languages',
+    'Italian': 'Romance European Languages', 'Japanese': 'East Asian Languages',
+    'Kabyle': 'African and Other Languages', 'Kinyarwanda': 'African and Other Languages',
+    'Kyrgyz': 'Turkic Languages', 'Latvian': 'Other European Languages',
+    'Maltese': 'Languages of the Caucasus and Middle East', 'Mongolian': 'Diverse Asian and Pacific Languages',
+    'Persian': 'Languages of the Caucasus and Middle East', 'Polish': 'Slavic Languages',
+    'Portuguese': 'Romance European Languages', 'Romanian': 'Romance European Languages',
+    'Romansh_Sursilvan': 'Constructed and Isolate Languages', 'Russian': 'Slavic Languages',
+    'Sakha': 'Turkic Languages', 'Slovenian': 'Slavic Languages',
+    'Spanish': 'Romance European Languages', 'Swedish': 'Germanic Languages',
+    'Tamil': 'African and Other Languages', 'Tatar': 'Turkic Languages',
+    'Turkish': 'Turkic Languages', 'Ukranian': 'Slavic Languages', 'Welsh': 'Other European Languages'
+    }

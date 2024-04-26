@@ -25,6 +25,11 @@ import sys
 
 def embedded_data():
     full_df, train_df, test_df, validation_df = prlib.get_preprocessed_data()
+    
+    # Apply the mapping to the DataFrame
+    #print(full_df['label'].unique())
+    #full_df['label'] = full_df['label'].map(prlib.language_cluster_labels)
+    #full_df.groupby('label').count()
 
     X_train, X_test, Y_train, Y_test = train_test_split(full_df.iloc[:, 0:-1], full_df['label'], stratify=full_df['label'], test_size=0.33, random_state=42)
     #X_train, Y_train = df_without_label.iloc[:len(train_df), :], full_df['label'].iloc[:len(train_df)]
@@ -54,7 +59,7 @@ def get_PCs(dataframe, percentage_variance):
     print()
     print(f'Total variance = {sum(ev)}')
 
-    pca = PCA(percentage_variance/100, verbose=3)
+    pca = PCA(percentage_variance/100)
     principal_components = pca.fit_transform(scaled_df)
     explained_variance = pca.explained_variance_
     percentage = sum(pca.explained_variance_ratio_)
@@ -98,7 +103,7 @@ param_grid_svm = {
 }
 
 def train_svm(X_train, Y_train, n_iter):
-    svm_clf = SVC()
+    svm_clf = SVC(random_state=42)
     random_search_svm = RandomizedSearchCV(svm_clf, param_distributions=param_grid_svm, n_iter=n_iter, verbose=3, cv=5, random_state=42, n_jobs=-1, scoring = 'f1_macro')
     random_search_svm.fit(X_train, Y_train)
     print("Best parameters for SVM:", random_search_svm.best_params_)
@@ -143,8 +148,7 @@ if __name__ == '__main__':
     if n_iter == 0 and type == "svc":
         model = SVC(random_state=42)
     elif n_iter == 0 and type == "rfc":
-        model = RandomForestClassifier(verbose=3, random_state=42, \
-                                        criterion='entropy', max_depth=None, max_features=None, min_samples_leaf=2, min_samples_split=2, n_estimators=1000)
+        model = RandomForestClassifier(verbose=3, random_state=42)
         #nn = MLPClassifier(verbose=3)
         print("Training...")
         model.fit(X_train, Y_train)
@@ -152,6 +156,7 @@ if __name__ == '__main__':
         model = train_svm(X_train, Y_train, n_iter)
     elif type == "rfc":
         model = train_rfc(X_train, Y_train, n_iter)
+    
     predictions = model.predict(X_test)
     accuracy = get_metrics(Y_test, predictions)
     print(f'Model accuracy: {accuracy}')
