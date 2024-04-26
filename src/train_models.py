@@ -32,8 +32,9 @@ def embedded_data():
     #full_df.groupby('label').count()
 
     X_train, X_test, Y_train, Y_test = train_test_split(full_df.iloc[:, 0:-1], full_df['label'], stratify=full_df['label'], test_size=0.33, random_state=42)
-    #X_train, Y_train = df_without_label.iloc[:len(train_df), :], full_df['label'].iloc[:len(train_df)]
-    #X_test, Y_test = df_without_label.iloc[len(train_df):, :], full_df['label'].iloc[len(train_df):]
+    #real_test = pd.concat([test_df, validation_df])
+    #X_train, Y_train = train_df.drop('label', axis=1), train_df['label']
+    #X_test, Y_test = real_test.drop('label', axis=1), real_test['label']
 
     # PCA
     X_train, embedding = get_PCs(X_train, 95)
@@ -59,7 +60,7 @@ def get_PCs(dataframe, percentage_variance):
     print()
     print(f'Total variance = {sum(ev)}')
 
-    pca = PCA(percentage_variance/100)
+    pca = PCA(percentage_variance/100, random_state=42)
     principal_components = pca.fit_transform(scaled_df)
     explained_variance = pca.explained_variance_
     percentage = sum(pca.explained_variance_ratio_)
@@ -146,12 +147,13 @@ if __name__ == '__main__':
     X_train, Y_train, X_test, Y_test = embedded_data()
 
     # Model initialization
+    print("Training...")
     if n_iter == 0 and type == "svc":
         model = SVC(random_state=42)
+        model.fit(X_train, Y_train)
     elif n_iter == 0 and type == "rfc":
         model = RandomForestClassifier(verbose=3, random_state=42)
         #nn = MLPClassifier(verbose=3)
-        print("Training...")
         model.fit(X_train, Y_train)
     elif type == "svc":
         model = train_svm(X_train, Y_train, n_iter)

@@ -236,4 +236,4 @@ language_cluster_labels = {
     'Spanish': 'Romance European Languages', 'Swedish': 'Germanic Languages',
     'Tamil': 'African and Other Languages', 'Tatar': 'Turkic Languages',
     'Turkish': 'Turkic Languages', 'Ukranian': 'Slavic Languages', 'Welsh': 'Other European Languages'
-    }
+}
