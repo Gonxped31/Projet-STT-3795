@@ -1,11 +1,25 @@
 \documentclass{article}
 \usepackage{hyperref}
+\usepackage{svg}
 \hypersetup{
     colorlinks=true,
     urlcolor=blue
 }
 
 \begin{document}
+\section*{Appendix}
+Here is the correlation matrix for the data:\\
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includesvg[width=1 \textwidth]{images/correlation_matrix.svg}
+        \caption{Figure 1}
+        \label{fig:image1}
+    \end{subfigure}
+\end{figure}\\
+
+\newpage
 \section*{References}
 \begin{itemize}
     \item \href{https://huggingface.co/datasets/common_language}{Data Source}
