@@ -159,13 +159,33 @@ def extract_feature_row(path, language):
 
     #Get the attributes
     mfccs = prlib.get_Normalized_Mfccs(data)
+    print("MFCCS")
+    print(mfccs.shape)
+    print(mfccs)
     specs_measurements = prlib.get_spectral_measurements(data)
+    print("Spec measurements")
+    print(specs_measurements.shape)
+    print(specs_measurements)
     pitch_track = prlib.get_pitch_sequences(data)
+    print("pitch track")
+    print(pitch_track.shape)
+    print(pitch_track)
     formants_data = prlib.get_formants(path)
+    print("Formants")
+    print(formants_data.shape)
+    print(formants_data)
     rms_energy = prlib.get_rms_energy(data)
+    print("RMS energy")
+    print(rms_energy.shape)
+    print(rms_energy)
     zcr = prlib.get_ZCR(data)
+    print("RMS energy")
+    print(zcr.shape)
+    print(zcr)
     hnr_mean = prlib.get_HNR(data)
-
+    print("RMS energy")
+    print(hnr_mean.shape)
+    print(hnr_mean)
     # mfccs: Get mean and std atributes
     mfccs = mfccs_to_df(np.mean(mfccs, axis = 1),np.std(mfccs, axis = 1))
 
@@ -201,7 +221,7 @@ def extract_feature_row(path, language):
                                             spectre_flatness_df, \
                                                 spectre_contrast_df,\
                                                     pitch_track_df,\
-                                                        formants_df, \
+                                                        formants_df,\
                                                             rms_energy_df, zcr_hnr_df, label_df], axis = 1)
     
     if (combined_features_row.isnull().values.any()):

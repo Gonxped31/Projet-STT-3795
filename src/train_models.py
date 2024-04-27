@@ -5,7 +5,7 @@ from sklearn.manifold import MDS
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, confusion_matrix
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.model_selection import train_test_split, RandomizedSearchCV, GridSearchCV
 
 # Data analysis and stats imports
 import numpy as np
@@ -25,18 +25,24 @@ import sys
 
 def embedded_data():
     full_df, train_df, test_df, validation_df = prlib.get_preprocessed_data()
+    
+    # Apply the mapping to the DataFrame
+    #print(full_df['label'].unique())
+    #full_df['label'] = full_df['label'].map(prlib.language_cluster_labels)
+    #full_df.groupby('label').count()
 
     X_train, X_test, Y_train, Y_test = train_test_split(full_df.iloc[:, 0:-1], full_df['label'], stratify=full_df['label'], test_size=0.33, random_state=42)
-    #X_train, Y_train = df_without_label.iloc[:len(train_df), :], full_df['label'].iloc[:len(train_df)]
-    #X_test, Y_test = df_without_label.iloc[len(train_df):, :], full_df['label'].iloc[len(train_df):]
+    #real_test = pd.concat([test_df, validation_df])
+    #X_train, Y_train = train_df.drop('label', axis=1), train_df['label']
+    #X_test, Y_test = real_test.drop('label', axis=1), real_test['label']
 
     # PCA
     X_train, embedding = get_PCs(X_train, 95)
     X_test = embedding(X_test)
 
     # MDS with mahalanobis
-    #df_mds = mds_mahalanobis(X_train, 70)
-    #df_mds['label'] = df['label']
+    #X_train, embedding = mds(X_train, 90, compute_mahalanobis_distance_matrix)
+    #X_test = embedding(X_test)
 
     return X_train, Y_train, X_test, Y_test
 
@@ -54,7 +60,7 @@ def get_PCs(dataframe, percentage_variance):
     print()
     print(f'Total variance = {sum(ev)}')
 
-    pca = PCA(percentage_variance/100)
+    pca = PCA(percentage_variance/100, random_state=42)
     principal_components = pca.fit_transform(scaled_df)
     explained_variance = pca.explained_variance_
     percentage = sum(pca.explained_variance_ratio_)
@@ -62,19 +68,26 @@ def get_PCs(dataframe, percentage_variance):
     print(f'Variance for {round(percentage*100, 2)}% = {sum(explained_variance)}')
     print(f'Number of PCs for {round(percentage*100, 2)}% = {len(explained_variance)}')
     print(f'Attribute lost = {len(scaled_df[0]) - len(explained_variance)}')
-    names = pca.get_feature_names_out()
 
+    names = pca.get_feature_names_out()
     embedding = lambda df: pd.DataFrame(pca.transform(scaler.transform(df)), columns=names)
     return pd.DataFrame(data=principal_components, columns=names), embedding
 
 # MDS classique
-def mds(dataframe, n_components):
+def mds(dataframe, n_components, dissimilarity=True):
     scaler = StandardScaler()
     scaled_df = scaler.fit_transform(dataframe)
     print(f'Scaled_df Mean = {np.mean(scaled_df)},\nScaled_df Std = {np.std(scaled_df)}')
-    mds = MDS(n_components=n_components, random_state=42, dissimilarity='euclidean')
-    mds_transformed = mds.fit_transform(scaled_df)
-    return pd.DataFrame(mds_transformed, columns=[f'Component_{i+1}' for i in range(n_components)])
+
+    x_train = scaled_df if dissimilarity else compute_mahalanobis_distance_matrix(scaled_df)
+    dissimilarity = 'euclidean' if dissimilarity else 'precomputed'
+
+    mds = MDS(n_components=n_components, random_state=42, dissimilarity=dissimilarity, verbose=3)
+    mds_transformed = mds.fit_transform(x_train)
+    
+    names = mds.get_feature_names_out()
+    embedding = lambda df: pd.DataFrame(mds.transform(scaler.transform(df)), columns=names)
+    return pd.DataFrame(mds_transformed, columns=names), embedding
 
 # Mahalanobis distance matrix set up
 def compute_mahalanobis_distance_matrix(X):
@@ -84,37 +97,6 @@ def compute_mahalanobis_distance_matrix(X):
     distance_matrix = squareform(mahalanobis_dist)
     return distance_matrix
 
-# MDS with mahalanobis distance
-def mds_mahalanobis(dataframe, n_components):
-    scaler = StandardScaler()
-    scaled_df = scaler.fit_transform(dataframe)
-    mahalanobis_distance_matrix = compute_mahalanobis_distance_matrix(scaled_df)
-    mds = MDS(n_components=n_components, random_state=42, dissimilarity='precomputed')
-    mds_transformed = mds.fit_transform(mahalanobis_distance_matrix)
-    return pd.DataFrame(mds_transformed, columns=[f'Component_{i+1}' for i in range(n_components)])
-
-def train_simple(X_train, Y_train, X_test, Y_test):
-    # Model initialization
-    svm = SVC(verbose=3, random_state=42)
-    random_forest = RandomForestClassifier(verbose=3, random_state=42)
-    #nn = MLPClassifier(verbose=3)
-
-    # Models fiting
-    print("Training SVM")
-    svm.fit(X_train, Y_train)
-    print("Training RFC")
-    random_forest.fit(X_train, Y_train)
-
-    # Models prediction
-    svm_predictions = svm.predict(X_test)
-    random_forest_predictions = random_forest.predict(X_test)
-
-    svm_accuracy = f1_score(Y_test, svm_predictions, average='macro')
-    random_forest_accuracy = f1_score(Y_test, random_forest_predictions, average='macro')
-
-    print(f'SVM accuracy: {svm_accuracy}')
-    print(f'RDF accuracy: {random_forest_accuracy}')
-
 param_grid_svm = {
     'C': reciprocal(0.001, 1000),
     'gamma': expon(scale=1.0),
@@ -122,8 +104,7 @@ param_grid_svm = {
 }
 
 def train_svm(X_train, Y_train, n_iter):
-    print('Training SVM')
-    svm_clf = SVC()
+    svm_clf = SVC(random_state=42)
     random_search_svm = RandomizedSearchCV(svm_clf, param_distributions=param_grid_svm, n_iter=n_iter, verbose=3, cv=5, random_state=42, n_jobs=-1, scoring = 'f1_macro')
     random_search_svm.fit(X_train, Y_train)
     print("Best parameters for SVM:", random_search_svm.best_params_)
@@ -163,10 +144,26 @@ def get_metrics(Y_test, predictions):
     })
 
 if __name__ == '__main__':
-    X_train, Y_train, X_test, Y_test = embedded_data()
     n_iter = int(sys.argv[1])
-    if n_iter == 0:
-        train_simple(X_train, Y_train, X_test, Y_test)
-    else:
-        #train_svm(X_train, Y_train, n_iter)
-        train_rfc(X_train, Y_train, n_iter)
+    type = sys.argv[2]
+    
+    X_train, Y_train, X_test, Y_test = embedded_data()
+
+    # Model initialization
+    print("Training...")
+    if n_iter == 0 and type == "svc":
+        model = SVC(C=10, gamma='auto', kernel='rbf', random_state=42)
+        model.fit(X_train, Y_train)
+    elif n_iter == 0 and type == "rfc":
+        model = RandomForestClassifier(verbose=3, random_state=42, \
+                                        n_estimators= 200, min_samples_split= 5, min_samples_leaf= 4, max_features= 'sqrt', max_depth= None, criterion= 'gini')
+        #nn = MLPClassifier(verbose=3)
+        model.fit(X_train, Y_train)
+    elif type == "svc":
+        model = train_svm(X_train, Y_train, n_iter)
+    elif type == "rfc":
+        model = train_rfc(X_train, Y_train, n_iter)
+    
+    predictions = model.predict(X_test)
+    accuracy = get_metrics(Y_test, predictions)
+    print(f'Model accuracy: {accuracy}')
