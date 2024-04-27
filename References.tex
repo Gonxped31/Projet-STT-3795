@@ -1,27 +1,47 @@
 \documentclass{article}
 \usepackage{hyperref}
 \usepackage{svg}
+\usepackage[margin=1in]{geometry}
+
 \hypersetup{
     colorlinks=true,
     urlcolor=blue
 }
 
 \begin{document}
-\setcounter{page}{10}
-\section*{Appendix}
-Here is the correlation matrix for the data:\\
+\setcounter{page}{12}
+\section*{8 \space Appendix}
+
+\subsection*{4.2 \space Dimensionality Reduction}
+Correlation Matrix of the original data features:\\
+
 \begin{center}
-    \includesvg[width=1 \textwidth]{images/correlation_matrix.svg}
+  \hspace*{-0.05\linewidth}
+  \includesvg[width=1.35 \textwidth]{images/correlation_matrix.svg}
+\end{center}
+
+\newpage
+\subsection*{5.3 \space Support Vector Classification}
+Confusion Matrix for SVC classification results:
+\begin{center}
+  \hspace*{-0.05\linewidth}
+  \includesvg[width=1.25 \textwidth]{images/confusion_matrix_svm.svg}
+\end{center}
+
+\newpage
+\subsection*{5.4 \space Random Forest Classification}
+Confusion Matrix for Random Forest classification results:
+\begin{center}
+  \hspace*{-0.05\linewidth}
+  \includesvg[width=1.25 \textwidth]{images/confusion_matrix_rfc.svg}
 \end{center}
 
 
 
 \newpage
-\section*{References}
+\section*{9 \space References}
 \begin{itemize}
-    \item \href{https://github.com/Gonxped31/Projet-STT-3795}{GitHub Repository for this STT3795 Final Project}
-
-    \item \href{https://huggingface.co/datasets/common_language}{Data Source}
+    \item \href{https://huggingface.co/datasets/common_language}{Common Language Data Source}
 
     \item \href{https://www.youtube.com/playlist?list=PL-wATfeyAMNqIee7cH3q1bh4QJFAaeNv0}{Audio Signal Processing for Machine Learning}
 
@@ -39,7 +59,11 @@ Here is the correlation matrix for the data:\\
     
     \item \href{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html}{Random Forest Classifier}
 
+    \item \href{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html}{K-Fold Cross Validation}
+    
     \item \href{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html}{Randomized Hyperparameter Search}
+    
+    \item \href{https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics}{Model Evaluation Metrics}
 
 \end{itemize}
 \end{document}

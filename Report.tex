@@ -7,6 +7,7 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{subcaption}
 \usepackage{algorithm}
+\usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -55,6 +56,7 @@ In this context, evaluating and comparing the performance of classification algo
 \section{Objectives}
 The main objective of this project is to identify the strengths and weaknesses of each classification algorithm in the specific context of language classification. To achieve this, we will use representative datasets containing voice samples from different people, covering a variety of linguistic structures and features. We will assess the performance of each algorithm in terms of accuracy, recall, F-measure, \textbf{and other quality metrics of classification}.
 
+\newpage
 \section{Description of Analyzed Data}
 \subsection{Source}
 The data used in the project comes from the \textit{Hugging Face} website. It is a reliable internet site for hosting datasets as well as sharing pre-trained AI models. This allows us to have a reference to compare our model to, which is one of the main reasons why this dataset was chosen.
@@ -78,12 +80,12 @@ Given that our project was solely focused on the classification of the spoken la
 \For{each audio file in the dataset}
         \State Read the audio file to obtain waveform data
         \State Apply noise reduction to the waveform
-        \Try
             \State Clean the audio using the clean\_sound function
             \State Save the cleaned audio to the designated output path
-        \Except
+        \If{An exception occurs}
             \State Log error with file details
-        \EndTry
+        \EndIf
+\EndFor
 \end{algorithmic}
 \end{algorithm}
 
@@ -156,6 +158,7 @@ A formant is a characteristic component of the quality of a speech sound, partic
 \textbf{Harmonics to Noise Ratio (HNR)}:
 Harmonics to noise quantifies the amount of harmonic sound (periodic vibrations) relative to the amount of noise (non-periodic components) in a voice signal. A higher HNR generally indicates a clearer and more harmonic sound, which is often associated with a healthier and more typical voice production. In our case, we compute the HNR mean (represented in decibels) from all the audio clips, using the \textit{parselmouth}. This value is then added to the attribute matrix. 
 
+\newpage
 \section{Methodology}
 \subsection{Why supervised Learning ?}
 Supervised learning algorithms (SVM and Random forest) are used in this project because unlike unsupervised learning algorithms, they learn the specific characteristics of each language’s phonetic, intonational, and rhythmic properties, leading to highly accurate classification once the model is well-tuned. Unsupervised methods like clustering algorithms (DBscan, K-means or hierarchical clustering) identify groups based on feature similarity but do not inherently know what these groups represent (which language each group corresponds to) which can lead to an ambiguity in cluster interpretation.
@@ -163,7 +166,6 @@ Supervised learning algorithms (SVM and Random forest) are used in this project 
 Unsupervised algorithms suffer more from the curse of dimensionality than supervised models. In fact, SVMs are more effective even in hight dimension due to the fact that they primarily care about the points closest to the decision boundary (support vectors) rather than the dimensionality of the space. Furthermore, the maximization of the distance between the support vectors and the boundary ensures that the model focuses on the most informative features for classification. This property allows SVM to be less prone to overfitting, a common issue in high-dimensional spaces. Due to the kernel trick, SVMs can also handle non linear decisions which allows them to operate in higher dimensions without directly computing the coordinates in that space unlike DBscan or k-means for example (more description about SVM on the section \textbf{4.3}).
 
 In other hands, random forest is based on a set of decision trees which are robust against overfitting because each tree in the forest is bult from a random sample of features, reducing the variance of the set without substantially increase the biais. Furthermore, the classification for random forest is more efficient in hight dimensionality compared to unsupervised algorithms because it randomly selects subsets of features at each split, which means it can manage high-dimensional data by focusing on the most informative features for making splits.
-
 
 \subsection{Dimensionality reduction}
 Before applying PCA (Principal Component Analysis) or MDS (Multi-Dimensional Scaling), we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our data. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study (see the correlation matrix in the result section) gave us pretty strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory (see 5.1 Rejected method).
@@ -188,9 +190,30 @@ The method described above, maximising variance in the data, is biased towards f
 $$\hat{x}_k = \frac{x_k - \mu_k}{\sigma_j}, \ \hat{\Sigma}_{i,j} = \frac{\Sigma_{i,j}}{\sigma_i \cdot \sigma_j} = \rho_{i,j} \in [-1, 1]$$
 While the elements of the covariance matrix in feature space are all standardized to 1, and the total variance is just the number of dimensions, the diagonalization computed by PCA will tease out a new basis where variances can differ, so asking for the $k$ largest directions still makes sense.
 
-After applying PCA on our dataset, with a target of maintaining $95\%$ of the variance, we keep $90$ features from the $161$ initial features. This means that the first $90$ principal components of the correlation matrix $\hat{\Sigma} \in \mathbb{R}^{161 \times 161}$ , capture $95\%$ of the variance in the (standardized) training set.
+\begin{algorithm}
+\caption{Dimensionality Reduction with PCA}
+\begin{algorithmic}[1]
+\State Initialize dataset $X \in \mathbb{R}^{N \times D}$
+\State Compute all feature means $\Vec{\mu}$ and variances $\Vec{\sigma}^2$
+\Statex Center and scale the data:
+\For{each vector feature $x_{i,t}$ in $X$}
+    \State $z_{i,t} \gets \frac{1}{\sigma_t}(x_{i,t} - \mu_t)$
+\EndFor
+\Statex Compute the covariance matrix:
+\State $\Sigma = Z^TZ \in \mathbb{R}^{D \times D}$:
+\Statex Take the singular value decomposition:
+\State $svd(\Sigma) = U \cdot \Lambda \cdot U^T$
+\Statex Keep the largest components of the basis:
+\State $\hat{u}_{1 \dots k} = \arg^k \max \left\{ \Vec{u}_t^T \Lambda \Vec{u}_t \right\} \in \mathbb{R}^{k \times D}$
+\Statex Embed data vectors into the $\hat{U}$ subspace:
+\For{each data vector $\Vec{z}_{i}$ in $Z$}
+    \State $\Vec{y}_i \gets \hat{U}^T \Vec{z}_i \in \mathbb{R}^k$
+\EndFor
+\State \Return the new dataset $Y \in \mathbb{R}^{N \times k}$
+\end{algorithmic}
+\end{algorithm}
 
-There is also the possibility of "whitening" or "sphering" the embedded data, that is to standardize the output variances, before the classifier training step. In the end, we found it did not improve classification performance.
+After applying PCA on our dataset, with a target of maintaining $95\%$ of the variance, we keep $90$ features from the $161$ initial features. This means that the first $90$ principal components of the correlation matrix $\hat{\Sigma} \in \mathbb{R}^{161 \times 161}$ , capture $95\%$ of the variance in the (standardized) training set.
 
 \subsection{Support Vector Classifier}
 For this project, we use the library \textit{SVC} from \textit{sklearn} for multi-class classification. It trains an SVM one-vs-one classifier for each pair of classes, and then builds from them a one-vs-rest classifier for each class. The single class prediction is obtained from the most confident prediction of the one-vs-rest classifiers. 
@@ -230,7 +253,7 @@ Common choices for the kernel function \(K\) include:
 \end{comment}
 
 \subsection{Random Forest}
-For this project, we use the library \textit{RandomForestClassifier}(RFC) from \textit{sklearn}.
+For this project, we use the library \textit{RandomForestClassifier} (RFC) from \textit{sklearn}.
 Random Forest is an ensemble learning technique that builds multiple decision trees and merges them together to get a more accurate and stable prediction. The algorithm combines the output of multiple (often hundreds) randomly created decision trees, a method known as \textit{bootstrap aggregating}, or \textit{bagging}. Each tree in the forest is built from a sample drawn with replacement (i.e., a bootstrap sample) from the training set.
 
 \textbf{\large Mathematical Description}
@@ -280,7 +303,7 @@ Hyperparamter tuning is a crucial step to finding the best model. As data our da
 
 \newpage
 
-\begin{algorithm}[!h]
+\begin{algorithm}
 \caption{Random Search with Cross-Validation}
 \begin{algorithmic}[1]
 \State Initialize dataset $D$
@@ -316,10 +339,14 @@ For the sake of consistency and reproducibility, we fixed the "random\_state" pa
 - The hyper-parameter optimizer RandomizedSearchCV.
 
 \subsection{Rejected methods}
-In this section, we talk about the methods that we tried but didn't work. Based on the correlation matrix in the appendix, we can see that our data are not well correlated. So, it is more relevant to use MDS instead of PCA but MDS demand more computational resources. We tried to reduce the dimensionality with MDS, both with euclidian or malahanobis distance, but our Python environments crashed due to insufficient memory. Maybe the number of data points was too high at $\sim22$k. This happened also on the cloud Colab environment. 
-In fact, MDS involves computing the distances between all pairs of points in the dataset and then optimizing the configuration of points in the new space to reflect these distances as closely as possible.
+In this section, we talk about the methods that we tried but didn't work.
 
 The \textit{Common Language} dataset we are using came pre-separated into a 'train', 'test' and 'validation' set. Initial training runs with this split gave very poor results ($\approx$ 2x worse), compared to random selections from the whole dataset. So, we decided to use \textit{sklearn}'s stratified splitter on the entire dataset, ignoring the pre-defined split. Stratification ensures that the chosen subsets contain the same proportions of each class label.
+
+Based on the correlation matrix in the appendix, we can see that our data are not well correlated. So, it is more relevant to use MDS instead of PCA but MDS demand more computational resources. We tried to reduce the dimensionality with MDS, both with euclidian or malahanobis distance, but our Python environments crashed due to insufficient memory. Maybe the number of data points was too high at $\sim22$k. This happened also on the cloud Colab environment. 
+In fact, MDS involves computing the distances between all pairs of points in the dataset and then optimizing the configuration of points in the new space to reflect these distances as closely as possible.
+
+There is also the possibility of "whitening" or "sphering" the embedded data from PCA, that is to standardize the output variances, before the classifier training step. In the end, we found it did not improve classification performance.
 
 \begin{table}[h]
     \centering
@@ -393,7 +420,7 @@ It can be calculated as the harmonic mean of Precision and Recall:
 
 \(\displaystyle \text{F1} = \frac{2}{\frac{1}{\text{Precision}} + \frac{1}{\text{Recall}}} \displaystyle = 2 \times \frac{\text{Precision}\times\text{Recall}}{\text{Precision + Recall}} \). 
 
-\subsection{SVM}
+\subsection{Support Vector Classification}
 After cleaning our data and training the models with no hyperparameters tuning, we get those results:
 
 \begin{table}[h]
@@ -431,7 +458,7 @@ Then, applying random search (Algorithm 2) gives us those parameters : \texttt{C
     \caption{Results after grid search}
 \end{table}
 
-\subsection{Random Forest}
+\subsection{Random Forest Classification}
 As an exploratory first step, we fitted our data to an Random Forest Classifier, with sklearn's default hyperparameters. Here are the results:
 
 \begin{table}[h]
@@ -486,12 +513,11 @@ In conclusion, this project not only reinforced the necessity of careful data pr
 \textbf{Simon:}
 I proposed that we work on a language classification task from voice data. I found the \textit{Common Language} dataset from \textit{Hugging Face}. During initial research, I also found tutorials for data analysis specifically on audio and voice data, with explanations of relevant features to extract.
 
-During the project, I kept the code base organized and helped my teammates with Git difficulties. Most of the code was initially written in an exploratory way in Jupiter notebooks, and I compiled the relevant sections into libraries and batch Python scripts that could give us reproducible results. That also means reviewing and fixing errors that we would just skip over during exploration. I would often help my teammates to debug code, or clarify difficult concepts and formulas. There is no part of the code base that I started or completed myself.
+During the project, I kept the code base organized and helped my teammates with Git difficulties. Most of the code was initially written in an exploratory way in Jupiter notebooks, both locally and in Google Colab, and I compiled the relevant sections into libraries and batch Python scripts that could give us reproducible results. That also means reviewing and fixing errors that we would just skip over during exploration. I would often help my teammates to debug code, or clarify difficult concepts and formulas. There is no part of the code base that I started or completed myself.
 
 For example, I debugged the cleaning and feature extraction stages as some of our cleaned voice clips ended up too short and caused exceptions from the library. I also solved the issue where random search would only find NaN scores. I ran many of our final training runs, fixed our train/test splitting logic including a leak of test data into the PCA step, and provided the optimal parameters.
 
-For the report, I wrote the section on Dimensional Reduction (PCA/MDS). I wrote descriptions for some of the Random Forest hyperparameters, and for result evaluation metrics. I wrote on our difficulties with MDS and the train/test split. I coded and printed the feature correlation matrix, and the classification confusion matrices.
+For the report, I wrote the section on Dimensional Reduction (PCA/MDS). I wrote descriptions for some of the Random Forest hyperparameters, and for result evaluation metrics. I wrote on our difficulties with MDS and the train/test splitting. I coded and printed the feature correlation matrix, and the classification confusion matrices.
 \end{flushend}
 
-\newpage
 \end{document}
