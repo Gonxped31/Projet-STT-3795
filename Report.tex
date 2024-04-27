@@ -19,6 +19,7 @@
 \usepackage{comment}
 \usepackage{multicol}
 \usepackage{svg}
+\usepackage{flushend}
 
 \hypersetup{
     colorlinks=true,
@@ -33,7 +34,8 @@
 \newcommand{\proofend}{\hfill $\square$}
 \newcommand{\deltach}{\hat{\delta}}
 
-\title{STT 3795: Report}
+\title{STT 3795: Final Project Report}
+
 \author{Bio Samir Gbian: 20250793}
 \author{Kamen Damov: 20102811}
 \author{Simon Langlois: 20247696}
@@ -42,6 +44,8 @@
 
 \begin{document}
 \maketitle
+
+\href{https://github.com/Gonxped31/Projet-STT-3795}{GitHub Code Repository}
 
 \section{Introduction}
 Language classification is a crucial task in many fields, from natural language technology to speech recognition and machine translation. The rise of big data and the diversity of languages spoken around the world have amplified the importance of having effective classification methods to process and analyze these data meaningfully.
@@ -162,22 +166,31 @@ In other hands, random forest is based on a set of decision trees which are robu
 
 
 \subsection{Dimensionality reduction}
-Before applying PCA (Principal Component Analysis) or MDS (Multi-Dimensional Scaling), we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our data. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study (see the correlation matrix in the result section) gave us pretty strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory.
+Before applying PCA (Principal Component Analysis) or MDS (Multi-Dimensional Scaling), we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our data. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study (see the correlation matrix in the result section) gave us pretty strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory (see 5.1 Rejected method).
 
-The PCA method searches for an orthogonal projection of the original data from a space of dimension D into a subspace of lower dimension $k < D$, that could stand as an approximation of the original dataset. We consider the optimal condition for the projection to minimize the mean squared error over the data.
+\subsubsection{Principal Component Analysis}
+The PCA method searches for an orthogonal projection of the original data from a space of dimension D into a subspace of lower dimension $k < D$, that could stand as an approximation of the original dataset. We consider the optimal projection as the one minimizing the mean squared error over the data,
 \begin{align*}
 \arg &\min \limits_{P : \mathbb{R}^{d \times d}} \left\{ \mathbb{E}_x \left[ ||\Vec{x}_i - P\Vec{x}_i||^2 \right] \right\} \\
-&t.q. \  P = P^2 = P^T; rank(P) = k
+&s.t. \  P = P^2 = P^T; rank(P) = k
 \end{align*}
-This projection matrix can be defined from an orthonormal basis, as $P = UU^T$, whose components maximise scaling by the covariance matrix of our training set.
+The error term can be seen as the residual of the projection, so it minimizes $||P^{\perp}\Vec{x}_i||^2$. This projection matrix can be defined from an orthonormal basis, as $P = UU^T$, whose components maximise their product with the covariance matrix of our training set.
 \begin{align*}
- \arg \max \limits_{U : \mathbb{R}^{k \times d}} &\left\{ \sum^k_{j=1}  \Vec{u}^T_j \mathbb{C}ov_x({\Vec{x_i}}) \Vec{u}_j \right\} t.q. U^TU = I
+ \arg \max \limits_{U : \mathbb{R}^{k \times d}} &\left\{ \sum^k_{j=1}  \Vec{u}^T_j \mathbb{C}ov_x({\Vec{x_i}}) \Vec{u}_j \right\} s.t. \ U^TU = I
 \end{align*}
-We found during class that this basis is made up of eigenvectors of the covariance matrix, $\Sigma\Vec{u}_j = \lambda_j \cdot \Vec{u}_j$. The k-dimensional projection is made from the k eigenvectors with largest eigenvalues, normalized.
+As we found during class, this basis is made up of eigenvectors of the covariance matrix, $\Sigma\Vec{u}_j = \lambda_j \cdot \Vec{u}_j$. The k-dimensional projection is built from the k eigenvectors (normalized) with largest eigenvalues.
 
-For the purpose of dimensionality reduction, we won't perform an orthogonal projection with this basis found by PCA. Instead, we will transform the coordinate basis of our data from our chosen feature space into the eigenspace of $\Sigma$, via $\Vec{y} = U^T\Vec{x}$. Once in that basis, we can keep the k dimensions identified above, cutting off the dimensions responsible for the least variance. 
+For the purpose of dimensionality reduction, we could just perform an orthogonal projection as optimized above. But the PCA process will also transform the coordinate basis from our chosen feature space into the eigenspace of $\Sigma = U \Lambda U^T$, via:
+$$\Vec{z} = U^TP\Vec{x} = U^TUU^T\Vec{x} = U^T\Vec{x}$$
+The vectors are now embedded in a lower dimensional space where the covariance matrix is diagonal, cutting off the original (eigen)dimensions responsible for the least variance. We can show that the vector norm is preserved by the change of basis, same as the simply projected vectors, $||U^T\Vec{x}||^2 = ||P\Vec{x}||^2$.
 
-After applying PCA, with a maintained variance of $95\%$, we keep $90$ features from the $161$ initial features. This means that the first $90$ principal components of the covariance matrix $\Sigma \in \mathbb{R}^{151 \times 151}$ , capture $95\%$ of the variance in the training set.
+The method described above, maximising variance in the data, is biased towards features that are numerically bigger, with results that could vary with the choice of units of measurement (e.g. meters vs kilometers) that should not be significant. To avoid this problem, we standardize the data. This means we center the data to $\Vec{0}$ mean, then scale each feature independently so that their variances $\sigma^2_k$ are all equal to 1. The net effect is that PCA will work on the correlation matrix of our original dataset, not the covariance matrix.
+$$\hat{x}_k = \frac{x_k - \mu_k}{\sigma_j}, \ \hat{\Sigma}_{i,j} = \frac{\Sigma_{i,j}}{\sigma_i \cdot \sigma_j} = \rho_{i,j} \in [-1, 1]$$
+While the elements of the covariance matrix in feature space are all standardized to 1, and the total variance is just the number of dimensions, the diagonalization computed by PCA will tease out a new basis where variances can differ, so asking for the $k$ largest directions still makes sense.
+
+After applying PCA on our dataset, with a target of maintaining $95\%$ of the variance, we keep $90$ features from the $161$ initial features. This means that the first $90$ principal components of the correlation matrix $\hat{\Sigma} \in \mathbb{R}^{161 \times 161}$ , capture $95\%$ of the variance in the (standardized) training set.
+
+There is also the possibility of "whitening" or "sphering" the embedded data, that is to standardize the output variances, before the classifier training step. In the end, we found it did not improve classification performance.
 
 \subsection{Support Vector Classifier}
 For this project, we use the library \textit{SVC} from \textit{sklearn} for multi-class classification. It trains an SVM one-vs-one classifier for each pair of classes, and then builds from them a one-vs-rest classifier for each class. The single class prediction is obtained from the most confident prediction of the one-vs-rest classifiers. 
@@ -215,7 +228,6 @@ Common choices for the kernel function \(K\) include:
 - Sigmoid: \(K(\mathbf{x}_i, \mathbf{x}_j) = \tanh(\gamma \mathbf{x}_i^T \mathbf{x}_j + r)\).
 \(\gamma\), \(r\), and \(d\) are parameters that can be tuned according to the specific data and problem requirements.  
 \end{comment}
-
 
 \subsection{Random Forest}
 For this project, we use the library \textit{RandomForestClassifier}(RFC) from \textit{sklearn}.
@@ -262,10 +274,13 @@ The performance of a Random Forest model is highly dependent on the settings of 
     \item \texttt{bootstrap}: Whether bootstrap samples are used when building trees. If False, the whole dataset is used to build each tree. Using the default bootstrapping adds randomness to the model, by training each tree on a random subset of the data, which helps in reducing model variance and avoiding overfitting.
     
 \end{itemize}
+
 \subsection{Hyperparameter Tuning}
 Hyperparamter tuning is a crucial step to finding the best model. As data our data is complex and highly dimensional, we will need to apply a hyperparameter tuning to find the best parameters of our models (SVC and RFC). We will use a Random Search algorithm to find the best hyperparameters (see Algorithm 2). A Grid Search would've been another alternative, which would exhaustively search for the best model in a given hyperparameter space.   
 
-\begin{algorithm}
+\newpage
+
+\begin{algorithm}[!h]
 \caption{Random Search with Cross-Validation}
 \begin{algorithmic}[1]
 \State Initialize dataset $D$
@@ -290,6 +305,8 @@ Hyperparamter tuning is a crucial step to finding the best model. As data our da
 \State Output the best hyperparameters
 \end{algorithmic}
 \end{algorithm}
+
+\newpage
 
 \section{Results}
 For the sake of consistency and reproducibility, we fixed the "random\_state" parameter of all training components: \\
@@ -371,7 +388,7 @@ In order to compare, and determine the best model, we need to set metrics which 
 \textbf{F1 Score:} This metric is (almost) the Jaccard similarity between the sets of positive classification and positive prediction. That would be the ratio of their intersection over their union. 
 $$\frac{P(Prediction=+ \land Class = +)}{P(Prediction=+ \lor Class = +)}$$
 But instead, F1 score is twice the intersection, divided by the union plus the intersection again.
-$$\frac{2 \times P(Predict =+ \land Class = +)}{P(Class = +) +  P(Predict=+)}$$
+$$\text{F1} = \frac{2 \times P(Predict =+ \land Class = +)}{P(Class = +) +  P(Predict=+)}$$
 It can be calculated as the harmonic mean of Precision and Recall:
 
 \(\displaystyle \text{F1} = \frac{2}{\frac{1}{\text{Precision}} + \frac{1}{\text{Recall}}} \displaystyle = 2 \times \frac{\text{Precision}\times\text{Recall}}{\text{Precision + Recall}} \). 
@@ -461,10 +478,20 @@ We can also see that SVC f1-score is 30\% higher than RFC. So globaly, based on 
 In conclusion, this project not only reinforced the necessity of careful data preprocessing and the strategic choice of model parameters but also illuminated how different algorithms can uniquely respond to changes in data structure. For future work, exploring additional ensemble techniques, and possibly integrating more advanced neural network architectures, could provide further enhancements in the field of language classification. The insights gained here lay a foundation for deeper exploration into automated language recognition, promising to elevate the tools available for global communication and information exchange.
 
 \section{Team Contributions}
+\begin{flushend}
 \textbf{Samir:} Has done all the project alone.
 
 \textbf{Kamen:} Nothing.
 
-\textbf{Simon:} Nothing.
+\textbf{Simon:}
+I proposed that we work on a language classification task from voice data. I found the \textit{Common Language} dataset from \textit{Hugging Face}. During initial research, I also found tutorials for data analysis specifically on audio and voice data, with explanations of relevant features to extract.
 
+During the project, I kept the code base organized and helped my teammates with Git difficulties. Most of the code was initially written in an exploratory way in Jupiter notebooks, and I compiled the relevant sections into libraries and batch Python scripts that could give us reproducible results. That also means reviewing and fixing errors that we would just skip over during exploration. I would often help my teammates to debug code, or clarify difficult concepts and formulas. There is no part of the code base that I started or completed myself.
+
+For example, I debugged the cleaning and feature extraction stages as some of our cleaned voice clips ended up too short and caused exceptions from the library. I also solved the issue where random search would only find NaN scores. I ran many of our final training runs, fixed our train/test splitting logic including a leak of test data into the PCA step, and provided the optimal parameters.
+
+For the report, I wrote the section on Dimensional Reduction (PCA/MDS). I wrote descriptions for some of the Random Forest hyperparameters, and for result evaluation metrics. I wrote on our difficulties with MDS and the train/test split. I coded and printed the feature correlation matrix, and the classification confusion matrices.
+\end{flushend}
+
+\newpage
 \end{document}
