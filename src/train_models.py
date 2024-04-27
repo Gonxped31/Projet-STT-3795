@@ -149,10 +149,11 @@ if __name__ == '__main__':
     # Model initialization
     print("Training...")
     if n_iter == 0 and type == "svc":
-        model = SVC(random_state=42)
+        model = SVC(C=10, gamma='auto', kernel='rbf', random_state=42)
         model.fit(X_train, Y_train)
     elif n_iter == 0 and type == "rfc":
-        model = RandomForestClassifier(verbose=3, random_state=42)
+        model = RandomForestClassifier(verbose=3, random_state=42, \
+                                        n_estimators= 200, min_samples_split= 5, min_samples_leaf= 4, max_features= 'sqrt', max_depth= None, criterion= 'gini')
         #nn = MLPClassifier(verbose=3)
         model.fit(X_train, Y_train)
     elif type == "svc":
