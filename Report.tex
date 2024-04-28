@@ -60,7 +60,6 @@ In this context, evaluating and comparing the performance of classification algo
 \label{2}
 The main objective of this project is to identify the strengths and weaknesses of each classification algorithm in the specific context of language classification. To achieve this, we will use representative datasets containing voice samples from different people (with varying genders and age groups) covering a variety of linguistic structures and features. We will assess the performance of each algorithm in terms of accuracy, precision, recall, and F1-score.
 
-
 \section{Description of Analyzed Data}
 \label{3}
 \subsection{Source}
@@ -184,11 +183,12 @@ Unsupervised algorithms suffer more from the curse of dimensionality than superv
 Additionally, Random Forest Classifiers are based on a set of decision trees which are robust against overfitting because each tree in the forest is bult from a random sample of features, reducing the variance of the set without substantially increasing the biais. Furthermore, the classification for Random Forests is more efficient in hight dimensionality compared to unsupervised algorithms because it randomly selects subsets of features at each split, which means it can manage high-dimensional data by focusing on the most informative features for making splits.
 
 
-\subsection{Dimensionality reduction}
+\subsection{Dimensionality Reduction}
 \label{4.2}
 Before applying PCA (Principal Component Analysis) or MDS (Multi-Dimensional Scaling), we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our data. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study (see the correlation matrix in the appendix) gave us strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory (see 5.1 Rejected method).
 
-\textbf{Principal Component Analysis}
+\textbf{\large Principal Component Analysis}
+
 The PCA method searches for an orthogonal projection of the original data from a space of dimension D into a subspace of lower dimension $k < D$, that could stand as an approximation of the original dataset. We consider the optimal projection as the one minimizing the mean squared error over the data,
 \begin{align*}
 \arg &\min \limits_{P : \mathbb{R}^{d \times d}} \left\{ \mathbb{E}_x \left[ ||\Vec{x}_i - P\Vec{x}_i||^2 \right] \right\} \\
@@ -257,7 +257,8 @@ By using Lagrange multipliers, we obtains the dual :\\
 After the optimisation is done, the output for the decision function for $X$ is :\(\displaystyle \sum_{i\in SV} y_i\alpha_i K(x_i, x) + b\)
 where $SV$, represent the support vectors (the points that lies within the margin).
 
-\textbf{Hyperparameters}
+\textbf{\large Hyperparameters}
+
 When tuning our model, we considered three hyperparameters to tune, the regularization parameter for the soft margin $\beta$, different types of kernels, and their scale coefficient. As mentionned previously, slack variables allow some points to be on the wrong side of the margin. We can intuitively see that if there is no constraint on the slack variables, the model will be too lenient, meaning that it will accept too many incorrect classifications. The $\beta$ regularization parameter will modulate the slackness of the margin. The higher the value of $\beta$, the slacker, and the more lenient, is the margin. \\
 For the kernels ($\gamma$ parameter that is included in the kernel definitions), we test a polynomial kernel, RBF kernel, and a linear kernel. The linear kernel, defined as $K(x, y) = x^T y$ where $x$ and $y$ are feature vectors, assumes that the boundaries between classes is a linear function in the $\R^n$ space. Knowing that our data is most likely non-linear given our correlation study, we didn't have much hope that this kernel would yield good results, but we still added it to our kernel set to compare to the other intuitively more promising kernels. The polynomial kernel defined as, $K(x, y) = (\gamma x^T y + r )^d$, where $\gamma$ is a scale factor that controls the influence of higher-order terms in the polynomial, $r$ is a constant, and $d$ is the degree of the polynomial. This kernel represents the similarity between vectors in a feature space over polynomials of the original data. The RBF kernel, defined as $K(x, y) = exp(\gamma \| x - y \|^2)$, with $\gamma$ defines how much influence a single training example has on the fitting of the model. The larger $\gamma$ is, the closer data points must be to affect the model significantly, and thus, preventing from overfitting. The RBF kernel maps samples into a higher dimensional space using the square of the Euclidean distance between them, and thus it is very effective in cases where the decision boundary is highly irregular and cannot be approximated by a simple hyperplane. \\
 Having briefly defined the $\gamma$ parameter, let's delve into more detail into how it affects the polynomial and RBF kernels respectively. The $\gamma$ parameter plays a critical role in defining the behavior of both the polynomial and RBF kernels, each in a distinct manner, tailored to their specific mathematical formulations.
