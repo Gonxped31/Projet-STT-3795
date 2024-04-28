@@ -24,7 +24,8 @@
 
 \hypersetup{
     colorlinks=true,
-    urlcolor=blue
+    urlcolor=blue,
+    linkcolor=black
 }
 
 \newcommand{\C}{\mathbb{C}}
@@ -37,11 +38,11 @@
 
 \title{STT 3795: Final Project Report}
 
-\author{Bio Samir Gbian: 20250793}
-\author{Kamen Damov: 20102811}
-\author{Simon Langlois: 20247696}
+\author[1]{Bio Samir Gbian}
+\author[1]{Kamen Damov}
+\author[1]{Simon Langlois}
 \affil{Department of Mathematics and Statistics}
-\affil{University of Montreal}
+\affil[1]{University of Montreal}
 
 \begin{document}
 \maketitle
@@ -49,20 +50,26 @@
 \href{https://github.com/Gonxped31/Projet-STT-3795}{GitHub Code Repository}
 
 \section{Introduction}
+\label{1}
 Language classification is a crucial task in many fields, from natural language technology to speech recognition and machine translation. The rise of big data and the diversity of languages spoken around the world have amplified the importance of having effective classification methods to process and analyze these data meaningfully.
 
 In this context, evaluating and comparing the performance of classification algorithms is essential to identify the most suitable approaches for this complex task. This project aims to examine and compare the quality of some of the most commonly used classification algorithms in language classification. In particular, we focus on evaluating the performance of Support Vector Machines (SVM) and Random Forests.
 
+
 \section{Objectives}
+\label{2}
 The main objective of this project is to identify the strengths and weaknesses of each classification algorithm in the specific context of language classification. To achieve this, we will use representative datasets containing voice samples from different people, covering a variety of linguistic structures and features. We will assess the performance of each algorithm in terms of accuracy, recall, F-measure, \textbf{and other quality metrics of classification}.
 
-\newpage
+
 \section{Description of Analyzed Data}
+\label{3}
 \subsection{Source}
+\label{3.1}
 The data used in the project comes from the \textit{Hugging Face} website. It is a reliable internet site for hosting datasets as well as sharing pre-trained AI models. This allows us to have a reference to compare our model to, which is one of the main reasons why this dataset was chosen.
 The dataset, named \textit{Common Language}, contains several audio files in WAV format (specifically 34045 files). These files are separated into three types: training, testing, and validation. Each audio represents a person of a certain gender (Male/Female) quoting a phrase or repeating words in a language. Forty-five different languages are spoken in these audios (See source in reference for more details on all the languages spoken).
 
 \subsection{Data Cleaning}
+\label{3.2}
 The initial raw data attributes are: Client id, Path (Link to the audio file), Age (Speaker's age), Gender(Speaker's gender) and the language spoken in the audio.\\
 
 Given that our project was solely focused on the classification of the spoken languages, We removed all the columns except the paths to the \text{Language} (our target label), and \text{Path} (the paths to the raw wav files containing the spoken languages). After listening to some audio files and plotting the spectral representation of the audio, we realized that most wav files had a few seconds of silence or some background sounds that weren't spoken language. In order to have data that is exclusively spoken language sound waves on which our classification models would be trained on, we have to remove the non-spoken language sounds (see Algorithm 1).  
@@ -104,39 +111,45 @@ As we can see in Figure 1 and Figure 2, only relevant data has been kept, as the
 \end{figure}
 
 \subsection{Statistics}
+\label{3.3}
 Before preprocessing our audio data into features for model training, we need to verify that the data is well-balanced across various attributes, such as label distribution, category balance, and uniformity in audio lengths. We looked at three statistics on the data: the number of audio files by language (Figure 3 (a)), the average length of audios by language (Figure 3 (b)), and the total length of audios by language (Figure 3 (c)). 
-\begin{figure}[h]
+
+\begin{figure}[!h]
     \centering
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includesvg[width=1 \textwidth]{images/mean_audio_file.svg}
-        \caption{Figure 1}
+        \includesvg[width=1 \textwidth]{images/mean_audio_length.svg}
+        \caption{Figure 1: Audios mean}
         \label{fig:image1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includesvg[width=1\linewidth]{images/pre_cleaning.png}
-        \caption{Figure 2}
+        \includesvg[width=1\linewidth]{images/num_of_audio.svg}
+        \caption{Figure 2: Audios count}
         \label{fig:image2}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includesvg[width=1\linewidth]{images/pre_cleaning.png}
-        \caption{Figure 3}
+        \includesvg[width=1\linewidth]{images/sum_of_audio.svg}
+        \caption{Figure 3: Sum of audio length}
         \label{fig:image3}
     \end{subfigure}
     \caption{Three aligned images with individual captions}
     \label{fig:three_images}
-\end{figure}\\
+\end{figure}
+
+\newpage
 By looking at the count, some languages are overrepresented in our data, which is not ideal because it can lead to a model that is biased towards these languages, potentially reducing its performance on underrepresented languages. Furthermore, we can see that the average length of the samples for each are very heterogeneous, ranging from 2 seconds to 5 seconds. This would need to be kept in mind when producing the features from the soundwaves, so the windows properly capture lengths of each file. That being said, by looking at the total length of audios, which is the sum of seconds spoken for each language, we see that the difference between languages is slightly smaller. Overall, we see some unbalancing in our labels. Knowing this, we will need to stratify the dataset when doing the train/test splits so that each language is proportionately represented in the train and test sets, ensuring a more balanced and accurate evaluation of the model's capabilities across all languages.
 
+
 \subsection{Data Preprocessing}
+\label{3.4}
 For the preprocessing of audio data, we use different features which are presented below. These features were picked to produce a holistic representation of spoken languages, covering a wide range of language features. Given that 
 
 \textbf{MFCCs}:
-The Mel Frequency Cepstral Coefficients (MFCCs) are criticals in the sense that it allows capturing the different aspects that are unique to each spoken language. It is much easier to differentiate languages by using MFCCs. In our case, we decomposed our audio data using $512$ samples from each audio file. With a sample rate of $16000$ we get windows of length $0.032$ milliseconds. Furthermore, we set the number of MFCCs to be $25$, as recommended for spoken language. We yield, for each data point, a matrix $M \in \R^{25 \times n}$, where $n$ is the number of windows. We then compute a vector $V \in \R^{25}$ from $M$, where each element is this mean of an MFCC. These $25$ features are added to the final attribute matrix. 
+The Mel Frequency Cepstral Coefficients (MFCCs) are criticals in the sense that it allows capturing the different aspects that are unique to each spoken language. It is much easier to differentiate languages by using MFCCs. To obtain the MFCCs, we first found the spectrum of power as a function of our audio file's frequencies from a Fast Fourier Transformation (FFT). Then, it was necessary to find the Mel Filter Banks (MFB) of the spectrum from which we obtain the frequency energies (weighted energy) passing through each filter of the bank. A logarithmic function will be applied to these energies. Finally, by applying a Discrete Cosine Transformation on the log-transformed energies, we obtain the MFCCs. In our case, we decomposed our audio data using $512$ samples from each audio file. With a sample rate of $16000$ we get windows of length $0.032$ milliseconds. Furthermore, we set the number of MFCCs to be $25$, as recommended for spoken language. We yield, for each data point, a matrix $M \in \R^{25 \times n}$, where $n$ is the number of windows. We then compute a vector $V \in \R^{25}$ from $M$, where each element is this mean of an MFCC. These $25$ features are added to the final attribute matrix. 
 %To obtain the MFCCs, we first found the spectrum of power as a function of our audio file's frequencies from a Fast Fourier Transformation (FFT). Then, it was necessary to find the Mel Filter Banks (MFB) of the spectrum from which we obtain the frequency energies (weighted energy) passing through each filter of the bank. A logarithmic function will be applied to these energies. Finally, by applying a Discrete Cosine Transformation on the log-transformed energies, we obtain the MFCCs.\\
 
 \textbf{Spectral Centroid}: The spectral centroid indicates the center of mass of the sound's spectrum, providing a way to characterize the brightness of a sound. It is calculated as the weighted mean of the frequencies present in the signal, with their magnitudes as the weights. We yield a vector $V \in \R^{n}$ where $n$ is the number of windows. To have a standardized format to add in our attribute matrix, we compute mean, median, standard deviation, $25th$ percentile, $75th$ percentile, maximum value, and minimum value, from $V$ for each data point. This transformation is applied to all the spectral features (spectral rolloff and spectral bandwidth). 
@@ -158,19 +171,22 @@ A formant is a characteristic component of the quality of a speech sound, partic
 \textbf{Harmonics to Noise Ratio (HNR)}:
 Harmonics to noise quantifies the amount of harmonic sound (periodic vibrations) relative to the amount of noise (non-periodic components) in a voice signal. A higher HNR generally indicates a clearer and more harmonic sound, which is often associated with a healthier and more typical voice production. In our case, we compute the HNR mean (represented in decibels) from all the audio clips, using the \textit{parselmouth}. This value is then added to the attribute matrix. 
 
-\newpage
 \section{Methodology}
+\label{4}
 \subsection{Why supervised Learning ?}
+\label{4.1}
 Supervised learning algorithms (SVM and Random forest) are used in this project because unlike unsupervised learning algorithms, they learn the specific characteristics of each language’s phonetic, intonational, and rhythmic properties, leading to highly accurate classification once the model is well-tuned. Unsupervised methods like clustering algorithms (DBscan, K-means or hierarchical clustering) identify groups based on feature similarity but do not inherently know what these groups represent (which language each group corresponds to) which can lead to an ambiguity in cluster interpretation.
 
 Unsupervised algorithms suffer more from the curse of dimensionality than supervised models. In fact, SVMs are more effective even in hight dimension due to the fact that they primarily care about the points closest to the decision boundary (support vectors) rather than the dimensionality of the space. Furthermore, the maximization of the distance between the support vectors and the boundary ensures that the model focuses on the most informative features for classification. This property allows SVM to be less prone to overfitting, a common issue in high-dimensional spaces. Due to the kernel trick, SVMs can also handle non linear decisions which allows them to operate in higher dimensions without directly computing the coordinates in that space unlike DBscan or k-means for example (more description about SVM on the section \textbf{4.3}).
 
 In other hands, random forest is based on a set of decision trees which are robust against overfitting because each tree in the forest is bult from a random sample of features, reducing the variance of the set without substantially increase the biais. Furthermore, the classification for random forest is more efficient in hight dimensionality compared to unsupervised algorithms because it randomly selects subsets of features at each split, which means it can manage high-dimensional data by focusing on the most informative features for making splits.
 
+
 \subsection{Dimensionality reduction}
+\label{4.2}
 Before applying PCA (Principal Component Analysis) or MDS (Multi-Dimensional Scaling), we wanted to see the relationship between features i.e. how strongly they are correlated. This correlation study would guide us in the dimensionality reduction algorithm we choose to apply to our data. If some features are strongly correlated, PCA would be pertinent to be applied, as some features are linearly related. Even though our correlation study (see the correlation matrix in the result section) gave us pretty strong evidence of non-linear relationship between our features (meaning that MDS might be a better suit for our dataset), we opted to reduce dimensionality using PCA due to insufficient computing and memory (see 5.1 Rejected method).
 
-\subsubsection{Principal Component Analysis}
+\textbf{Principal Component Analysis}
 The PCA method searches for an orthogonal projection of the original data from a space of dimension D into a subspace of lower dimension $k < D$, that could stand as an approximation of the original dataset. We consider the optimal projection as the one minimizing the mean squared error over the data,
 \begin{align*}
 \arg &\min \limits_{P : \mathbb{R}^{d \times d}} \left\{ \mathbb{E}_x \left[ ||\Vec{x}_i - P\Vec{x}_i||^2 \right] \right\} \\
@@ -215,11 +231,14 @@ While the elements of the covariance matrix in feature space are all standardize
 
 After applying PCA on our dataset, with a target of maintaining $95\%$ of the variance, we keep $90$ features from the $161$ initial features. This means that the first $90$ principal components of the correlation matrix $\hat{\Sigma} \in \mathbb{R}^{161 \times 161}$ , capture $95\%$ of the variance in the (standardized) training set.
 
+
 \subsection{Support Vector Classifier}
+\label{4.3}
 For this project, we use the library \textit{SVC} from \textit{sklearn} for multi-class classification. It trains an SVM one-vs-one classifier for each pair of classes, and then builds from them a one-vs-rest classifier for each class. The single class prediction is obtained from the most confident prediction of the one-vs-rest classifiers. 
 
-This library use a non-linear SVM with a soft margin. Non-linear SVM with a soft margin is particularly useful when dealing with data that cannot be linearly separated in the original feature space (which is the case in our situation). The inclusion of slack variables, \(\xi_i\), allows some data points to be on the incorrect side of the margin, providing a balance between the complexity of the model and its error minimization.\\
+This library use a non-linear SVM with a soft margin. Non-linear SVM with a soft margin is particularly useful when dealing with data that cannot be linearly separated in the original feature space (which is the case in our situation). The inclusion of slack variables, \(\xi_i\), allows some data points to be on the incorrect side of the margin, providing a balance between the complexity of the model and its error minimization.
 
+\vspace{10mm}
 \textbf{Mathematical formulation}
 
 For a dataset $X \in \R^{n \times p}$ and a vector $y \in \{-1, 1\}^n$, the objective is to find $w$ such that the values returned by the functions $f(X) = sign(w^T\phi(x) + b)$ are correct for most samples.\\
@@ -228,11 +247,35 @@ For a dataset $X \in \R^{n \times p}$ and a vector $y \in \{-1, 1\}^n$, the obje
 \) 
 subject to:\\
 \( y_i (w^T \phi(x_i) + b) \geq 1 - \xi_i\), \(\xi_i \geq 0, \quad \forall i\).
-By using Lagrange multipliers, we obtains the dual :\(\displaystyle \min_{\alpha} \frac{1}{2} \alpha^T Q \alpha - \mathbf{1}^T \alpha
-\) subject to: \(y^T \alpha = 0\), \(0 \leq \alpha_i \leq \beta, i=1,...,n\) with $Q$ an $n$ by $n$ positive semidefinite matrix, $Q_{ij} \equiv y_iy_jK(x_i, x_j)$, where $K(x_i, x_j) = \phi(x_i)^T\phi(x_j)$ is the kernel. 
+By using Lagrange multipliers, we obtains the dual :\\
+\(\displaystyle \min_{\alpha} \frac{1}{2} \alpha^T Q \alpha - \mathbf{1}^T \alpha
+\) subject to:\\
+\(y^T \alpha = 0\), \(0 \leq \alpha_i \leq \beta, i=1,...,n\) with $Q$ an $n$ by $n$ positive semidefinite matrix, $Q_{ij} \equiv y_iy_jK(x_i, x_j)$, where $K(x_i, x_j) = \phi(x_i)^T\phi(x_j)$ is the kernel. 
 
 After the optimisation is done, the output for the decision function for $X$ is :\(\displaystyle \sum_{i\in SV} y_i\alpha_i K(x_i, x) + b\)
 where $SV$, represent the support vectors (the points that lies within the margin).
+
+\begin{algorithm}
+\caption{SVC with non-linear SVM (Soft Margin) with Kernel}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Training data $X$, labels $y$ where $y \in \{-1, +1\}$, regularization parameter $\beta$
+\State \textbf{Output:} Support vectors $X_{SV}$, coefficients $\alpha$, bias $b$\\
+
+\Procedure{SVMTrain}{$X, y, \beta$}
+    \State Choose a kernel function $K$ (e.g., RBF)
+    \State Formulate the dual optimization problem
+    \State Use quadratic programming to solve for $\alpha$
+    \State Compute $b$ using support vectors 
+    \State (where $0 < \alpha_i < \beta$)
+    \State \Return $X_{SV}$, $\alpha$, $b$
+\EndProcedure\\
+
+\Function{SVMPredict}{$X, X_{SV}, \alpha, b, K$}
+    \State Compute: $f(x) = \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b$
+    \State \Return $\text{sign}(f(x))$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
 \textbf{Hyperparameters}\\
 When tuning our model, we considered three hyperparameters to tune, the regularization parameter for the soft margin $\beta$, different types of kernels, and their scale coefficient. As mentionned previously, slack variables allow some points to be on the wrong side of the margin. We can intuitively see that if there is no constraint on the slack variables, the model will be too lenient, meaning that it will accept too many incorrect classifications. The $\beta$ regularization parameter will modulate the slackness of the margin. The higher the value of $\beta$, the slacker, and the more lenient, is the margin. \\
@@ -253,19 +296,58 @@ Common choices for the kernel function \(K\) include:
 \end{comment}
 
 \subsection{Random Forest}
+\label{4.4}
 For this project, we use the library \textit{RandomForestClassifier} (RFC) from \textit{sklearn}.
 Random Forest is an ensemble learning technique that builds multiple decision trees and merges them together to get a more accurate and stable prediction. The algorithm combines the output of multiple (often hundreds) randomly created decision trees, a method known as \textit{bootstrap aggregating}, or \textit{bagging}. Each tree in the forest is built from a sample drawn with replacement (i.e., a bootstrap sample) from the training set.
 
+\begin{algorithm}
+\caption{Random Forest Algorithm}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Data set $D$, Number of trees $N$
+\State \textbf{Output:} A Random Forest $F$\\
+
+\Procedure{RandomForest}{$D, N$}
+    \State Initialize forest $F$ as an empty list
+    \For{$i = 1$ to $N$}
+        \State $D_i \gets$ BootstrapSample($D$) (sample data)
+        \State $Tree \gets$ BuildTree($D_i$)
+        \State Add $Tree$ to $F$
+    \EndFor
+    \State \Return $F$
+\EndProcedure\\
+
+\Function{BuildTree}{$D$}
+    \If{Base case condition}
+        \State \Return leaf node
+    \EndIf
+    \State $Feature, Threshold \gets$ BestSplit($D$)
+    \State Split $D$ into $D_{left}$ and $D_{right}$ based
+    \State on $features$ and $threshold$
+    \State $Node.left \gets$ \Call{BuildTree}{$D_{left}$}
+    \State $Node.right \gets$ \Call{BuildTree}{$D_{right}$}
+    \State \Return $Node$
+\EndFunction\\
+
+\Function{BestSplit}{$D$}
+    \State Choose a feature and threshold
+    \State that best splits the data $D$
+    \State \Return $Feature, Threshold$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\vspace{5mm}
 \textbf{\large Mathematical Description}
 
 Let \( \mathcal{D} = \{(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)\} \) be a dataset containing \( n \) samples, where each sample consists of a feature vector \( X_i \) and a corresponding label \( Y_i \). Random Forest creates a multitude of decision trees using the following steps:
 
+\begin{comment}
 \begin{enumerate}
     \item For each tree, a random sample of \( m \) features is selected from the total \( p \) features.
     \item Each tree is grown to the fullest extent possible and no pruning is performed.
     \item The output of the Random Forest is given by the mode of the classifications (for classification tasks) or the mean prediction (for regression tasks) of the individual trees.
 \end{enumerate}
-
+\end{comment}
 Mathematically, the prediction of a Random Forest classifier can be expressed as:
 
 \begin{equation}
@@ -298,10 +380,10 @@ The performance of a Random Forest model is highly dependent on the settings of 
     
 \end{itemize}
 
-\subsection{Hyperparameter Tuning}
-Hyperparamter tuning is a crucial step to finding the best model. As data our data is complex and highly dimensional, we will need to apply a hyperparameter tuning to find the best parameters of our models (SVC and RFC). We will use a Random Search algorithm to find the best hyperparameters (see Algorithm 2). A Grid Search would've been another alternative, which would exhaustively search for the best model in a given hyperparameter space.   
 
-\newpage
+\subsection{Hyperparameter Tuning}
+\label{4.5}
+Hyperparamter tuning is a crucial step to finding the best model. As data our data is complex and highly dimensional, we will need to apply a hyperparameter tuning to find the best parameters of our models (SVC and RFC). We will use a Random Search algorithm to find the best hyperparameters (see Algorithm 2). A Grid Search would've been another alternative, which would exhaustively search for the best model in a given hyperparameter space.
 
 \begin{algorithm}
 \caption{Random Search with Cross-Validation}
@@ -329,9 +411,8 @@ Hyperparamter tuning is a crucial step to finding the best model. As data our da
 \end{algorithmic}
 \end{algorithm}
 
-\newpage
-
 \section{Results}
+\label{5}
 For the sake of consistency and reproducibility, we fixed the "random\_state" parameter of all training components: \\
 - The data splitter deciding which vectors are part of the overall training vs test set. \\
 - The dimension reduction operators PCA and MDS. \\
@@ -339,11 +420,12 @@ For the sake of consistency and reproducibility, we fixed the "random\_state" pa
 - The hyper-parameter optimizer RandomizedSearchCV.
 
 \subsection{Rejected methods}
+\label{5.1}
 In this section, we talk about the methods that we tried but didn't work.
 
-The \textit{Common Language} dataset we are using came pre-separated into a 'train', 'test' and 'validation' set. Initial training runs with this split gave very poor results ($\approx$ 2x worse), compared to random selections from the whole dataset. So, we decided to use \textit{sklearn}'s stratified splitter on the entire dataset, ignoring the pre-defined split. Stratification ensures that the chosen subsets contain the same proportions of each class label.
+First, the \textit{Common Language} dataset we are using came pre-separated into a 'train', 'test' and 'validation' set. Initial training runs with this split gave very poor results ($\approx$ 2x worse), compared to random selections from the whole dataset. So, we decided to use \textit{sklearn}'s stratified splitter on the entire dataset, ignoring the pre-defined split. Stratification ensures that the chosen subsets contain the same proportions of each class label.
 
-Based on the correlation matrix in the appendix, we can see that our data are not well correlated. So, it is more relevant to use MDS instead of PCA but MDS demand more computational resources. We tried to reduce the dimensionality with MDS, both with euclidian or malahanobis distance, but our Python environments crashed due to insufficient memory. Maybe the number of data points was too high at $\sim22$k. This happened also on the cloud Colab environment. 
+Secondly, based on the correlation matrix in the appendix, we can see that our data are not well correlated. So, it is more relevant to use MDS instead of PCA but MDS demand more computational resources. We tried to reduce the dimensionality with MDS, both with euclidian or malahanobis distance, but our Python environments crashed due to insufficient memory. Maybe the number of data points was too high at $\sim22$k. This happened also on the cloud Colab environment. 
 In fact, MDS involves computing the distances between all pairs of points in the dataset and then optimizing the configuration of points in the new space to reflect these distances as closely as possible.
 
 There is also the possibility of "whitening" or "sphering" the embedded data from PCA, that is to standardize the output variances, before the classifier training step. In the end, we found it did not improve classification performance.
@@ -363,7 +445,7 @@ There is also the possibility of "whitening" or "sphering" the embedded data fro
     \caption{With the \textit{Hugging Face} data split}
 \end{table}
 
-In the initial datasets, we have 45 labels. Some languages in the labels are very similar so we reduced the number of labels by grouping them based on the region in which they are spoken. We used GPT-4 to find new labels. Here is the promp we used : \texttt{We have a set of labels for a classification task based on speech and want to relable them based on similarity and geographic location. Output 10 new labels.}
+Finaly, in the initial datasets, we have 45 labels. Some languages in the labels are very similar so we reduced the number of labels by grouping them based on the region in which they are spoken. We used GPT-4 to find new labels. Here is the promp we used : \texttt{We have a set of labels for a classification task based on speech and want to relable them based on similarity and geographic location. Output 10 new labels.}
 
 Here is the comparaison of the results after running the models (with the best hyperparameters) with 45 labels vs 10 labels:
 \begin{table}[h]
@@ -394,9 +476,10 @@ Here is the comparaison of the results after running the models (with the best h
     \caption{With 10 labels}
 \end{table}
 
-Given that the data has less labels (is less complex), the models learn better which explain why the metrics increased. There is less room for misclassification.
+Given that the data has less labels (is less complex), there is less room for misclassification for the models which explain why the metrics are higher. We decided to keep the inital labels do to the fact that a model trained with the initial labels might be better for classifying languages than a model trained based on the region in which the languages are spoken because the first model will be trained with more precise labels.
 
 \subsection{Metrics}
+\label{5.2}
 In order to compare, and determine the best model, we need to set metrics which will guide us to our decision. We will use four metrics, accuracy, F1 scores, precision and recall. These metrics are defined in terms of hte number of sample and the four categories. True/False means that the classifier is right or wrong and Positive/Negative means that the classifier predicts that the sample is in the class +/- resp. So a \textit{True Positive} represent the fact that the classifier predicts that a sample is in the + class and he is right. A \textit{False Positive} represent the fact that the classifier predicts that a sample is in the + class but he is wrong. And the same logic goes for \textit{True Negative}  and \textit{False Negative}.
 
 \textbf{Accuracy:} The accuracy of a classifier is the ratio between the number of True positives and the total number of predictions ($P(Class == Prediction)$): 
@@ -420,7 +503,10 @@ It can be calculated as the harmonic mean of Precision and Recall:
 
 \(\displaystyle \text{F1} = \frac{2}{\frac{1}{\text{Precision}} + \frac{1}{\text{Recall}}} \displaystyle = 2 \times \frac{\text{Precision}\times\text{Recall}}{\text{Precision + Recall}} \). 
 
+
+\newpage
 \subsection{Support Vector Classification}
+\label{5.3}
 After cleaning our data and training the models with no hyperparameters tuning, we get those results:
 
 \begin{table}[h]
@@ -459,6 +545,7 @@ Then, applying random search (Algorithm 2) gives us those parameters : \texttt{C
 \end{table}
 
 \subsection{Random Forest Classification}
+\label{5.4}
 As an exploratory first step, we fitted our data to an Random Forest Classifier, with sklearn's default hyperparameters. Here are the results:
 
 \begin{table}[h]
@@ -493,7 +580,10 @@ We applied a Random Search algorithm (Algorithm 2) to find the best hyperparamte
 
 In both SVC and RFC, we see an improvement in all of our metrics after running the Random Search. This suggests that by exhaustively exploring the hyperparamter space, we could potentially find an even better model (even though the performance gain is marginal).  
 
+
+
 \section{Conclusion}
+\label{6}
 This project embarked on the challenge of comparing the efficacy of two widely used machine learning algorithms, Support Vector Machines (SVC) and Random Forests (RFC), in the domain of language classification based on speech. Through extensive data preprocessing, model training, and hyperparameter optimization, several key insights were unearthed.
 
 Firstly, the reduction of labels from 45 to 10, intended to simplify the classification problem, yielded expected results. Both SVC and RFC metrics increased do to the reduce of the complexity of the label set. So, both algorithm demonstrated robustness by improving accuracy when the problem space was reduced, underscoring its adaptability to variations in data complexity.
@@ -504,11 +594,16 @@ We can also see that SVC f1-score is 30\% higher than RFC. So globaly, based on 
 
 In conclusion, this project not only reinforced the necessity of careful data preprocessing and the strategic choice of model parameters but also illuminated how different algorithms can uniquely respond to changes in data structure. For future work, exploring additional ensemble techniques, and possibly integrating more advanced neural network architectures, could provide further enhancements in the field of language classification. The insights gained here lay a foundation for deeper exploration into automated language recognition, promising to elevate the tools available for global communication and information exchange.
 
-\section{Team Contributions}
-\begin{flushend}
-\textbf{Samir:} Has done all the project alone.
 
-\textbf{Kamen:} Nothing.
+
+\section{Team Contributions}
+\label{7}
+
+\textbf{Samir:} During the project, i coded the Fast Fourier tranform for audio visualisation that helped us see the form (wave form) of the audios. I made the exploration of the data to see the global shape and the statistics of the data (mean, sum and count). I coded the preprocessing of our data to get all the features we needed. I also wrote the code to reduce the demensionality (PCA), train the models and get the resukt metrics for each trained model.
+
+For the report, i wrote the introduction (\hyperref[1]{\textit{section 1}}), objectives of the project (\hyperref[2]{\textit{section 2}}). I also described where we found our data (\hyperref[3.1]{\textit{section 3.1}}). I helped Kamen on the explanation of each preprocessing features we used (\hyperref[3.4]{\textit{section 3.4}}). I wrote the \hyperref[4.1]{\textit{section 4.1}} about why we used supervised learning instead of unsupervised learning. I described the maths behind SVC at the section \hyperref[4.3]{\textit{section 4.3}}. I contributed on the writing of the \hyperref[4.4]{\textit{section 4.4}}. I explained why we kept the initial labels in the dataset in the \hyperref[5.1]{\textit{section 5.1}}, described the metrics (\hyperref[5.2]{\textit{section 5.2}}), explained the results for the SVC (\hyperref[5.3]{\textit{section 5.3}}) and wrote the conclusion (\hyperref[6]{\textit{section 6}}).
+
+\textbf{Kamen:} \textbf{TODO !!}
 
 \textbf{Simon:}
 I proposed that we work on a language classification task from voice data. I found the \textit{Common Language} dataset from \textit{Hugging Face}. During initial research, I also found tutorials for data analysis specifically on audio and voice data, with explanations of relevant features to extract.
@@ -517,7 +612,7 @@ During the project, I kept the code base organized and helped my teammates with 
 
 For example, I debugged the cleaning and feature extraction stages as some of our cleaned voice clips ended up too short and caused exceptions from the library. I also solved the issue where random search would only find NaN scores. I fixed our train/test splitting logic, and a leak of test data into the PCA step. I ran many of our final training runs and provided the optimal parameters.
 
-For the report, I wrote the section on Dimensional Reduction (PCA/MDS). I wrote descriptions for some of the Random Forest hyperparameters, and for result evaluation metrics. I wrote on our difficulties with MDS and the train/test splitting. I coded and printed the feature correlation matrix, and the classification confusion matrices.
-\end{flushend}
+For the report, I wrote the \hyperref[4.2]{\textit{section 4.2}} on Dimensional Reduction (PCA/MDS). I wrote descriptions for some of the Random Forest hyperparameters, and for result evaluation metrics. I wrote on our difficulties with MDS and the train/test splitting. I coded and printed the feature correlation matrix, and the classification confusion matrices.
+
 
 \end{document}
