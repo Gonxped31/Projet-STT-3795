@@ -75,6 +75,7 @@ The initial raw data attributes are: Client id, Path (Link to the audio file), A
 Given that our project was solely focused on the classification of the spoken languages, We removed all the columns except the paths to the \text{Language} (our target label), and \text{Path} (the paths to the raw wav files containing the spoken languages). After listening to some audio files and plotting the spectral representation, we realized that most wav files had a few seconds of silence or some background sounds that weren't spoken language. In order to have data that is exclusively spoken language sound waves, and have higher quality data to feed to our classification models, we have to remove the non-spoken language sounds (see Algorithm 1).
 \begin{algorithm}
 \caption{Audio Cleaning Process}
+\label{algo1}
 \begin{algorithmic}[1]
 \State Initialize paths for raw and cleaned audio files
 \State Prepare empty list for errors
@@ -170,7 +171,7 @@ A formant is a characteristic component of the quality of a speech sound, partic
 \textbf{Harmonics to Noise Ratio (HNR)}:
 Harmonics to noise quantifies the amount of harmonic sound (periodic vibrations) relative to the amount of noise (non-periodic components) in a voice signal. A higher HNR generally indicates a clearer and more harmonic sound, which is often associated with a healthier and more typical voice production. In our case, we compute the HNR mean (represented in decibels) from all the audio clips, using the \textit{parselmouth}. This value is then added to the attribute matrix. 
 
-We have now produced an attribute matrix consisting of features that are correctly formatted for use in machine learning models.
+The result of the feature preprocessing is an attributes matrix, $A\in\R^{34045 \times 161}$, consisting of features that are correctly formatted for use in machine learning models. 
 
 \section{Methodology}
 \label{4}
@@ -209,6 +210,7 @@ While the elements of the covariance matrix in feature space are all standardize
 
 \begin{algorithm}
 \caption{Dimensionality Reduction with PCA}
+\label{algo2}
 \begin{algorithmic}[1]
 \State Initialize dataset $X \in \mathbb{R}^{N \times D}$
 \State Compute all feature means $\Vec{\mu}$ and variances $\Vec{\sigma}^2$
@@ -222,7 +224,7 @@ While the elements of the covariance matrix in feature space are all standardize
 \State $svd(\Sigma) = U \cdot \Lambda \cdot U^T$
 \Statex Keep the largest components of the basis:
 \State $\hat{u}_{1 \dots k} = \arg^k \max \left\{ \Vec{u}_t^T \Lambda \Vec{u}_t \right\} \in \mathbb{R}^{k \times D}$
-\Statex Embed data vectors into the $\hat{U}$ subspace:
+\Statex Transform data vectors into $\hat{U}$ coordinates:
 \For{each data vector $\Vec{z}_{i}$ in $Z$}
     \State $\Vec{y}_i \gets \hat{U}^T \Vec{z}_i \in \mathbb{R}^k$
 \EndFor
@@ -239,7 +241,6 @@ For this project, we use the library \textit{SVC} from \textit{sklearn} for mult
 
 This library use a non-linear SVM with a soft margin. Non-linear SVM with a soft margin is particularly useful when dealing with data that cannot be linearly separated in the original feature space (which is the case in our situation). The inclusion of slack variables, \(\xi_i\), allows some data points to be on the incorrect side of the margin, providing a balance between the complexity of the model and its error minimization.
 
-\newpage
 \textbf{Mathematical formulation}
 
 For a dataset $X \in \R^{n \times p}$ and a vector $y \in \{-1, 1\}^n$, the objective is to find $w$ such that the values returned by the functions $f(X) = sign(w^T\phi(x) + b)$ are correct for most samples.\\
@@ -255,8 +256,19 @@ By using Lagrange multipliers, we obtains the dual :\\
 
 After the optimisation is done, the output for the decision function for $X$ is :\(\displaystyle \sum_{i\in SV} y_i\alpha_i K(x_i, x) + b\)
 where $SV$, represent the support vectors (the points that lies within the margin).
+
+\textbf{Hyperparameters}
+When tuning our model, we considered three hyperparameters to tune, the regularization parameter for the soft margin $\beta$, different types of kernels, and their scale coefficient. As mentionned previously, slack variables allow some points to be on the wrong side of the margin. We can intuitively see that if there is no constraint on the slack variables, the model will be too lenient, meaning that it will accept too many incorrect classifications. The $\beta$ regularization parameter will modulate the slackness of the margin. The higher the value of $\beta$, the slacker, and the more lenient, is the margin. \\
+For the kernels ($\gamma$ parameter that is included in the kernel definitions), we test a polynomial kernel, RBF kernel, and a linear kernel. The linear kernel, defined as $K(x, y) = x^T y$ where $x$ and $y$ are feature vectors, assumes that the boundaries between classes is a linear function in the $\R^n$ space. Knowing that our data is most likely non-linear given our correlation study, we didn't have much hope that this kernel would yield good results, but we still added it to our kernel set to compare to the other intuitively more promising kernels. The polynomial kernel defined as, $K(x, y) = (\gamma x^T y + r )^d$, where $\gamma$ is a scale factor that controls the influence of higher-order terms in the polynomial, $r$ is a constant, and $d$ is the degree of the polynomial. This kernel represents the similarity between vectors in a feature space over polynomials of the original data. The RBF kernel, defined as $K(x, y) = exp(\gamma \| x - y \|^2)$, with $\gamma$ defines how much influence a single training example has on the fitting of the model. The larger $\gamma$ is, the closer data points must be to affect the model significantly, and thus, preventing from overfitting. The RBF kernel maps samples into a higher dimensional space using the square of the Euclidean distance between them, and thus it is very effective in cases where the decision boundary is highly irregular and cannot be approximated by a simple hyperplane. \\
+Having briefly defined the $\gamma$ parameter, let's delve into more detail into how it affects the polynomial and RBF kernels respectively. The $\gamma$ parameter plays a critical role in defining the behavior of both the polynomial and RBF kernels, each in a distinct manner, tailored to their specific mathematical formulations.
+For the polynomial kernel, $\gamma$ serves as a scaling factor for the dot product \(x^T y\) in the formula $(K(x, y) = (\gamma x^T y + r)^d)$. By adjusting $\gamma$, we control the influence of higher-order terms in the polynomial. Increasing $\gamma$ emphasizes the higher degrees of the polynomial, thereby capturing more complex patterns in the data, but also increasing the risk of overfitting, especially in noisy datasets or those with outlier points. Conversely, a lower $\gamma$ reduces the complexity of the model, making it behave more linearly, which could be beneficial for datasets where the underlying patterns are less complex.
+
+In the case of the RBF kernel, $\gamma$ impacts the width of the Gaussian function used to measure the similarity between points: $(K(x, y) = \exp(-\gamma \| x - y \|^2))$. A high $\gamma$ value results in a narrow peak, meaning that only data points close to each other are considered similar. This sensitivity allows the model to fit closely to the training data, which can capture intricate data structures but may lead to overfitting if the data has noise. A lower $\gamma$ produces a wider peak, giving the model a more general perspective of the data, enhancing its ability to generalize but potentially underfitting complex datasets.
+
+Here is a pseudo code for SVC:
 \begin{algorithm}
 \caption{SVC with Non-linear SVM (Soft Margin) with Kernel}
+\label{algo3}
 \begin{algorithmic}[1]
 \State \textbf{Input:} Training data $X$, labels $y$ where $y \in \{1, 2, \dots, K\}$, regularization parameter $\beta$
 \State \textbf{Output:} Support vectors $X_{SV}$, coefficients $\alpha$, bias $b$, multi-class classifiers $C$
@@ -296,23 +308,6 @@ where $SV$, represent the support vectors (the points that lies within the margi
 \end{algorithmic}
 \end{algorithm}
 
-
-\textbf{Hyperparameters}
-When tuning our model, we considered three hyperparameters to tune, the regularization parameter for the soft margin $\beta$, different types of kernels, and their scale coefficient. As mentionned previously, slack variables allow some points to be on the wrong side of the margin. We can intuitively see that if there is no constraint on the slack variables, the model will be too lenient, meaning that it will accept too many incorrect classifications. The $\beta$ regularization parameter will modulate the slackness of the margin. The higher the value of $\beta$, the slacker, and the more lenient, is the margin. \\
-For the kernels ($\gamma$ parameter that is included in the kernel definitions), we test a polynomial kernel, RBF kernel, and a linear kernel. The linear kernel, defined as $K(x, y) = x^T y$ where $x$ and $y$ are feature vectors, assumes that the boundaries between classes is a linear function in the $\R^n$ space. Knowing that our data is most likely non-linear given our correlation study, we didn't have much hope that this kernel would yield good results, but we still added it to our kernel set to compare to the other intuitively more promising kernels. The polynomial kernel defined as, $K(x, y) = (\gamma x^T y + r )^d$, where $\gamma$ is a scale factor that controls the influence of higher-order terms in the polynomial, $r$ is a constant, and $d$ is the degree of the polynomial. This kernel represents the similarity between vectors in a feature space over polynomials of the original data. The RBF kernel, defined as $K(x, y) = exp(\gamma \| x - y \|^2)$, with $\gamma$ defines how much influence a single training example has on the fitting of the model. The larger $\gamma$ is, the closer data points must be to affect the model significantly, and thus, preventing from overfitting. The RBF kernel maps samples into a higher dimensional space using the square of the Euclidean distance between them, and thus it is very effective in cases where the decision boundary is highly irregular and cannot be approximated by a simple hyperplane. \\
-Having briefly defined the $\gamma$ parameter, let's delve into more detail into how it affects the polynomial and RBF kernels respectively. The $\gamma$ parameter plays a critical role in defining the behavior of both the polynomial and RBF kernels, each in a distinct manner, tailored to their specific mathematical formulations.
-For the polynomial kernel, $\gamma$ serves as a scaling factor for the dot product \(x^T y\) in the formula $(K(x, y) = (\gamma x^T y + r)^d)$. By adjusting $\gamma$, we control the influence of higher-order terms in the polynomial. Increasing $\gamma$ emphasizes the higher degrees of the polynomial, thereby capturing more complex patterns in the data, but also increasing the risk of overfitting, especially in noisy datasets or those with outlier points. Conversely, a lower $\gamma$ reduces the complexity of the model, making it behave more linearly, which could be beneficial for datasets where the underlying patterns are less complex.
-
-In the case of the RBF kernel, $\gamma$ impacts the width of the Gaussian function used to measure the similarity between points: $(K(x, y) = \exp(-\gamma \| x - y \|^2))$. A high $\gamma$ value results in a narrow peak, meaning that only data points close to each other are considered similar. This sensitivity allows the model to fit closely to the training data, which can capture intricate data structures but may lead to overfitting if the data has noise. A lower $\gamma$ produces a wider peak, giving the model a more general perspective of the data, enhancing its ability to generalize but potentially underfitting complex datasets.
-
-\begin{comment}
-\textbf{Kernel Function}\\
-Common choices for the kernel function \(K\) include:
-- Polynomial: \(K(\mathbf{x}_i, \mathbf{x}_j) = (\gamma \mathbf{x}_i^T \mathbf{x}_j + r)^d\),
-- Radial Basis Function (RBF): \(K(\mathbf{x}_i, \mathbf{x}_j) = \exp(-\gamma \|\mathbf{x}_i - \mathbf{x}_j\|^2)\),
-- Sigmoid: \(K(\mathbf{x}_i, \mathbf{x}_j) = \tanh(\gamma \mathbf{x}_i^T \mathbf{x}_j + r)\).
-\(\gamma\), \(r\), and \(d\) are parameters that can be tuned according to the specific data and problem requirements.  
-\end{comment}
 \subsection{Random Forest}
 \label{4.4}
 For this project, we use the library \textit{RandomForestClassifier} (RFC) from \textit{sklearn}.
@@ -320,6 +315,7 @@ Random Forest is an ensemble learning technique that builds multiple decision tr
 
 \begin{algorithm}[!h]
 \caption{Random Forest Algorithm}
+\label{algo4}
 \begin{algorithmic}[1]
 \State \textbf{Input:} Data set $D$, Number of trees $N$
 \State \textbf{Output:} A Random Forest $F$
@@ -372,7 +368,7 @@ Mathematically, the prediction of a Random Forest classifier can be expressed as
     \hat{Y}^p = \frac{1}{N_T} \sum_{b=1}^{N_T} T_b(X)
 \end{equation}
 
-where \( N_T \) is the number of trees in the forest and \( T_b \) represents the prediction of the \( b \)-th tree.
+where \( N_T \) is the number of trees in the forest and \( T_b \) represents the prediction of the \( b \)-th tree.\\
 
 \textbf{\large Hyperparameters}
 
@@ -403,6 +399,7 @@ The performance of a Random Forest model is highly dependent on the settings of 
 \label{4.5}
 \begin{algorithm}
 \caption{Random Search with Cross-Validation}
+\label{algo5}
 \begin{algorithmic}[1]
 \State Initialize dataset $D$
 \State Define set of hyperparameters $H$
@@ -429,6 +426,7 @@ The performance of a Random Forest model is highly dependent on the settings of 
 
 Hyperparamter tuning is a crucial step to finding the best model. As data our data is complex and highly dimensional, we will need to apply a hyperparameter tuning to find the best parameters of our models (SVC and RFC). We will use a Random Search algorithm to find the best hyperparameters (see Algorithm 2). A Grid Search would've been another alternative, which would exhaustively search for the best model in a given hyperparameter space.
 
+\newpage
 \section{Results}
 \label{5}
 For the sake of consistency and reproducibility, we fixed the "random\_state" parameter of all training components: \\
@@ -615,12 +613,12 @@ In conclusion, this project not only reinforced the necessity of careful data pr
 \section{Team Contributions}
 \label{7}
 
-\textbf{Samir:} During the project, i coded the Fast Fourier tranform for audio visualisation that helped us see the form (wave form) of the audios. I made the exploration of the data to see the global shape and the statistics of the data (mean, sum and count). I coded the preprocessing of our data to get all the features we needed. I also wrote the code to reduce the demensionality (PCA), train the models and get the resukt metrics for each trained model.
+\textbf{Samir:} During the project, i wrote the code for the Fast Fourier tranform for audio visualisation that helped us see the form (wave form) of the audios. I made the exploration of the data to see the global shape and the statistics of the data (mean, sum and count). I wrote the code for the preprocessing of our data to get all the features we needed. I also wrote the code to reduce the demensionality (PCA), train the models and get the result metrics for each trained model.
 
-For the report, i wrote the introduction (\hyperref[1]{\textit{section 1}}), objectives of the project (\hyperref[2]{\textit{section 2}}). I also described where we found our data (\hyperref[3.1]{\textit{section 3.1}}). I helped Kamen on the explanation of each preprocessing features we used (\hyperref[3.4]{\textit{section 3.4}}). I wrote the \hyperref[4.1]{\textit{section 4.1}} about why we used supervised learning instead of unsupervised learning. I described the maths behind SVC at the section \hyperref[4.3]{\textit{section 4.3}}. I contributed on the writing of the \hyperref[4.4]{\textit{section 4.4}}. I explained why we kept the initial labels in the dataset in the \hyperref[5.1]{\textit{section 5.1}}, described the metrics (\hyperref[5.2]{\textit{section 5.2}}), explained the results for the SVC (\hyperref[5.3]{\textit{section 5.3}}) and wrote the conclusion (\hyperref[6]{\textit{section 6}}).
+For the report, i wrote the introduction (\hyperref[1]{\textit{section 1}}), objectives of the project (\hyperref[2]{\textit{section 2}}). I also described where we found our data (\hyperref[3.1]{\textit{section 3.1}}). I helped Kamen on the explanation of each preprocessing features we used (\hyperref[3.4]{\textit{section 3.4}}). I wrote the \hyperref[4.1]{\textit{section 4.1}} about why we used supervised learning instead of unsupervised learning. I described the maths behind SVC and i wrote the \hyperref[algo3]{\textit{algorithm 3}} with help of Kamen (\hyperref[4.3]{\textit{section 4.3}}). I also wrote the algo \hyperref[algo4]{\textit{algorithm 4}} and contributed on the writing of the \hyperref[4.4]{\textit{section 4.4}}. I explained why we kept the initial labels in the dataset in the \hyperref[5.1]{\textit{section 5.1}}, described the metrics (\hyperref[5.2]{\textit{section 5.2}}), explained the results for the SVC (\hyperref[5.3]{\textit{section 5.3}}) and wrote the conclusion (\hyperref[6]{\textit{section 6}}).
 
 \textbf{Kamen:}
-I developed the initial scripts for retrieving data from Hugging Face and prepared it for data analysis. I recommended relevant metrics to explore and analyzed the data alongside Samir. Additionally, I developed the script to generate the attribute matrix from the raw feature extraction, enabling its use in PCA and model training. I also contributed to creating the initial train/test splits and tested the SVC and Random Forest models with our data. Furthermore, I proposed and implemented Random Search as a method for fine-tuning the models' hyperparameters. 
+I developed the initial scripts for retrieving data from Hugging Face and prepared it for data analysis (\hyperref[algo1]{\textit{algorithm 1}}). I recommended relevant metrics to explore and analyzed the data alongside Samir. Additionally, I developed the script to generate the attribute matrix from the raw feature extraction, enabling its use in PCA and model training. I also contributed to creating the initial train/test splits and tested the SVC and Random Forest models with our data. Furthermore, I proposed and implemented Random Search as a method for fine-tuning the models' hyperparameters. 
 
 For the report, I wrote the \hyperref[3.2]{\textit{section 3.2}} and the \hyperref[3.3]{\textit{section 3.3}}. I contributed to writing the \hyperref[3.4]{\textit{section 3.4}} with Samir. I described the SVC hyperparamters in \hyperref[4.3]{\textit{section 4.3}} and explained the Random Forest Classifiers' results in \hyperref[5.4]{\textit{section 5.4}}. I also wrote \hyperref[4.5]{\textit{section 4.5}} on hyperparameter tuning.
 
