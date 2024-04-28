@@ -241,7 +241,7 @@ For this project, we use the library \textit{SVC} from \textit{sklearn} for mult
 
 This library use a non-linear SVM with a soft margin. Non-linear SVM with a soft margin is particularly useful when dealing with data that cannot be linearly separated in the original feature space (which is the case in our situation). The inclusion of slack variables, \(\xi_i\), allows some data points to be on the incorrect side of the margin, providing a balance between the complexity of the model and its error minimization.
 
-\textbf{Mathematical formulation}
+\textbf{\large Mathematical Description}
 
 For a dataset $X \in \R^{n \times p}$ and a vector $y \in \{-1, 1\}^n$, the objective is to find $w$ such that the values returned by the functions $f(X) = sign(w^T\phi(x) + b)$ are correct for most samples.\\
 \textit{SVC} resolve the following primal problem : \(\displaystyle
