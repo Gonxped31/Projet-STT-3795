@@ -25,10 +25,16 @@ import sys
 
 def embedded_data():
     full_df, train_df, test_df, validation_df = prlib.get_preprocessed_data()
+    
+    # Apply the mapping to the DataFrame
+    #print(full_df['label'].unique())
+    #full_df['label'] = full_df['label'].map(prlib.language_cluster_labels)
+    #full_df.groupby('label').count()
 
     X_train, X_test, Y_train, Y_test = train_test_split(full_df.iloc[:, 0:-1], full_df['label'], stratify=full_df['label'], test_size=0.33, random_state=42)
-    #X_train, Y_train = df_without_label.iloc[:len(train_df), :], full_df['label'].iloc[:len(train_df)]
-    #X_test, Y_test = df_without_label.iloc[len(train_df):, :], full_df['label'].iloc[len(train_df):]
+    #real_test = pd.concat([test_df, validation_df])
+    #X_train, Y_train = train_df.drop('label', axis=1), train_df['label']
+    #X_test, Y_test = real_test.drop('label', axis=1), real_test['label']
 
     # PCA
     X_train, embedding = get_PCs(X_train, 95)
@@ -54,7 +60,7 @@ def get_PCs(dataframe, percentage_variance):
     print()
     print(f'Total variance = {sum(ev)}')
 
-    pca = PCA(percentage_variance/100, verbose=3)
+    pca = PCA(percentage_variance/100, random_state=42)
     principal_components = pca.fit_transform(scaled_df)
     explained_variance = pca.explained_variance_
     percentage = sum(pca.explained_variance_ratio_)
@@ -98,7 +104,7 @@ param_grid_svm = {
 }
 
 def train_svm(X_train, Y_train, n_iter):
-    svm_clf = SVC()
+    svm_clf = SVC(random_state=42)
     random_search_svm = RandomizedSearchCV(svm_clf, param_distributions=param_grid_svm, n_iter=n_iter, verbose=3, cv=5, random_state=42, n_jobs=-1, scoring = 'f1_macro')
     random_search_svm.fit(X_train, Y_train)
     print("Best parameters for SVM:", random_search_svm.best_params_)
@@ -135,23 +141,26 @@ def get_metrics(Y_test, predictions):
     })
 
 if __name__ == '__main__':
-    X_train, Y_train, X_test, Y_test = embedded_data()
     n_iter = int(sys.argv[1])
     type = sys.argv[2]
+    
+    X_train, Y_train, X_test, Y_test = embedded_data()
 
     # Model initialization
+    print("Training...")
     if n_iter == 0 and type == "svc":
-        model = SVC(random_state=42)
+        model = SVC(C=10, gamma='auto', kernel='rbf', random_state=42)
+        model.fit(X_train, Y_train)
     elif n_iter == 0 and type == "rfc":
         model = RandomForestClassifier(verbose=3, random_state=42, \
-                                        criterion='entropy', max_depth=None, max_features=None, min_samples_leaf=2, min_samples_split=2, n_estimators=1000)
+                                        n_estimators= 200, min_samples_split= 5, min_samples_leaf= 4, max_features= 'sqrt', max_depth= None, criterion= 'gini')
         #nn = MLPClassifier(verbose=3)
-        print("Training...")
         model.fit(X_train, Y_train)
     elif type == "svc":
         model = train_svm(X_train, Y_train, n_iter)
     elif type == "rfc":
         model = train_rfc(X_train, Y_train, n_iter)
+    
     predictions = model.predict(X_test)
     accuracy = get_metrics(Y_test, predictions)
     print(f'Model accuracy: {accuracy}')
