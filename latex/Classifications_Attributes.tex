@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\title{Important Audio Attributes for Language Classification}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In language classification tasks based on speech, it is critical to extract a set of acoustic features from audio files that capture the unique characteristics of the spoken language. The following is a compilation of essential attributes for such a purpose.
+
+\section{List of Attributes}
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Mel-Frequency Cepstral Coefficients (MFCCs):} Fundamental for capturing the timbre of audio signals.
+    
+    \item \textbf{Spectral Features:}
+    \begin{itemize}
+        \item Spectral Centroid -- Relates to the perceived brightness of the sound.
+        \item Spectral Roll-off -- Indicates the skewness of the spectral shape.
+        \item Spectral Bandwidth -- Reflects the width of the spectral energy distribution.
+        \item Spectral Flatness -- Measures the noise-like quality of a signal.
+        \item Spectral Contrast -- Differentiates between phonemes with contrasting energies.
+    \end{itemize}
+    
+    \item \textbf{Pitch and Intonation Patterns:} Essential for identifying the tonal properties of speech.
+    
+    \item \textbf{Formant Frequencies:} Important for vowel sound differentiation.
+    
+    \item \textbf{Energy and Amplitude Features:}
+    \begin{itemize}
+        \item Root Mean Square (RMS) Energy -- Quantifies the energy in a signal.
+        \item Zero-Crossing Rate (ZCR) -- Indicates the frequency content of a signal.
+    \end{itemize}
+    
+    \item \textbf{Temporal Features:}
+    \begin{itemize}
+        \item Duration of Phonemes -- Characteristic of linguistic sounds.
+        \item Silence Intervals -- Duration of pauses in speech.
+    \end{itemize}
+    
+    \item \textbf{Voice Quality Features:}
+    \begin{itemize}
+        \item Jitter -- Frequency variation of vocal fold vibrations.
+        \item Shimmer -- Amplitude variation in vocal amplitude.
+    \end{itemize}
+    
+    \item \textbf{Rate of Speech:} The speed of speech can be indicative of specific language rhythms.
+    
+    \item \textbf{Harmonics-to-Noise Ratio (HNR):} Reflects the amount of acoustic noise in the voice signal.
+    
+    \item \textbf{Prosodic Features:} Include elements like stress and rhythm, which are language-dependent.
+    
+    \item \textbf{Cepstral Features:}
+    \begin{itemize}
+        \item Cepstral Mean and Variance Normalization (CMVN) -- Techniques to standardize features across recordings.
+    \end{itemize}
+\end{enumerate}
+
+\section{Conclusion}
+The extraction of these attributes can significantly enhance the performance of language classification systems. While this list is comprehensive, the relevance of each attribute may vary depending on the specific application and data set. 
+
+\end{document}
