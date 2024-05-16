@@ -121,11 +121,8 @@ param_grid_rf = {
 }
 
 def train_rfc(X_train, Y_train, n_iter):
-    print('Training RDF')
     rfc = RandomForestClassifier(random_state=42, n_jobs=-1)
-    random_search_rf = RandomizedSearchCV(rfc, param_distributions=param_grid_rf, n_iter=n_iter, 
-                                          cv=5, verbose=3, random_state=42, n_jobs=-1, 
-                                          scoring = 'f1_macro')
+    random_search_rf = RandomizedSearchCV(rfc, param_distributions=param_grid_rf, n_iter=n_iter, cv=5, verbose=3, random_state=42, n_jobs=-1, scoring = 'f1_macro')
     random_search_rf.fit(X_train, Y_train)
     print("Best parameters:", random_search_rf.best_params_)
     print("Best score:", random_search_rf.best_score_)
